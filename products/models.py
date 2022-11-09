@@ -10,3 +10,4 @@ class Product(models.Model):
     delivery = models.CharField(max_length=80)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    sale = models.TextField()
