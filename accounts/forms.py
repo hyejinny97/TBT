@@ -18,16 +18,18 @@ class CustomCreationUserForm(UserCreationForm):
 
 
 class CustomChangeUserForm(UserChangeForm):
-    password = None
-    model = get_user_model()
-    fields = ["username", "nickname", "email", "profile_image"]
+    class Meta:
+        password = None
+        model = get_user_model()
+        fields = ["nickname", "last_name", "first_name", "email", "profile_image"]
 
-    labels = {
-        "username": "이름",
-        "nickname": "닉네임",
-        "email": "이메일",
-        "profile_image": "프로필 사진",
-    }
+        labels = {
+            "last_name": "성",
+            "first_name": "이름",
+            "nickname": "닉네임",
+            "email": "이메일",
+            "profile_image": "프로필 사진",
+        }
 
 
 class CustomAuthenticationForm(AuthenticationForm):
