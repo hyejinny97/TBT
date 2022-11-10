@@ -4,10 +4,12 @@
 {{product.name}}
 <img src="{{ product.product_image.url }}">
 
-{{grade}}
+{{grade|floatformat}}
 <a href="{% url 'reviews:create' product.pk %}">리뷰 쓰기</a>
 {% for review in reviews %}
+{% if review.review_image %}
 <img src="{{ review.review_image.url }}">
+{% endif %}
 {{review.title}}
 {{review.account}}
 {{review.content}}
