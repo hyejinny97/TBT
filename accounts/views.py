@@ -63,3 +63,9 @@ def update(request):
         form = CustomChangeUserForm(instance=request.user)
     context = {"form": form}
     return render(request, "accounts/update.html", context)
+
+
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
+    return redirect("accounts:signup")
