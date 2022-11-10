@@ -1,11 +1,12 @@
 @import url(./main.css);
 
-body {
+.containers {
   padding: 0rem 10%;
 }
 
 .title {
-  font-size: 3rem;
+  margin: 2rem 0;
+  font-size: 1.7rem;
 }
 
 .title__user {
@@ -14,9 +15,9 @@ body {
 
 /* 프로필 */
 .profile__container {
-  width: 100%;
+  width: 65rem;
   min-height: 15rem;
-  padding: 2rem 15rem;
+  padding: 2rem 10rem;
   border: 2px solid var(--main);
   white-space: nowrap;
 }
@@ -63,18 +64,41 @@ body {
   display: inline-block;
 }
 
+.follow__btn {
+  margin-top: 1.5rem;
+  margin-left: 1.9rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--main);
+  border-radius: 5px;
+}
+
+.unfollow__btn {
+  margin-top: 1.5rem;
+  margin-left: 1.9rem;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--main);
+  border-radius: 5px;
+}
+
 .update__btn {
   margin-top: 1.5rem;
   margin-left: 1rem;
-  padding: 0.5rem 0.8rem;
+  padding: 0.7rem 0.8rem;
   background-color: var(--main);
   color: var(--bg);
   border: none;
   border-radius: 5px;
 }
 
-.update__btn:hover {
+.update__btn:hover,
+.follow__btn:hover {
   background-color: var(--main-sub);
+  transition: all 300ms ease-in;
+}
+
+.unfollow__btn:hover {
+  background-color: var(--main);
+  color: var(--bg);
   transition: all 300ms ease-in;
 }
 
@@ -93,7 +117,16 @@ body {
   color: var(--txt);
 }
 
-.profile__link:hover {
+.profile__link--notuser {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 1.5rem;
+  text-decoration: none;
+  color: var(--txt);
+}
+
+.profile__link:hover,
+.profile__link--notuser:hover {
   color: var(--txt);
 }
 
@@ -104,15 +137,11 @@ body {
 
 /* 최근 주문 내역 */
 .sub__title {
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
   margin-left: 0.5rem;
   color: var(--main);
   font-weight: 600;
   font-size: 1.2rem;
-}
-
-.order__history {
-  padding-left: 10rem;
 }
 
 .order__history__category {
@@ -141,6 +170,7 @@ body {
 .order__history__container {
   margin-top: 1rem;
   white-space: nowrap;
+  transform: translateY(-1.5rem);
 }
 
 .order__number {
@@ -151,6 +181,7 @@ body {
   width: 5rem;
   height: 5rem;
   margin-left: 6rem;
+  transform: translateY(2rem);
 }
 
 .order__title {
@@ -172,15 +203,15 @@ body {
 .arrow__down {
   cursor: pointer;
   display: block;
-  margin-top: 2rem;
-  margin-left: 27rem;
+  transform: translateY(3rem);
+  margin-left: 30rem;
   width: 2rem;
   height: 2rem;
   color: var(--main);
 }
 
 .arrow__down:hover {
-  transform: scale(1.2);
+  transform: translateY(3rem) scale(1.2);
   transition: all 300ms ease-in;
 }
 
@@ -188,12 +219,17 @@ body {
 .main__title {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
+}
+
+.sub__title {
+  font-size: 1.4rem;
 }
 
 .plus__title {
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 2.4rem;
+  margin-bottom: 2rem;
   font-weight: 600;
 }
 
@@ -225,12 +261,14 @@ body {
 
 .review__container {
   white-space: nowrap;
+  transform: translateY(-1.5rem);
 }
 
 .review__img {
   width: 5rem;
   height: 5rem;
   margin-left: 1.3rem;
+  transform: translateY(2rem);
 }
 
 .review__name {
@@ -246,8 +284,9 @@ body {
 
 .review__grade {
   margin-top: 1.5rem;
-  margin-left: 6rem;
+  margin-left: 7rem;
   font-weight: 700;
+  color: var(--sub-b);
 }
 
 .star {
@@ -257,7 +296,7 @@ body {
 }
 
 .review__title {
-  width: 26rem;
+  width: 20rem;
   height: 3rem;
   display: inline-block;
   transform: translateY(1.7rem);
@@ -277,12 +316,13 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 1rem;
-  padding-bottom: 3rem;
+  margin-top: 0.5rem;
+  padding-bottom: 6rem;
 }
 
 .wishlist__box {
-  margin: 0 2rem;
+  width: 13rem;
+  margin: 1rem 1.5rem;
   text-align: center;
 }
 
