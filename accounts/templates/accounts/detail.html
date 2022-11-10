@@ -26,7 +26,9 @@
     {% if request.user.pk == user.pk %}
       <div class='my-3'>
         <a class='btn btn-success' href="{% url "accounts:update" %}">수정하기</a>
+        <a class='btn btn-danger' href="{% url "accounts:delete" %}">탈퇴하기</a>
       </div>
+
     {% endif %}
   </div>
 
