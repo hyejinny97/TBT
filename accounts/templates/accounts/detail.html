@@ -5,10 +5,29 @@
   <h1>
     개인 프로필
   </h1>
-
+  <hr>
+  <a href="{% url "accounts:index" %}">회원 목록</a>
   <div class='container'>
     <div>
       <img src="{{ user.profile_image1 }}" alt="profile">
+      <br>
+      <div>
+        팔로워 :
+        <span id="followers-count">{{ user.followers.all|length }}</span>
+        팔로잉 :
+        <span id="followings-count">{{ user.followings.all|length }}</span>
+      </div>
+      {% if request.user != user %}
+        <form id="follow-form" data-user-id="{{ user.pk }}" data-my-id="{{ my.pk }}">
+          {% csrf_token %}
+          {% if request.user in user.followings.all %}
+            <button type="submit" class="btnC" id="follow-btn">follow</button>
+          {% else %}
+            <button type="submit" class="btnC" id="follow-btn">unfollow</button>
+          {% endif %}
+        </form>
+      {% endif %}
+      <br>
       <p>ID :
         {{ user.username }}</p>
       <p>닉네임 :
@@ -25,7 +44,7 @@
     </div>
     {% if request.user.pk == user.pk %}
       <div class='my-3'>
-        <a class='btn btn-success' href="{% url "accounts:update" %}">수정하기</a>
+        <a class='btn btn-success' href="{% url "accounts:update" %}">프로필 수정하기</a>
         <a class='btn btn-danger' href="{% url "accounts:delete" %}">탈퇴하기</a>
       </div>
 

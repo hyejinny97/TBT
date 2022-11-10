@@ -5,14 +5,113 @@
 }
 
 :root {
-  --main: #21684f;
-  --main-sub: #318064;
-  --highlight: #c03039;
-  --high-sub: #e8525b;
-  --sub: #122d4e;
-  --sub-b: #19467e;
-  --bg: #f1f1f1;
-  --bg-gr: #f6f4f4;
-  --txt: #3e3e3e;
-  --line: #959595;
+	--main: #21684f;
+	--main-sub: #318064;
+	--highlight: #c03039;
+	--high-sub: #e8525b;
+	--sub: #122d4e;
+	--sub-b: ##19467e;
+	--bg: #f1f1f1;
+	--bg-gr: #f6f4f4;
+	--txt: ##3e3e3e;
+	--line: #959595;
+}
+
+body {
+	font-family: "Noto Sans KR", sans-serif;
+	font-size: 20px;
+	font-weight: 400;
+	color: var(--txt);
+	position: relative;
+}
+
+#header .navi {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 0 0;
+}
+#header .navi .search-area {
+	position: relative;
+}
+#header .navi .search-area input[type="text"] {
+	border: 2px solid var(--main);
+	border-radius: 0.5rem;
+	padding: 0.3rem 0.5rem;
+	font-size: 0.9rem;
+}
+#header .navi .search-area button {
+	color: var(--main);
+	position: absolute;
+	right: 5%;
+	top: 20%;
+}
+
+#header .gnb,
+#header .lnb {
+	display: flex;
+}
+#header .gnb li {
+	padding: 0.5rem;
+}
+#header .gnb li a {
+	padding: 0.2rem 0.5rem;
+	position: relative;
+}
+#header .gnb li a::after {
+	content: "";
+	display: block;
+	background: var(--main);
+	width: 0%;
+	height: 3px;
+	position: absolute;
+	bottom: -3px;
+	left: 0px;
+	transition: 0.2s;
+}
+
+#header .gnb li a:hover {
+	color: var(--main);
+	font-weight: 700;
+}
+#header .gnb li a:hover::after {
+	width: 100%;
+}
+#header .logo {
+	margin: 2.5rem 0;
+	text-align: center;
+}
+#header .logo img {
+	width: 200px;
+}
+#header .lnb-area {
+	border-top: 2px solid var(--main);
+	border-bottom: 2px solid var(--main);
+}
+#header .lnb {
+	justify-content: space-around;
+	text-align: center;
+}
+#header .lnb li {
+	width: 25%;
+}
+#header .lnb li a {
+	display: inline-block;
+	padding: 1rem 0;
+	width: 100%;
+	transition: 0.3s;
+}
+#header .lnb li a:hover {
+	background: var(--main);
+	color: var(--bg);
+}
+
+#footer {
+	background: var(--sub);
+	height: 80px;
+	text-align: center;
+	color: var(--bg);
+}
+#footer p {
+	font-size: 0.8rem;
+	line-height: 60px;
 }

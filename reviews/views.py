@@ -10,13 +10,14 @@ def main(request):
 
 def index(request, product_pk):
     product = Product.objects.get(pk=product_pk)
-    reviews = Product.review_set.all()
+    reviews = product.review_set.all()
     grade = 0
     cnt = 0
     for review in reviews:
         grade += review.grade
         cnt += 1
-    grade /= cnt
+    if grade:
+        grade /= cnt
     context = {
         "reviews": reviews,
         "product": product,

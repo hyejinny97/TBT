@@ -14,13 +14,10 @@
     <p>{{products.sale}} </p>
     <img src="{{ products.product_image.url }} " alt="">
 </div>
-
+<p><a href="{% url 'reviews:index' products.pk %}">리뷰확인</a></p>
 <p><a href="{% url 'products:products_update' products.pk %}">수정하기</a></p>
-<form action="{% url 'products:products_delete' products.pk  %}" method="POST" >
+<form action="{% url 'products:products_delete' products.pk  %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="삭제">
 </form>
 {% endblock body %}
-
-
-
