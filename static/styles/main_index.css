@@ -1,5 +1,12 @@
 @import url(./main.css);
 
-h1 {
-	font-size: 2rem;
+#home .tit {
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+#home .sec {
+	margin: 5rem 0 0;
+}
+#home .sec .item-area {
+	display: flex;
 }
