@@ -19,9 +19,14 @@ class CustomCreationUserForm(UserCreationForm):
 
 class CustomChangeUserForm(UserChangeForm):
     class Meta:
-        password = None
         model = get_user_model()
-        fields = ["nickname", "last_name", "first_name", "email", "profile_image"]
+        fields = [
+            "nickname",
+            "last_name",
+            "first_name",
+            "email",
+            "profile_image",
+        ]
 
         labels = {
             "last_name": "성",
