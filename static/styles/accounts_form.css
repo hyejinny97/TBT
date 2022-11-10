@@ -1,0 +1,66 @@
+@import url(./main.css);
+
+.btnC {
+	background: var(--main);
+	color: var(--bg);
+	border-radius: 0.2rem;
+	padding: 1rem 0.5rem;
+	transition: 0.3s;
+}
+.btn-sb {
+	width: 100%;
+	margin-top: 3rem;
+}
+.btn-sb:hover {
+	background: var(--main-sub);
+}
+
+#signup .tit-area,
+#login .tit-area {
+	margin: 2.5rem 0;
+}
+
+#signup .tit-area .tit,
+#login .tit-area .tit {
+	font-size: 2rem;
+	font-weight: 700;
+	text-align: center;
+}
+#signup .form-area,
+#login .form-area {
+	max-width: 650px;
+	margin: 0 auto 2rem;
+}
+#login .form-area {
+	max-width: 450px;
+}
+#signup .signup-form li,
+#login .login-form li {
+	padding: 0.5rem 0;
+	margin-bottom: 0.5rem;
+}
+#signup .signup-form label,
+#login .login-form label {
+	display: inline-block;
+	margin-bottom: 0.5rem;
+}
+#signup .signup-form input,
+#login .login-form input {
+	border: 1px solid var(--line);
+	border-radius: 0.2rem;
+	width: 100%;
+	padding: 0.3rem 0.5rem;
+}
+#signup .signup-form input:focus,
+#login .login-form input:focus {
+	border: 2px solid var(--main);
+}
+
+#signup .singup-login {
+	text-align: center;
+	margin-bottom: 2rem;
+}
+#signup .singup-login .link-login {
+	color: var(--highlight);
+	font-weight: 700;
+}
