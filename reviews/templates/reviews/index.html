@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
 {{product.name}}
-{{product_image}}
+<img src="{{ product.product_image.url }}">
+
 {{grade}}
 <a href="{% url 'reviews:create' product.pk %}">리뷰 쓰기</a>
 {% for review in reviews %}
+<img src="{{ review.review_image.url }}">
 {{review.title}}
 {{review.account}}
 {{review.content}}
 {{review.grade}}
-{{review.review_image}}
 {{review.created_at}}
 <a href="{% url 'reviews:delete' review.pk %}">삭제</a>
 <a href="{% url 'reviews:update' review.pk %}">수정</a>
