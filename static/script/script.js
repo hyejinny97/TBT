@@ -23,7 +23,6 @@ form.addEventListener('submit', function (e) {
             } else {
                 followBtn.innerText = 'follow'
                 followBtn.classList.remove('btnW');
-
             }
             const followersCount = document.querySelector('#followers-count');
             const followingsCount = document.querySelector('#followings-count');
