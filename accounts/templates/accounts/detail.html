@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <h1>
+    개인 프로필
+  </h1>
+
+  <div class='container'>
+    <div>
+      <img src="{{ user.profile_image }}" alt="profile">
+      <p>ID :
+        {{ user.username }}</p>
+      <p>닉네임 :
+        {{ user.nickname }}</p>
+      <span>
+        이름 :
+        {{ user.last_name }}</span>|
+      <span>{{ user.first_name }}</span>
+      <p>email :
+        {{ user.email }}</p>
+      <p>가입날짜 :
+        {{ user.date_joined }}</p>
+    </div>
+
+  </div>
+
+{% endblock body %}
