@@ -14,7 +14,7 @@ class User(AbstractUser):
     profile_image = ProcessedImageField(
         upload_to="media/",
         blank=True,
-        processors=[ResizeToFill(200, 200)],
+        processors=[ResizeToFill(100, 100)],
         format="JPEG",
         options={"quality": 60},
     )
