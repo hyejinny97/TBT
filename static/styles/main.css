@@ -1,18 +1,18 @@
-@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;700;900&display=swap');
 
 * {
-	font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 :root {
-	--main: #21684f;
-	--main-sub: #318064;
-	--highlight: #c03039;
-	--high-sub: #e8525b;
-	--sub: ##122d4e;
-	--sub-b: ##19467e;
-	--bg: #f1f1f1;
-	--bg-gr: #f6f4f4;
-	--txt: ##3e3e3e;
-	--line: #959595;
+  --main: #21684f;
+  --main-sub: #318064;
+  --highlight: #c03039;
+  --high-sub: #e8525b;
+  --sub: #122d4e;
+  --sub-b: #19467e;
+  --bg: #f1f1f1;
+  --bg-gr: #f6f4f4;
+  --txt: #3e3e3e;
+  --line: #959595;
 }
