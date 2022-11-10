@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block body %}
+  <h1 class='text-center my-4'>
+    환영합니다</h1>
+  <hr>
+  <div class='container'>
+    <form action="" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input class='btn btn-dark' type="submit" name="" id="">
+    </form>
+  </div>
+{% endblock body %}
