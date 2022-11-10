@@ -49,7 +49,6 @@ def logout(request):
     return redirect("index")
 
 
-
 def detail(request, user_pk):
     user = get_user_model().objects.get(pk=user_pk)
     context = {
@@ -115,15 +114,15 @@ def changeps(request):
 def follow(request, user_pk):
     user = get_object_or_404(get_user_model(), pk=user_pk)
     if request.user != get_user_model().objects.get(pk=user_pk):
-        if request.user not in get_user_model().objects.get(pk=user_pk).follower.all():
+        if request.user not in get_user_model().objects.get(pk=user_pk).followers.all():
             request.user.followings.add(get_user_model().objects.get(pk=user_pk))
-            is_followed = True
+            is_follow = True
         else:
             request.user.followings.remove(get_user_model().objects.get(pk=user_pk))
-            is_followed = False
+            is_follow = False
         context = {
-            "isFollowed": is_followed,
-            "followers_count": user.follower.count(),
+            "isFollow": is_follow,
+            "followers_count": user.followers.count(),
             "followings_count": user.followings.count(),
         }
 
