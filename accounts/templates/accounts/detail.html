@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <h1>
+    개인 프로필
+  </h1>
+
+  <div class='container'>
+    <div>
+      <img src="{{ user.profile_image1 }}" alt="profile">
+      <p>ID :
+        {{ user.username }}</p>
+      <p>닉네임 :
+        {{ user.nickname }}</p>
+      <span>
+        이름 :
+        {{ user.last_name }}
+      </span>
+      <span>{{ user.first_name }}</span>
+      <p>email :
+        {{ user.email }}</p>
+      <p>가입날짜 :
+        {{ user.date_joined }}</p>
+    </div>
+    {% if request.user.pk == user.pk %}
+      <div class='my-3'>
+        <a class='btn btn-success' href="{% url "accounts:update" %}">수정하기</a>
+        <a class='btn btn-danger' href="{% url "accounts:delete" %}">탈퇴하기</a>
+      </div>
+
+    {% endif %}
+  </div>
+
+{% endblock body %}

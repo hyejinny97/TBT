@@ -1,4 +1,17 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>응애</h1>
+{{product.name}}
+{{product_image}}
+{{grade}}
+<a href="{% url 'reviews:create' product.pk %}">리뷰 쓰기</a>
+{% for review in reviews %}
+{{review.title}}
+{{review.account}}
+{{review.content}}
+{{review.grade}}
+{{review.review_image}}
+{{review.created_at}}
+<a href="{% url 'reviews:delete' review.pk %}">삭제</a>
+<a href="{% url 'reviews:update' review.pk %}">수정</a>
+{% endfor %}
 {% endblock body %}

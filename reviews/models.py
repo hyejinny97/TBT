@@ -1,12 +1,12 @@
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
-from django.contrib.auth import get_user_model
 from products.models import Product
+from django.conf import settings
 
 # Create your models here.
 class Review(models.Model):
-    account = models.ForeignKey(get_user_model, on_delete=models.CASCADE)
+    account = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=80)
     content = models.TextField()
