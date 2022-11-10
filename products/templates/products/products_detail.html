@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% block body %}
+
+<a href="{% url 'products:index' %} ">집으로</a>
+<div>
+    {{ products.created_at }}|{{ products.updated_at }}
+    <p>{{ products.name }} </p>
+    <p>{{ products.category }} </p>
+    <p>{{ products.Description}} </p>
+    <p>{{products.pay}} </p>
+    <p>{{products.delivery}} </p>
+    <p>{{products.sale}} </p>
+    <img src="{{ products.product_image.url }} " alt="">
+</div>
+
+<p><a href="{% url 'products:products_update' products.pk %}">수정하기</a></p>
+<form action="{% url 'products:products_delete' products.pk  %}" method="POST" >
+    {% csrf_token %}
+    <input type="submit" value="삭제">
+</form>
+{% endblock body %}
+
+
+
