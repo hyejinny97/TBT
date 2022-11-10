@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomCreationUserForm, CustomChangeUserForm
 from .forms import CustomAuthenticationForm
 from django.contrib.auth.forms import PasswordChangeForm
@@ -7,6 +7,8 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 
@@ -86,3 +88,43 @@ def changeps(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, "accounts/change_ps.html", {"form": form})
+
+
+# @require_POST
+# def follow(request, user_pk):
+#     if request.user.is_authenticated:
+#         user = get_user_model().objects.get(pk=user_pk)
+#         if user != request.user:
+#             if user.followings.filter(pk=request.user.pk).exists():
+#                 user.followings.remove(request.user)
+#                 is_followed = False
+#             else:
+#                 user.followings.add(request.user)
+#                 is_followed = True
+#             context = {
+#                 "is_followed": is_followed,
+#                 "followers_count": user.followers.count(),
+#                 "followings_count": user.followings.count(),
+#             }
+
+#         return JsonResponse(context)
+#     return redirect("accounts:login")
+
+
+@login_required
+def follow(request, user_pk):
+    user = get_object_or_404(get_user_model(), pk=user_pk)
+    if request.user != get_user_model().objects.get(pk=user_pk):
+        if request.user not in get_user_model().objects.get(pk=user_pk).follower.all():
+            request.user.followings.add(get_user_model().objects.get(pk=user_pk))
+            is_followed = True
+        else:
+            request.user.followings.remove(get_user_model().objects.get(pk=user_pk))
+            is_followed = False
+        context = {
+            "isFollowed": is_followed,
+            "followers_count": user.follower.count(),
+            "followings_count": user.followings.count(),
+        }
+
+    return JsonResponse(context)
