@@ -18,6 +18,10 @@ class User(AbstractUser):
         format="JPEG",
         options={"quality": 60},
     )
+    like_products = models.ManyToManyField("products.Product", related_name="like_zzim")
+    followings = models.ManyToManyField(
+        "self", symmetrical=False, related_name="follow"
+    )
 
     def profile_image1(self):
         if self.profile_image and hasattr(self.profile_image, "url"):
