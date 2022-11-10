@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% block body %}
+<a href="{% url 'products:index' %}">집으로</a>
+<div class="container">
+<form action="{% url 'products:products_create' %}" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {% bootstrap_form create_form %} 
+    <input type="submit" id="" value="제출">  
+</form>
+</div>
+
+{% endblock body %}
