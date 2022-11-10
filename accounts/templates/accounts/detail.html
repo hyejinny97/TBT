@@ -21,9 +21,9 @@
         <form id="follow-form" data-user-id="{{ user.pk }}" data-my-id="{{ my.pk }}">
           {% csrf_token %}
           {% if request.user in user.followings.all %}
-            <input class='btn btn-dark my-2' type='submit' value="팔로우 취소">
+            <button type="submit" class="btnC" id="follow-btn">follow</button>
           {% else %}
-            <input class='btn btn-success my-2' type='submit' value="팔로우">
+            <button type="submit" class="btnC" id="follow-btn">unfollow</button>
           {% endif %}
         </form>
       {% endif %}
@@ -50,42 +50,5 @@
 
     {% endif %}
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    const forms = document.querySelector("#follow-form")
-    const csrftoken = document
-      .querySelector('[name=csrfmiddlewaretoken]')
-      .value;
 
-    forms.addEventListener('submit', function (event) {
-      event.preventDefault()
-      const userId = event.target.dataset.userId
-      const myId = event
-        .target
-        .dataset
-        .myId
-        axios({
-          method: "post",
-          url: `/accounts/${userId}/follow/`,
-          headers: {
-            'X-CSRFToken': csrftoken
-          }
-        })
-        .then((response) => {
-          const isFollowed = response.data.isfollowed
-          const followBtn = document.querySelector('#follow-form > input[type=submit]')
-          if (isFollowed === true) {
-            followBtn.value = '팔로우 취소'
-          } else {
-            followBtn.value = '팔로우'
-          }
-          const followersCountTag = document.querySelector('#followers-count')
-          const followingsCountTag = document.querySelector('#followings-count')
-          const followersCount = response.followers_count
-          const followingsCount = response.followings_count
-          followersCountTag.innerText = followersCount
-          followingsCountTag.innerText = followingsCount
-        })
-    })
-  </script>
 {% endblock body %}
