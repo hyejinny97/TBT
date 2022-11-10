@@ -16,7 +16,10 @@ class Product(models.Model):
     product_image = ProcessedImageField(
         upload_to="imgaes/",
         blank=True,
-        processors=[ResizeToFill(400, 400)],  
+        processors=[ResizeToFill(400, 400)],
         format="JPEG",
-        options={"quality": 60},  
+        options={"quality": 60},
     )
+
+
+#  추가 모델 서브 이미지 모델 생성

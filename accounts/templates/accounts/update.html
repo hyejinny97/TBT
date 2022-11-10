@@ -5,11 +5,13 @@
   <h1 class='text-center my-4'>
     프로필 수정 페이지</h1>
   <hr>
+  <a href="{% url "accounts:index" %}">회원 목록</a>
   <div class='container'>
     <form action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       {% bootstrap_form form %}
-      <input class='btn btn-success' type="submit" name="" id="">
+      <input class='btn btn-success' type="submit" name="" id="" value="저장하기">
+      <a class="btn btn-success" href="{% url 'accounts:changeps' %}">비밀번호 수정하기</a>
     </form>
   </div>
 {% endblock body %}
