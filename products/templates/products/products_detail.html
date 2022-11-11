@@ -44,7 +44,7 @@
     <img src="{{ products.product_image.url }} " alt="">
   </div>
   <p>
-    <a href="{% url 'reviews:index' products.pk %}">리뷰확인</a>
+    <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
   </p>
   <p>
     <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
