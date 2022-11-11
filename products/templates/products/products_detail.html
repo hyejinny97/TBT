@@ -11,14 +11,17 @@
       <form class="like-forms" data-product-id="{{ products.pk }}">
         {% csrf_token %}
         {% if user in products.like_users.all %}
-          <button type="submit" class="">
-            <i class="bi bi-bookmark-heart-fill" id="like-{{ products.pk }}"></i>
+          <button type="submit" class="" id="like-{{ products.pk }}">
+            <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart-fill"></i>
           </button>
         {% else %}
-          <button type="submit" class="">
-            <i class="bi bi-bookmark-heart" id="like-{{ products.pk }}"></i>
+          <button type="submit" class="" id="like-{{ products.pk }}">
+            <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart"></i>
           </button>
         {% endif %}
+        <div id="heart-count">
+          <p>{{ products.like_users.count }}</p>
+        </div>
       </form>
     </div>
   {% endif %}
@@ -75,20 +78,22 @@
           .then((response) => {
             const isLiked = response.data.is_liked
             const likeBtn = document.querySelector(`#like-${productId}`)
-            const likeCountTag = document.querySelector('#like-count')
-            const likeCountValue = response.data.like_count
+            const heartBtn = document.querySelector(`#heart-${productId}`)
+            const likeCountTag = document.querySelector('#heart-count')
+            const likeCount = response.data.like_count
+            likeCountTag.innerText = likeCount
             if (isLiked === true) {
-              likeBtn
+              heartBtn
                 .classList
                 .remove('bi-bookmark-heart')
-              likeBtn
+              heartBtn
                 .classList
                 .add('bi-bookmark-heart-fill')
             } else {
-              likeBtn
+              heartBtn
                 .classList
                 .remove('bi-bookmark-heart-fill')
-              likeBtn
+              heartBtn
                 .classList
                 .add('bi-bookmark-heart')
             }

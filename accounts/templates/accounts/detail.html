@@ -33,26 +33,28 @@
             <div class="profile__middle">
               <div class="follow">
                 <div class="follow__container">
-                  <span class="follow__cnt text-center">{{ user.followings.all|length }}</span>
+                  <span class="follow__cnt text-center" id="followings-count">{{ user.followings.all|length }}</span>
                   <span class="follow__title">팔로잉</span>
                 </div>
                 <div class="follow__container">
-                  <span class="follow__cnt text-center">{{ user.followers.all|length }}</span>
+                  <span class="follow__cnt text-center" id="followers-count">{{ user.followers.all|length }}</span>
                   <span class="follow__title">팔로워</span>
                 </div>
               </div>
-              {% if request.user != user %}
-                <form id="follow-form" data-user-id="{{ user.pk }}" data-my-id="{{ my.pk }}">
-                  {% csrf_token %}
-                  {% if request.user in user.followings.all %}
-                    <button type="submit" class="follow__btn" id="follow-btn">follow</button>
-                  {% else %}
-                    <button type="submit" class="unfollow__btn" id="follow-btn">unfollow</button>
+              {% if request.user.is_authenticated %}
+                {% if request.user != user %}
+                  <form id="follow-form" data-user-id="{{ user.pk }}" data-my-id="{{ my.pk }}">
+                    {% csrf_token %}
+                    {% if request.user in user.followings.all %}
+                      <button type="submit" class="follow__btn" id="follow-btn">follow</button>
+                    {% else %}
+                      <button type="submit" class="unfollow__btn" id="follow-btn">unfollow</button>
+                    {% endif %}
+                  </form>
+                {% else %}
+                  {% if request.user.pk == user.pk %}
+                    <button class="update__btn">회원 정보 수정</button>
                   {% endif %}
-                </form>
-              {% else %}
-                {% if request.user.pk == user.pk %}
-                  <button class="update__btn">회원 정보 수정</button>
                 {% endif %}
               {% endif %}
             </div>
