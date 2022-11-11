@@ -34,6 +34,12 @@ qnaBtnCloseModal.addEventListener('click', function () {
     overlay.classList.add('hidden');
     detailArea.classList.remove('scroll-block');
 });
+overlay.addEventListener('click', function () {
+    revModal.classList.add('hidden');
+    qnaModal.classList.add('hidden');
+    detailArea.classList.remove('scroll-block');
+    overlay.classList.add('hidden');
+})
 
 
 document.addEventListener('keydown', function (e) {

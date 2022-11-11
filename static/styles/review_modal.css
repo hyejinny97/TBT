@@ -25,7 +25,7 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	transform: translate(-50%, -45%);
+	transform: translate(-50%, -30%);
 	max-width: 80rem;
 	background: var(--bg);
 	padding: 5rem 6rem;
@@ -99,6 +99,7 @@
 #review .sub-tit,
 #qna .sub-tit {
 	font-size: 1.5rem;
+	font-weight: 700;
 	margin-bottom: 1rem;
 }
 #review .sub-tit span {
@@ -109,25 +110,33 @@
 #qna .qna-form .btnC {
 	width: 100%;
 }
+
+#review .review-form .rate-area {
+	margin-bottom: 5rem;
+}
+#review .review-form .rate-area .rate-stars {
+	width: 200px;
+}
 #review .review-form .rate-area input {
 	display: none;
 }
 #review .review-form .rate-area label {
 	color: var(--line);
 	transition: all 0.2s ease;
-	/* float: right; */
+	float: right;
 	margin: 0 0.3rem;
 	font-size: 1.8rem;
 	cursor: pointer;
 }
 
-#review .review-form .rate-area input:not(:checked) ~ label:hover,
-#review .review-form .rate-area input:not(:checked) ~ label:hover ~ label {
+#review .review-form .rate-stars input:not(:checked) ~ label:hover,
+#review .review-form .rate-stars input:not(:checked) ~ label:hover ~ label {
 	color: var(--rate);
 }
-#review .review-form .rate-area input:checked ~ label {
+#review .review-form .rate-stars input:checked ~ label {
 	color: var(--rate);
 }
+
 #review .review-form .review-txt textarea,
 #qna .qna-form .qna-txt textarea {
 	border: 1px solid var(--line);
@@ -136,6 +145,7 @@
 	background: var(--gr);
 	width: 100%;
 }
+
 #review .review-form .review-img span {
 	font-size: 0.95rem;
 }
