@@ -1,6 +1,5 @@
 'use strict';
 
-
 const form = document.querySelector('#follow-form');
 
 form.addEventListener('submit', function (e) {
@@ -35,3 +34,4 @@ form.addEventListener('submit', function (e) {
             followingsCount.innerText = followingsCountValue;
         })
 });
+
