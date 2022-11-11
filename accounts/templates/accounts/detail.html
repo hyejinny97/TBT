@@ -20,10 +20,10 @@
       {% if request.user != user %}
         <form id="follow-form" data-user-id="{{ user.pk }}" data-my-id="{{ my.pk }}">
           {% csrf_token %}
-          {% if request.user in user.followings.all %}
-            <button type="submit" class="btnC" id="follow-btn">follow</button>
-          {% else %}
+          {% if request.user in user.followers.all %}
             <button type="submit" class="btnC" id="follow-btn">unfollow</button>
+          {% else %}
+            <button type="submit" class="btnC" id="follow-btn">follow</button>
           {% endif %}
         </form>
       {% endif %}

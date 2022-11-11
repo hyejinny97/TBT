@@ -7,8 +7,9 @@
     <h1 class='text-center my-4'>
       프로필 수정 페이지</h1>
     <hr>
-    <a href="{% url "accounts:index" %}">회원 목록</a>
-    <div class='container'>
+    <a href="{% url 'accounts:detail' user.pk %}">MY 프로필</a>
+
+    <div class='container my-3'>
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}

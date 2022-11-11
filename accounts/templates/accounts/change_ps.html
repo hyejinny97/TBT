@@ -4,11 +4,12 @@
 {% block body %}
   <h1 class='text-center my-3'>비빌번호 수정하기</h1>
   <hr>
+  <a href="{% url 'accounts:detail' user.pk %}">MY 프로필</a>
   <div class='container mt-5'>
     <form action="" method="POST">
       {% csrf_token %}
       {% bootstrap_form form %}
-      <input class='btn btn-success' type="submit" vlaue="저장하기">
+      <input class='btn btn-success' type="submit" value="저장하기">
     </form>
   </div>
 {% endblock body %}
