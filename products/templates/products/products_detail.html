@@ -3,21 +3,97 @@
 {% load static %}
 {% block body %}
 
-<a href="{% url 'products:index' %} ">집으로</a>
-<div>
+  <a href="{% url 'products:index' %} ">집으로</a>
+
+  <!-- 찜하기 비동기 구현 -->
+  {% if request.user.is_authenticated %}
+    <div>
+      <form class="like-forms" data-product-id="{{ products.pk }}">
+        {% csrf_token %}
+        {% if user in product.like_usres.all %}
+          <button type="submit" class="">
+            <i class="bi bi-bookmark-heart-fill" id="like-{{ products.pk }}"></i>
+          </button>
+        {% else %}
+          <button type="submit" class="">
+            <i class="bi bi-bookmark-heart" id="like-{{ products.pk }}"></i>
+          </button>
+        {% endif %}
+      </form>
+    </div>
+  {% endif %}
+
+  <!-- 상품 상세 페이지 -->
+  <div>
     {{ products.created_at }}|{{ products.updated_at }}
-    <p>{{ products.name }} </p>
-    <p>{{ products.category }} </p>
-    <p>{{ products.Description}} </p>
-    <p>{{products.pay}} </p>
-    <p>{{products.delivery}} </p>
-    <p>{{products.sale}} </p>
+    <p>{{ products.name }}
+    </p>
+    <p>{{ products.category }}
+    </p>
+    <p>{{ products.Description}}
+    </p>
+    <p>{{products.pay}}
+    </p>
+    <p>{{products.delivery}}
+    </p>
+    <p>{{products.sale}}
+    </p>
     <img src="{{ products.product_image.url }} " alt="">
-</div>
-<p><a href="{% url 'reviews:index' products.pk %}">리뷰확인</a></p>
-<p><a href="{% url 'products:products_update' products.pk %}">수정하기</a></p>
-<form action="{% url 'products:products_delete' products.pk  %}" method="POST">
+  </div>
+  <p>
+    <a href="{% url 'reviews:index' products.pk %}">리뷰확인</a>
+  </p>
+  <p>
+    <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
+  </p>
+  <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="삭제">
-</form>
+  </form>
+
+  <!-- 찜하기 script -->
+  <script>
+    const forms = document.querySelectorAll('.like-forms')
+    const csrftoken = document
+      .querySelector('[name=csrfmiddlewaretoken]')
+      .value;
+
+    forms.forEach((form) => {
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const productId = event
+          .target
+          .dataset
+          .productId
+          axios({
+            method: 'post',
+            url: `/products/${productId}/like/`,
+            headers: {
+              'X-CSRFToken': csrftoken
+            }, // csrf token
+          })
+          .then((response) => {
+            const isLiked = response.data.is_liked
+            const likeBtn = document.querySelector(`#like-${productId}`)
+            const likeCountTag = document.querySelector('#like-count')
+            const likeCountValue = response.data.like_count
+            if (isLiked === true) {
+              likeBtn
+                .classList
+                .remove('bi-bookmark-heart')
+              likeBtn
+                .classList
+                .add('bi-bookmark-heart-fill')
+            } else {
+              likeBtn
+                .classList
+                .remove('bi-bookmark-heart-fill')
+              likeBtn
+                .classList
+                .add('bi-bookmark-heart')
+            }
+          })
+      })
+    })
+  </script>
 {% endblock body %}
