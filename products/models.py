@@ -1,9 +1,6 @@
 from django.db import models
-from imagekit.models.fields import ProcessedImageField
-from imagekit.processors import ResizeToFill
 
 
-# Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length=80)
     category = models.CharField(max_length=80)
@@ -13,13 +10,10 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     sale = models.TextField()
-    product_image = ProcessedImageField(
-        upload_to="imgaes/",
-        blank=True,
-        processors=[ResizeToFill(400, 400)],
-        format="JPEG",
-        options={"quality": 60},
-    )
 
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="images/", null=True)
 
 #  추가 모델 서브 이미지 모델 생성

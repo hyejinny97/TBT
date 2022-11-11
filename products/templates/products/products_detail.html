@@ -50,18 +50,18 @@
     <div class="qna-area">
       <p class="qna-modal-btn">문의하기</p>
     </div>
-    <p>
-      <a href="{% url 'reviews:index' products.pk %}">리뷰확인</a>
-    </p>
-    <p>
-      <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
-    </p>
-    <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
-      {% csrf_token %}
-      <input type="submit" value="삭제">
-    </form>
+     <p>
+    <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
+  </p>
+  <p>
+    <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
+  </p>
+  <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="삭제">
+  </form>
   </div>
-  <!--리뮤 모달-->
+  <!--리뷰 모달-->
   <div id="review" class="modalC hidden">
     <div class="tit-area">
       <h1 class="tit">리뷰 쓰기</h1>
@@ -168,6 +168,7 @@
     </div>
   </div>
   <div class="overlayC hidden"></div>
+
 
   <!-- 찜하기 script -->
   <script>
