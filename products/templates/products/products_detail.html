@@ -2,63 +2,178 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% block body %}
+  <div id="product-detail">
+    <a href="{% url 'products:index' %} ">상품 목록 페이지</a>
+    <!-- 찜하기 비동기 구현 -->
+    {% if request.user.is_authenticated %}
+      <div>
+        <form class="like-forms" data-product-id="{{ products.pk }}">
+          {% csrf_token %}
+          {% if user in products.like_users.all %}
+            <button type="submit" class="" id="like-{{ products.pk }}">
+              <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart-fill"></i>
+            </button>
+          {% else %}
+            <button type="submit" class="" id="like-{{ products.pk }}">
+              <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart"></i>
+            </button>
+          {% endif %}
+          <div id="heart-count">
+            <p>{{ products.like_users.count }}</p>
+          </div>
+        </form>
+      </div>
+    {% endif %}
 
-  <a href="{% url 'products:index' %} ">집으로</a>
-
-  <!-- 찜하기 비동기 구현 -->
-  {% if request.user.is_authenticated %}
+    <!-- 상품 상세 페이지 -->
     <div>
-      <form class="like-forms" data-product-id="{{ products.pk }}">
-        {% csrf_token %}
-        {% if user in products.like_users.all %}
-          <button type="submit" class="" id="like-{{ products.pk }}">
-            <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart-fill"></i>
-          </button>
-        {% else %}
-          <button type="submit" class="" id="like-{{ products.pk }}">
-            <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart"></i>
-          </button>
-        {% endif %}
-        <div id="heart-count">
-          <p>{{ products.like_users.count }}</p>
+      {{ products.created_at }}|{{ products.updated_at }}
+      <p>{{ products.name }}
+      </p>
+      <p>{{ products.category }}
+      </p>
+      <div>
+        {% for productimage in products.productimage_set.all %}
+          <img src="{{ productimage.image.url }}" alt="" style='width:100px;'>
+        {% endfor %}
+      </div>
+      <div>
+        <img src="{{ products.Description2.url }}" alt="">
+      </div>
+      <p>{{products.pay}}
+      </p>
+      <p>{{products.delivery}}
+      </p>
+      <p>{{products.sale}}
+      </p>
+      <img src="{{ products.product_image.url }} " alt="">
+    </div>
+    <div class="rev-area">
+      <p id="rev-modal-btn">리뷰쓰기</p>
+    </div>
+    <div class="qna-area">
+      <p class="qna-modal-btn">문의하기</p>
+    </div>
+    <p>
+      <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
+    </p>
+    <p>
+      <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
+    </p>
+    <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제">
+    </form>
+  </div>
+  <!--리뷰 모달-->
+  <div id="review" class="modalC hidden">
+    <div class="tit-area">
+      <h1 class="tit">리뷰 쓰기</h1>
+      <button class="btn-close btn-close-rev">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="item-area sect">
+      <div class="img-area">
+        <img src="https://source.unsplash.com/random/200x200" alt="">
+      </div>
+      <div class="info">
+        <p>category</p>
+        <h3 class="sub-tit">다이어리</h3>
+      </div>
+    </div>
+    <div class="form-area ">
+      <form action="" class="review-form ">
+        <div class="rate-area sect">
+          <h4 class="sub-tit">별점<span>*</span></h4>
+          <div class="rate-stars">
+            <input type="radio" name="rate" id="rate-5">
+            <label for="rate-5">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-4">
+            <label for="rate-4">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-3">
+            <label for="rate-3">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-2">
+            <label for="rate-2">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-1">
+            <label for="rate-1">
+              <i class="bi bi-star-fill"></i>
+            </label>
+          </div>
         </div>
+        <div class="review-img sect">
+          <h4 class="sub-tit">사진 첨부</h4>
+          <span>사진을 첨부해주세요 (최대 1장)</span>
+          <label for="file" class="upload-btn">
+            <i class="bi bi-card-image"></i>
+            <span>
+              사진첨부하기</span>
+          </label>
+          <input type="file" accept="image/jpeg" name="file" id="file"/>
+        </div>
+        <div class="review-txt sect">
+          <h4 class="sub-tit">리뷰 작성<span>*</span></h4>
+          <textarea name="review-content" id="review-content" cols="120" rows="10" placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 20자 이상)"></textarea>
+        </div>
+        <button class="btnC" type="submit">완료</button>
       </form>
     </div>
-  {% endif %}
-
-  <!-- 상품 상세 페이지 -->
-  <div>
-    {{ products.created_at }}|{{ products.updated_at }}
-    <p>{{ products.name }}
-    </p>
-    <p>{{ products.category }}
-    </p>
-    <div>
-      {% for productimage in products.productimage_set.all %}
-        <img src="{{ productimage.image.url }}" alt="" style='width:100px;'>
-      {% endfor %}
-    </div>
-    <div>
-      <img src="{{ products.Description2.url }}" alt="">
-    </div>
-    <p>{{products.pay}}
-    </p>
-    <p>{{products.delivery}}
-    </p>
-    <p>{{products.sale}}
-    </p>
-    <img src="{{ products.product_image.url }} " alt="">
   </div>
-  <p>
-    <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
-  </p>
-  <p>
-    <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
-  </p>
-  <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="삭제">
-  </form>
+
+  <!--문의 모달-->
+  <div id="qna" class="modalC hidden">
+    <div class="tit-area">
+      <h1 class="tit">상품 문의하기</h1>
+      <button class="btn-close btn-close-qna">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+    <div class="qna-cate">
+      <h3 class="sub-tit">문의유형</h3>
+      <table class="cate-area sect">
+        <tbody>
+          <tr>
+            <td class="tab_oper tab-active">상품</td>
+            <td class="tab_oper">배송</td>
+            <td class="tab_oper">반품</td>
+          </tr>
+          <tr>
+            <td class="tab_oper">교환</td>
+            <td class="tab_oper">환불</td>
+            <td class="tab_oper">기타</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub-tit">상품</h3>
+    <div class="item-area sect">
+      <div class="img-area">
+        <img src="https://source.unsplash.com/random/200x200" alt="">
+      </div>
+      <div class="info">
+        <p>category</p>
+        <h3 class="sub-tit">상품명</h3>
+      </div>
+    </div>
+    <div class="form-area ">
+      <form action="" class="qna-form">
+        <div class="qna-txt sect">
+          <h4 class="sub-tit">문의내용</h4>
+          <textarea name="review-content" id="review-content" cols="120" rows="10" placeholder="문의내용을 입력하세요."></textarea>
+        </div>
+        <button class="btnC" type="submit">완료</button>
+      </form>
+    </div>
+  </div>
+  <div class="overlayC hidden"></div>
 
   <!-- 찜하기 script -->
   <script>
