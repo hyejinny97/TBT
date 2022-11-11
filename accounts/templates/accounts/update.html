@@ -1,20 +1,43 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load widget_tweaks %}
 
 {% block body %}
   <div id="update">
-
-    <h1 class='text-center my-4'>
-      프로필 수정 페이지</h1>
-    <hr>
-    <a href="{% url "accounts:index" %}">회원 목록</a>
-    <div class='container'>
-      <form action="" method="POST" enctype="multipart/form-data">
+    <div class="tit-area">
+      <h1 class="tit">
+        회원 정보 수정</h1>
+    </div>
+    <div class='form-area'>
+      <form action="" method="POST" enctype="multipart/form-data" class="update-form">
         {% csrf_token %}
-        {% bootstrap_form form %}
-        <input class='btnC ' type="submit" name="" id="" value="저장하기">
-        <a class="btnC " href="{% url 'accounts:changeps' %}">비밀번호 수정하기</a>
+        <ul class="form-list">
+          <li>
+            <label for="first_name">이름</label>
+            {% render_field form.first_name %}
+          </li>
+          <li>
+            <label for="last_name">성</label>
+            {% render_field form.last_name %}
+          </li>
+          <li>
+            <label for="email">이메일</label>
+            {% render_field form.email %}
+          </li>
+          <li>
+            <label for="profile_image">프로필 이미지</label>
+            {% render_field form.profile_image %}
+          </li>
+        </ul>
+        <a class="btnC btnS " href="{% url 'accounts:changeps' %}">비밀번호 변경</a>
+        <button type="submit" class="btnC btn-sb">기본 정보 수정</button>
       </form>
+    </div>
+    <div class="prev">
+      <p>
+        <a href="{% url 'accounts:login' %}" class="link-prev">이전페이지로</a>
+        돌아가기
+      </p>
     </div>
   </div>
 {% endblock body %}

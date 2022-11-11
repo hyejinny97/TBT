@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomCreationUserForm, CustomChangeUserForm
 from .forms import CustomAuthenticationForm
+from products.models import Product
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login as auth_login
@@ -8,7 +9,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+
 
 # Create your views here.
 
@@ -89,27 +90,6 @@ def changeps(request):
     return render(request, "accounts/change_ps.html", {"form": form})
 
 
-# @require_POST
-# def follow(request, user_pk):
-#     if request.user.is_authenticated:
-#         user = get_user_model().objects.get(pk=user_pk)
-#         if user != request.user:
-#             if user.followings.filter(pk=request.user.pk).exists():
-#                 user.followings.remove(request.user)
-#                 is_followed = False
-#             else:
-#                 user.followings.add(request.user)
-#                 is_followed = True
-#             context = {
-#                 "is_followed": is_followed,
-#                 "followers_count": user.followers.count(),
-#                 "followings_count": user.followings.count(),
-#             }
-
-#         return JsonResponse(context)
-#     return redirect("accounts:login")
-
-
 @login_required
 def follow(request, user_pk):
     user = get_object_or_404(get_user_model(), pk=user_pk)
@@ -127,3 +107,15 @@ def follow(request, user_pk):
         }
 
     return JsonResponse(context)
+
+
+def wishlist(request, user_pk):
+    users = get_user_model().objects.get(pk=user_pk)
+    context = {"users": users}
+    return render(request, "accounts/wishlist.html", context)
+
+
+def reviewlist(request, user_pk):
+    users = get_user_model().objects.get(pk=user_pk)
+    context = {"users": users}
+    return render(request, "accounts/review_list.html", context)

@@ -1,15 +1,18 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
 from .form import ProductsForm, ProductImageForm
 from .models import Product,ProductImage
 from django.db.models import Avg, Count
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def index(request):
     products = Product.objects.all()
 
-    context = {
-        'products' : products
-    }
+    context = {"products": products}
     return render(request, "products/index.html", context)
+
 
 
 # Create your views here.
@@ -29,9 +32,11 @@ def products_create(request):
     context = {
         'create_form' : create_form,
         'product_image_form': product_image_form,
+
     }
 
-    return render(request, 'products/products_create.html', context)
+    return render(request, "products/products_create.html", context)
+
 
 def products_index(request):
     products = Product.objects.all()
@@ -51,7 +56,8 @@ def products_detail(request, products_pk):
         'total' : total,
     }
 
-    return render(request, 'products/products_detail.html', context)
+    return render(request, "products/products_detail.html", context)
+
 
 def products_update(request, products_pk):
     products = get_object_or_404(Product, pk=products_pk)
@@ -59,19 +65,40 @@ def products_update(request, products_pk):
         form = ProductsForm(request.POST, request.FILES, instance=products)
         if form.is_valid():
             form.save()
-            return redirect('products:products_detail', products_pk)
+            return redirect("products:products_detail", products_pk)
 
     else:
         form = ProductsForm(instance=products)
 
-    context ={
-        'form' : form,
+    context = {
+        "form": form,
     }
-    
-    return render(request, 'products/products_update.html', context)
+
+    return render(request, "products/products_update.html", context)
+
 
 def products_delete(request, products_pk):
 
-        products = get_object_or_404(Product, pk=products_pk)
-        products.delete()
-        return redirect('products:index')
+    products = get_object_or_404(Product, pk=products_pk)
+    products.delete()
+    return redirect("products:index")
+
+
+@login_required
+def like(request, products_pk):
+    if request.user.is_authenticated:
+        product = Product.objects.get(pk=products_pk)
+        if product.like_users.filter(pk=request.user.pk).exists():
+            product.like_users.remove(request.user)
+            is_liked = False
+        else:
+            product.like_users.add(request.user)
+            is_liked = True
+    else:
+        return redirect("products:detail", products_pk)
+    return JsonResponse(
+        {
+            "is_liked": is_liked,
+            "like_count": product.like_users.count(),
+        }
+    )

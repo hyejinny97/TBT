@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+  <!DOCTYPE html>
+  <html lang="en">
+
+    <head>
+      <meta charset="UTF-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link rel="stylesheet" href="{% static 'styles/wishlist.css' %}"/>
+      <title>위시리스트</title>
+    </head>
+
+    <body>
+      <section class="containers">
+        <p class="title text-center fw-semibold">
+          <span class="title__user">user</span>
+          님의 Wish List
+        </p>
+        <!-- 버튼 -->
+        <div class="wishlist__btn">
+          <button class="cart__btn">장바구니 담기</button>
+          <button class="delete__btn">삭제하기</button>
+        </div>
+        <!-- 찜 목록 -->
+
+        <ul class="wishlist__content">
+          {% if user.like_products.all %}
+            {% for product in user.like_products.all %}
+              <a href="{% url "products:products_detail" product.pk %}">
+                <li class="wishlist__box">
+                  <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
+                  <img class="wishlist__img" src="{{ product.product_image.url }}" alt="wishlist-img"/>
+                  <p class="wishlist__title">{{ product.name }}</p>
+                  <p class="wishlist__price">{{ product.pay }}</p>
+                </li>
+              </a>
+            {% endfor %}
+          {% endif %}
+
+          <li class="wishlist__box">
+            <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
+            <img class="wishlist__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/482/B004820641.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="wishlist-img"/>
+            <p class="wishlist__title">아이코닉 2023 두줄 다이어리</p>
+            <p class="wishlist__price">10,880원</p>
+          </li>
+          <li class="wishlist__box">
+            <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
+            <img class="wishlist__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/482/B004820641.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="wishlist-img"/>
+            <p class="wishlist__title">아이코닉 2023 두줄 다이어리</p>
+            <p class="wishlist__price">10,880원</p>
+          </li>
+          <li class="wishlist__box">
+            <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
+            <img class="wishlist__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/482/B004820641.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="wishlist-img"/>
+            <p class="wishlist__title">아이코닉 2023 두줄 다이어리</p>
+            <p class="wishlist__price">10,880원</p>
+          </li>
+          <li class="wishlist__box">
+            <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
+            <img class="wishlist__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/482/B004820641.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="wishlist-img"/>
+            <p class="wishlist__title">아이코닉 2023 두줄 다이어리</p>
+            <p class="wishlist__price">10,880원</p>
+          </li>
+          <li class="wishlist__box">
+            <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
+            <img class="wishlist__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/482/B004820641.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="wishlist-img"/>
+            <p class="wishlist__title">아이코닉 2023 두줄 다이어리</p>
+            <p class="wishlist__price">10,880원</p>
+          </li>
+        </ul>
+        <div class="ment text-center">
+          <p class="info">
+            더 많은 상품을
+            <span class="info__wishlist">🎁위시리스트</span>에 담아보세요 :)
+          </p>
+          <p class="goto">쇼핑 바로 가기</p>
+        </div>
+      </section>
+    </body>
+
+  </html>
+
+{% endblock body %}

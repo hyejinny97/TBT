@@ -1,6 +1,5 @@
 'use strict';
 
-
 const form = document.querySelector('#follow-form');
 
 form.addEventListener('submit', function (e) {
@@ -19,10 +18,12 @@ form.addEventListener('submit', function (e) {
             const followBtn = document.querySelector('#follow-btn');
             if (isFollow === true) {
                 followBtn.innerText = 'unfollow'
-                followBtn.classList.add('btnW');
+                followBtn.classList.remove('follow__btn');
+                followBtn.classList.add('unfollow__btn');
             } else {
                 followBtn.innerText = 'follow'
-                followBtn.classList.remove('btnW');
+                followBtn.classList.remove('unfollow__btn');
+                followBtn.classList.add('follow__btn');
 
             }
             const followersCount = document.querySelector('#followers-count');
@@ -33,3 +34,4 @@ form.addEventListener('submit', function (e) {
             followingsCount.innerText = followingsCountValue;
         })
 });
+
