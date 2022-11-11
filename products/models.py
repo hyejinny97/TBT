@@ -14,7 +14,10 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="product_image"
+    )
     image = models.ImageField(upload_to="images/", null=True)
+
 
 #  추가 모델 서브 이미지 모델 생성

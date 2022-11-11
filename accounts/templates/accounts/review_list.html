@@ -30,7 +30,7 @@
           {% for review in reviews %}
             <div class="review__container">
               <a href="{% url 'products:products_detail' review.product.pk %}">
-                <img class="review__img" src="{{ review.product.product_image.url }}" alt="review-img"/>
+                <img class="review__img" src="{{ review.product.product_image.all.first.image.url }}" alt="review-img"/>
                 <span class="review__name">{{ review.product.name }}</span>
               </a>
               <span class="review__grade">

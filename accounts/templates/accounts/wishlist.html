@@ -32,7 +32,7 @@
               <a href="{% url "products:products_detail" product.pk %}">
                 <li class="wishlist__box">
                   <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
-                  <img class="wishlist__img" src="{{ product.product_image.url }}" alt="wishlist-img"/>
+                  <img class="wishlist__img" src="{{ product.product_image.all.first.image.url }}" alt="wishlist-img"/>
                   <p class="wishlist__title">{{ product.name }}</p>
                   <p class="wishlist__price">{{ product.pay }}</p>
                 </li>
