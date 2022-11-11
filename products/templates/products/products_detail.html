@@ -33,8 +33,14 @@
     </p>
     <p>{{ products.category }}
     </p>
-    <p>{{ products.Description}}
-    </p>
+    <div>
+      {% for productimage in products.productimage_set.all %}
+        <img src="{{ productimage.image.url }}" alt="" style='width:100px;'>
+      {% endfor %}
+    </div>
+    <div>
+      <img src="{{ products.Description2.url }}" alt="">
+    </div>
     <p>{{products.pay}}
     </p>
     <p>{{products.delivery}}
