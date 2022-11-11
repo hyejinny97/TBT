@@ -334,3 +334,8 @@
 .wishlist__price {
   font-weight: 600;
 }
+
+/* js */
+.hidden {
+  display: none;
+}
