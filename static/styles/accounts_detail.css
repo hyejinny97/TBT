@@ -1,0 +1,336 @@
+@import url(./main.css);
+
+.containers {
+  padding: 0rem 10%;
+}
+
+.title {
+  margin: 2rem 0;
+  font-size: 1.7rem;
+}
+
+.title__user {
+  color: var(--main);
+}
+
+/* 프로필 */
+.profile__container {
+  width: 65rem;
+  min-height: 15rem;
+  padding: 2rem 10rem;
+  border: 2px solid var(--main);
+  white-space: nowrap;
+}
+
+.profile__content {
+  display: flex;
+  margin-top: 0.5rem;
+  justify-content: space-around;
+}
+
+.profile__img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
+
+.profile__name {
+  color: var(--main);
+  font-weight: 600;
+}
+
+.profile__middle {
+  margin-top: 1rem;
+  margin-left: 3rem;
+}
+
+.follow {
+  display: flex;
+}
+
+.follow__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+}
+
+.follow__cnt {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.follow__title {
+  display: inline-block;
+}
+
+.follow__btn {
+  margin-top: 1.5rem;
+  margin-left: 1.9rem;
+  padding: 0.8rem 1.5rem;
+  background-color: var(--main);
+  border-radius: 5px;
+}
+
+.unfollow__btn {
+  margin-top: 1.5rem;
+  margin-left: 1.9rem;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--main);
+  border-radius: 5px;
+}
+
+.update__btn {
+  margin-top: 1.5rem;
+  margin-left: 1rem;
+  padding: 0.7rem 0.8rem;
+  background-color: var(--main);
+  color: var(--bg);
+  border: none;
+  border-radius: 5px;
+}
+
+.update__btn:hover,
+.follow__btn:hover {
+  background-color: var(--main-sub);
+  transition: all 300ms ease-in;
+}
+
+.unfollow__btn:hover {
+  background-color: var(--main);
+  color: var(--bg);
+  transition: all 300ms ease-in;
+}
+
+.profile__bottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-left: 4rem;
+}
+
+.profile__link {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: var(--txt);
+}
+
+.profile__link--notuser {
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 1.5rem;
+  text-decoration: none;
+  color: var(--txt);
+}
+
+.profile__link:hover,
+.profile__link--notuser:hover {
+  color: var(--txt);
+}
+
+.arrow {
+  margin-top: -0.4rem;
+  color: var(--main);
+}
+
+/* 최근 주문 내역 */
+.sub__title {
+  margin-top: 2.5rem;
+  margin-left: 0.5rem;
+  color: var(--main);
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.order__history__category {
+  margin-top: 2rem;
+  white-space: nowrap;
+}
+
+.order__category__number,
+.order__category__title,
+.order__category__status {
+  font-weight: 600;
+}
+
+.order__category__number {
+  margin-left: 2rem;
+}
+
+.order__category__title {
+  margin-left: 20rem;
+}
+
+.order__category__status {
+  margin-left: 18.5rem;
+}
+
+.order__history__container {
+  margin-top: 1rem;
+  white-space: nowrap;
+  transform: translateY(-1.5rem);
+}
+
+.order__number {
+  margin-left: 1.5rem;
+}
+
+.order__img {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 6rem;
+  transform: translateY(2rem);
+}
+
+.order__title {
+  display: inline-block;
+  width: 20rem;
+  transform: translateY(0.5rem);
+  margin-left: 6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order__status {
+  margin-left: 4rem;
+  color: var(--sub);
+  font-weight: 600;
+}
+
+.arrow__down {
+  cursor: pointer;
+  display: block;
+  transform: translateY(3rem);
+  margin-left: 30rem;
+  width: 2rem;
+  height: 2rem;
+  color: var(--main);
+}
+
+.arrow__down:hover {
+  transform: translateY(3rem) scale(1.2);
+  transition: all 300ms ease-in;
+}
+
+/* 최근 리뷰 */
+.main__title {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+
+.sub__title {
+  font-size: 1.4rem;
+}
+
+.plus__title {
+  cursor: pointer;
+  margin-top: 2.4rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.review {
+  margin-left: 1rem;
+}
+
+.review__category {
+  margin: 1rem 0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.category__name {
+  margin-left: 13rem;
+}
+
+.category__grade {
+  margin-left: 16.5rem;
+}
+
+.category__title {
+  margin-left: 12rem;
+}
+
+.line {
+  color: var(--line);
+}
+
+.review__container {
+  white-space: nowrap;
+  transform: translateY(-1.5rem);
+}
+
+.review__img {
+  width: 5rem;
+  height: 5rem;
+  margin-left: 1.3rem;
+  transform: translateY(2rem);
+}
+
+.review__name {
+  display: inline-block;
+  margin-left: 5rem;
+  width: 15rem;
+  height: 3rem;
+  transform: translateY(1.7rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.review__grade {
+  margin-top: 1.5rem;
+  margin-left: 7rem;
+  font-weight: 700;
+  color: var(--sub-b);
+}
+
+.star {
+  margin-top: -0.2rem;
+  margin-right: 0.3rem;
+  color: var(--sub-b);
+}
+
+.review__title {
+  width: 20rem;
+  height: 3rem;
+  display: inline-block;
+  transform: translateY(1.7rem);
+  margin-left: 6.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 위시리스트 */
+.wishlist__img {
+  width: 13rem;
+  height: 13rem;
+}
+
+.wishlist__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
+  padding-bottom: 6rem;
+}
+
+.wishlist__box {
+  width: 13rem;
+  margin: 1rem 1.5rem;
+  text-align: center;
+}
+
+.wishlist__title {
+  margin-top: 0.5rem;
+  margin-bottom: 0.1rem;
+}
+
+.wishlist__price {
+  font-weight: 600;
+}
