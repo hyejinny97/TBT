@@ -10,46 +10,56 @@
 	border-radius: 0.2rem;
 	padding: 1rem 0.5rem;
 	transition: 0.3s;
+	cursor: pointer;
 }
 
 .btnC:hover {
 	background: var(--main-sub);
 }
-#review {
+#review,
+#qna {
 	padding: 2rem;
 }
-#review .tit-area {
+#review .tit-area,
+#qna .tit-area {
 	position: relative;
 	margin-bottom: 3rem;
 }
-#review .tit-area .tit {
+#review .tit-area .tit,
+#qna .tit-area .tit {
 	font-size: 2rem;
 	font-weight: 700;
 	text-align: center;
 }
-#review .tit-area .btn-close {
+#review .tit-area .btn-close,
+#qna .tit-area .btn-close {
 	font-size: 1.5rem;
 	position: absolute;
-	right: 5%;
-	top: 0;
+	right: 0;
+	top: -1.5rem;
 	cursor: pointer;
 }
-#review .sect {
+#review .sect,
+#qna .sect {
 	margin-bottom: 3rem;
 }
-#review .item-area {
+#review .item-area,
+#qna .item-area {
 	display: flex;
 	align-items: center;
 }
-#review .item-area .img-area {
+#review .item-area .img-area,
+#qna .item-area .img-area {
 	margin-right: 1.5rem;
 }
-#review .item-area .info p {
+#review .item-area .info p,
+#qna .item-area .info p {
 	color: var(--main);
 	font-weight: 700;
 	margin-bottom: 1rem;
 }
-#review .sub-tit {
+#review .sub-tit,
+#qna .sub-tit {
 	font-size: 1.5rem;
 	margin-bottom: 1rem;
 }
@@ -57,7 +67,8 @@
 	color: var(--highlight);
 }
 
-#review .review-form .btnC {
+#review .review-form .btnC,
+#qna .qna-form .btnC {
 	width: 100%;
 }
 #review .review-form .rate-area input {
@@ -79,11 +90,13 @@
 #review .review-form .rate-area input:checked ~ label {
 	color: var(--rate);
 }
-#review .review-form .review-txt textarea {
+#review .review-form .review-txt textarea,
+#qna .qna-form .qna-txt textarea {
 	border: 1px solid var(--line);
 	border-radius: 0.2rem;
 	padding: 0.3rem 0.5rem;
 	background: var(--gr);
+	width: 100%;
 }
 #review .review-form .review-img span {
 	font-size: 0.95rem;
@@ -108,6 +121,23 @@
 	display: none;
 }
 #review .review-form .review-txt textarea:focus,
-#review .review-form .review-txt textarea:active {
+#review .review-form .review-txt textarea:active,
+#qna .qna-form .qna-txt textarea:focus,
+#qna .qna-form .qna-txt textarea:active {
 	border: 2px solid var(--main);
+}
+#qna .qna-cate .cate-area {
+	width: 100%;
+	text-align: center;
+}
+#qna .qna-cate .cate-area td {
+	border: 2px solid var(--main);
+	padding: 1rem 0;
+	transition: 0.2s;
+	cursor: pointer;
+}
+#qna .qna-cate .cate-area td:hover,
+#qna .qna-cate .cate-area td.tab-active {
+	background: var(--main);
+	color: var(--bg);
 }
