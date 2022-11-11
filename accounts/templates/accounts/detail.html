@@ -130,7 +130,7 @@
       <!-- Wish List -->
       <div class="main__title">
         <p class="sub__title">Wish List</p>
-        <p class="plus__title">더보기 ></p>
+        <a class="plus__title" href="{% url 'accounts:wishlist' request.user.pk%}">더보기 ></a>
       </div>
       <div class="wishlist__content">
         <div class="wishlist__box">
