@@ -10,7 +10,7 @@
     <div>
       <form class="like-forms" data-product-id="{{ products.pk }}">
         {% csrf_token %}
-        {% if user in product.like_usres.all %}
+        {% if user in products.like_users.all %}
           <button type="submit" class="">
             <i class="bi bi-bookmark-heart-fill" id="like-{{ products.pk }}"></i>
           </button>
