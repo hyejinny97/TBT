@@ -17,4 +17,5 @@ urlpatterns = [
     path("changeps/", views.changeps, name="changeps"),
     path("<int:user_pk>/follow/", views.follow, name="follow"),
     path("<int:user_pk>/wishlist/", views.wishlist, name="wishlist"),
+    path("<int:user_pk>/reviewlist/", views.reviewlist, name="reviewlist"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

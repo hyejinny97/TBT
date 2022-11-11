@@ -113,3 +113,9 @@ def wishlist(request, user_pk):
     users = get_user_model().objects.get(pk=user_pk)
     context = {"users": users}
     return render(request, "accounts/wishlist.html", context)
+
+
+def reviewlist(request, user_pk):
+    users = get_user_model().objects.get(pk=user_pk)
+    context = {"users": users}
+    return render(request, "accounts/review_list.html", context)
