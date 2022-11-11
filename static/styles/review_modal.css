@@ -16,6 +16,44 @@
 .btnC:hover {
 	background: var(--main-sub);
 }
+
+.hidden {
+	display: none;
+	opacity: 0;
+}
+.modalC {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -30%);
+	max-width: 80rem;
+	background: var(--bg);
+	padding: 5rem 6rem;
+	box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+	transition: all 0.5s;
+}
+.overlayC {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(4px);
+	z-index: 100;
+	transition: all 0.5s;
+}
+.scroll-block {
+	overflow: hidden;
+}
+#product-detail #rev-modal-btn,
+#product-detail .qna-modal-btn {
+	font-weight: 700;
+	font-size: 1.5rem;
+	color: var(--main);
+	cursor: pointer;
+}
 #review,
 #qna {
 	padding: 2rem;
@@ -35,7 +73,7 @@
 #qna .tit-area .btn-close {
 	font-size: 1.5rem;
 	position: absolute;
-	right: 0;
+	right: -1rem;
 	top: -1.5rem;
 	cursor: pointer;
 }
@@ -61,6 +99,7 @@
 #review .sub-tit,
 #qna .sub-tit {
 	font-size: 1.5rem;
+	font-weight: 700;
 	margin-bottom: 1rem;
 }
 #review .sub-tit span {
@@ -71,25 +110,33 @@
 #qna .qna-form .btnC {
 	width: 100%;
 }
+
+#review .review-form .rate-area {
+	margin-bottom: 5rem;
+}
+#review .review-form .rate-area .rate-stars {
+	width: 200px;
+}
 #review .review-form .rate-area input {
 	display: none;
 }
 #review .review-form .rate-area label {
 	color: var(--line);
 	transition: all 0.2s ease;
-	/* float: right; */
+	float: right;
 	margin: 0 0.3rem;
 	font-size: 1.8rem;
 	cursor: pointer;
 }
 
-#review .review-form .rate-area input:not(:checked) ~ label:hover,
-#review .review-form .rate-area input:not(:checked) ~ label:hover ~ label {
+#review .review-form .rate-stars input:not(:checked) ~ label:hover,
+#review .review-form .rate-stars input:not(:checked) ~ label:hover ~ label {
 	color: var(--rate);
 }
-#review .review-form .rate-area input:checked ~ label {
+#review .review-form .rate-stars input:checked ~ label {
 	color: var(--rate);
 }
+
 #review .review-form .review-txt textarea,
 #qna .qna-form .qna-txt textarea {
 	border: 1px solid var(--line);
@@ -98,6 +145,7 @@
 	background: var(--gr);
 	width: 100%;
 }
+
 #review .review-form .review-img span {
 	font-size: 0.95rem;
 }

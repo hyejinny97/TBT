@@ -6,9 +6,20 @@
   <h1>안녕</h1>
   <a href="{% url 'products:products_create' %}">상품 작성</a>
   {% for product in products %}
-  <div>
-  <p>{{product.name}} </p>
-  <a href="{% url 'products:products_detail' product.pk %}"><img class='rounded' style='width:19rem; height:27rem;' src="{{ product.product_image.url }}" alt="{{ product.image }}"></a>
+    <div style='border:solid 1px black;'>
+      <p>{{ product.pk }}</p>
+      <div>
+        <a href="{% url 'products:products_detail' product.pk %}">{{ product.name }}</a>
+      </div>
+      <div>
+        <p>첫번째 이미지 사진:</p>
+        <img src="{{ product.productimage_set.all.0.image.url }}" alt="" style='width:100px;'>
+      </div>
+      <div>
+        <p>상품 상세설명 사진</p>
+        <img src="{{ product.Description2.url }}" alt="" style='height:200px;'>
+      </div>
+    </div>
   {% endfor %}
 </div>
 {% endblock body %}
