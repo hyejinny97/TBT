@@ -1,13 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from products.models import Product
 from .models import Review
 from .forms import ReviewForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def main(request):
-    return render(request, "reviews/main.html")
-
-
 def index(request, product_pk):
     product = Product.objects.get(pk=product_pk)
     reviews = product.review_set.all()
@@ -26,6 +23,7 @@ def index(request, product_pk):
     return render(request, "reviews/index.html", context)
 
 
+@login_required
 def create(request, product_pk):
     product = Product.objects.get(pk=product_pk)
     if request.method == "POST":
@@ -44,20 +42,39 @@ def create(request, product_pk):
     return render(request, "reviews/create.html", context)
 
 
+@login_required
 def delete(request, review_pk):
     review = Review.objects.get(pk=review_pk)
-    review.delete()
+    if request.user.pk == review.account.pk:
+        review.delete()
     return redirect("reviews:index", review.product.pk)
 
 
+@login_required
 def update(request, review_pk):
     review = Review.objects.get(pk=review_pk)
-    if request.method == "POST":
-        review_form = ReviewForm(request.POST, request.FILES, instance=review)
-        if review_form.is_valid():
-            review_form.save()
-            return redirect("reviews:index", review.product.pk)
+    if request.user.pk == review.account.pk:
+        if request.method == "POST":
+            review_form = ReviewForm(request.POST, request.FILES, instance=review)
+            if review_form.is_valid():
+                review_form.save()
+                return redirect("reviews:index", review.product.pk)
+            else:
+                review_form = ReviewForm(instance=review)
+        context = {"review_form": review_form}
     else:
-        review_form = ReviewForm(instance=review)
-    context = {"review_form": review_form}
+        return redirect("products:index")
     return render(request, "reviews/update.html", context)
+
+
+@login_required
+def likes(request, review_pk):
+    if request.user.is_authenticated:
+        review = get_object_or_404(Review, pk=review_pk)
+        if not request.user.pk == review.account.pk:
+            if review.like.filter(pk=request.user.pk).exists():
+                review.like.remove(request.user)
+            else:
+                review.like.add(request.user)
+            return redirect("reviews:index", review_pk)
+    return redirect("accounts:login")
