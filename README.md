@@ -144,3 +144,61 @@
 
 </div>
 </details>
+
+<details>
+<summary>프로젝트 제작 2일차</summary>
+<div markdown="1">
+
+👨‍💻**강민우**
+
+- json데이터로 제품 목록 구현하기
+
+👨‍💻**권건희**
+
+- 리뷰 디테일 수정
+- 좋아요 추가+비동기화
+
+👨‍💻 **백솔비**
+
+- 찜목록 html 완성 후 장고 연결
+- 리뷰 목록 html 완성 (시간 괜찮으면 장고 연결)
+
+👨‍💻**오채현**
+
+- 리뷰 템플릿
+- 메인 페이지 템플릿
+
+👨‍💻**윤혜진**
+
+- 크롤링한 데이터 DB에 반영
+- 상품 목록 페이지 템플릿 작성 및 스타일링
+
+👨‍💻**주세환**
+
+- 찜하기 비동기 구현
+- wishlist item 목록 구현
+- 마이프로필 리뷰목록 구현
+
+</div>
+</details>
+
+<details>
+<summary>프로젝트 제작 N일차</summary>
+<div markdown="1">
+
+</div>
+</details>
+
+<details>
+<summary>프로젝트 제작 N일차</summary>
+<div markdown="1">
+
+</div>
+</details>
+
+<details>
+<summary>프로젝트 제작 N일차</summary>
+<div markdown="1">
+
+</div>
+</details>
