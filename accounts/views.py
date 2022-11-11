@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomCreationUserForm, CustomChangeUserForm
 from .forms import CustomAuthenticationForm
-from products.models import Product
+from products.models import Product, ProductImage
 from reviews.models import Review
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -53,13 +53,11 @@ def logout(request):
 
 def detail(request, user_pk):
     user = get_user_model().objects.get(pk=user_pk)
-    products = Review.objects.all()
     reviews = get_user_model().objects.get(pk=user_pk).review_set.all()
     context = {
         "user": user,
         "my": request.user,
         "reviews": reviews,
-        "products": products,
     }
     return render(request, "accounts/detail.html", context)
 
