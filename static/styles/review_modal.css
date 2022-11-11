@@ -1,0 +1,113 @@
+@import url(./main.css);
+
+:root {
+	--rate: #ffd61e;
+	--gr: #f1f1f1;
+}
+.btnC {
+	background: var(--main);
+	color: var(--bg);
+	border-radius: 0.2rem;
+	padding: 1rem 0.5rem;
+	transition: 0.3s;
+}
+
+.btnC:hover {
+	background: var(--main-sub);
+}
+#review {
+	padding: 2rem;
+}
+#review .tit-area {
+	position: relative;
+	margin-bottom: 3rem;
+}
+#review .tit-area .tit {
+	font-size: 2rem;
+	font-weight: 700;
+	text-align: center;
+}
+#review .tit-area .btn-close {
+	font-size: 1.5rem;
+	position: absolute;
+	right: 5%;
+	top: 0;
+	cursor: pointer;
+}
+#review .sect {
+	margin-bottom: 3rem;
+}
+#review .item-area {
+	display: flex;
+	align-items: center;
+}
+#review .item-area .img-area {
+	margin-right: 1.5rem;
+}
+#review .item-area .info p {
+	color: var(--main);
+	font-weight: 700;
+	margin-bottom: 1rem;
+}
+#review .sub-tit {
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+#review .sub-tit span {
+	color: var(--highlight);
+}
+
+#review .review-form .btnC {
+	width: 100%;
+}
+#review .review-form .rate-area input {
+	display: none;
+}
+#review .review-form .rate-area label {
+	color: var(--line);
+	transition: all 0.2s ease;
+	/* float: right; */
+	margin: 0 0.3rem;
+	font-size: 1.8rem;
+	cursor: pointer;
+}
+
+#review .review-form .rate-area input:not(:checked) ~ label:hover,
+#review .review-form .rate-area input:not(:checked) ~ label:hover ~ label {
+	color: var(--rate);
+}
+#review .review-form .rate-area input:checked ~ label {
+	color: var(--rate);
+}
+#review .review-form .review-txt textarea {
+	border: 1px solid var(--line);
+	border-radius: 0.2rem;
+	padding: 0.3rem 0.5rem;
+	background: var(--gr);
+}
+#review .review-form .review-img span {
+	font-size: 0.95rem;
+}
+#review .review-form .review-img .upload-btn {
+	border: 2px solid var(--main);
+	border-radius: 0.2rem;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	padding: 1rem;
+	margin-top: 1rem;
+	transition: 0.2s;
+	color: var(--main);
+	font-weight: 700;
+}
+#review .review-form .review-img .upload-btn:hover {
+	background: var(--main);
+	color: var(--bg);
+}
+#review .review-form .review-img input[type="file"] {
+	display: none;
+}
+#review .review-form .review-txt textarea:focus,
+#review .review-form .review-txt textarea:active {
+	border: 2px solid var(--main);
+}
