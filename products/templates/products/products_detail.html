@@ -3,9 +3,7 @@
 {% load static %}
 {% block body %}
   <div id="product-detail">
-
     <a href="{% url 'products:index' %} ">상품 목록 페이지</a>
-
     <!-- 찜하기 비동기 구현 -->
     {% if request.user.is_authenticated %}
       <div>
@@ -50,16 +48,16 @@
     <div class="qna-area">
       <p class="qna-modal-btn">문의하기</p>
     </div>
-     <p>
-    <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
-  </p>
-  <p>
-    <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
-  </p>
-  <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="삭제">
-  </form>
+    <p>
+      <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
+    </p>
+    <p>
+      <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
+    </p>
+    <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
+      {% csrf_token %}
+      <input type="submit" value="삭제">
+    </form>
   </div>
   <!--리뷰 모달-->
   <div id="review" class="modalC hidden">
@@ -82,26 +80,28 @@
       <form action="" class="review-form ">
         <div class="rate-area sect">
           <h4 class="sub-tit">별점<span>*</span></h4>
-          <input type="radio" name="rate" id="rate-5">
-          <label for="rate-5">
-            <i class="bi bi-star-fill"></i>
-          </label>
-          <input type="radio" name="rate" id="rate-4">
-          <label for="rate-4">
-            <i class="bi bi-star-fill"></i>
-          </label>
-          <input type="radio" name="rate" id="rate-3">
-          <label for="rate-3">
-            <i class="bi bi-star-fill"></i>
-          </label>
-          <input type="radio" name="rate" id="rate-2">
-          <label for="rate-2">
-            <i class="bi bi-star-fill"></i>
-          </label>
-          <input type="radio" name="rate" id="rate-1">
-          <label for="rate-1">
-            <i class="bi bi-star-fill"></i>
-          </label>
+          <div class="rate-stars">
+            <input type="radio" name="rate" id="rate-5">
+            <label for="rate-5">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-4">
+            <label for="rate-4">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-3">
+            <label for="rate-3">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-2">
+            <label for="rate-2">
+              <i class="bi bi-star-fill"></i>
+            </label>
+            <input type="radio" name="rate" id="rate-1">
+            <label for="rate-1">
+              <i class="bi bi-star-fill"></i>
+            </label>
+          </div>
         </div>
         <div class="review-img sect">
           <h4 class="sub-tit">사진 첨부</h4>
@@ -168,7 +168,6 @@
     </div>
   </div>
   <div class="overlayC hidden"></div>
-
 
   <!-- 찜하기 script -->
   <script>
