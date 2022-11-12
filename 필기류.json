@@ -242,7 +242,10 @@
 		"pdt_category": "\ud544\uae30\ub958/\ud544\ud1b5",
 		"pdt_pay": 14500,
 		"pdt_description": "http://webimage.10x10.co.kr/item/contentsimage/409/F004092971_07.jpg",
-		"pdt_images": [],
+		"pdt_images": [
+			"1",
+			"2"
+		],
 		"pdt_delivery": 0,
 		"pdt_sale": 0
 	},
@@ -262,7 +265,14 @@
 		"pdt_category": "\ud544\uae30\ub958/\ud544\ud1b5",
 		"pdt_pay": 5500,
 		"pdt_description": "http://webimage.10x10.co.kr/ckeditor/item/202208/20220809_113226_8255.jpg",
-		"pdt_images": [],
+		"pdt_images": [
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"6"
+		],
 		"pdt_delivery": 2500,
 		"pdt_sale": 0
 	},
@@ -328,7 +338,10 @@
 		"pdt_category": "\ud544\uae30\ub958/\ud544\ud1b5",
 		"pdt_pay": 400,
 		"pdt_description": "http://webimage.10x10.co.kr/ckeditor/item/202009/20200923_145837_8401.jpg",
-		"pdt_images": [],
+		"pdt_images": [
+			"1",
+			"2"
+		],
 		"pdt_delivery": 2500,
 		"pdt_sale": 0
 	},
@@ -570,7 +583,11 @@
 		"pdt_category": "\ud544\uae30\ub958/\ud544\ud1b5",
 		"pdt_pay": 2160,
 		"pdt_description": "",
-		"pdt_images": [],
+		"pdt_images": [
+			"1",
+			"2",
+			"3"
+		],
 		"pdt_delivery": 0,
 		"pdt_sale": 0
 	}
