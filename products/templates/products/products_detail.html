@@ -33,7 +33,7 @@
       <p>{{ products.category }}
       </p>
       <div>
-        {% for productimage in products.productimage_set.all %}
+        {% for productimage in products.product_image.all %}
           <img src="{{ productimage.image.url }}" alt="" style='width:100px;'>
         {% endfor %}
       </div>
