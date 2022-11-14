@@ -108,7 +108,8 @@ def like(request, products_pk):
     )
 
 def note(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(category='노트/메모지')
+
 
     context = {
         'category' : '노트',
@@ -117,7 +118,8 @@ def note(request):
     return render(request,'products/index.html', context)
 
 def diary(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(category='다이어리')
+    
 
     context = {
         'category' : '다이어리',
@@ -126,7 +128,7 @@ def diary(request):
     return render(request,'products/index.html', context)
 
 def pencil(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(category='필기류/필통')
 
     context = {
         'category' : '필기류',
@@ -135,7 +137,7 @@ def pencil(request):
     return render(request,'products/index.html', context)
 
 def file(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(category='파일/바인더')
 
     context = {
         'category' : '파일',
