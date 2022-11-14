@@ -120,6 +120,22 @@
           </li>
         </ul>
       </div>
+
+    </div>
+  </header>
+  <main>
+    <!-- main home -->
+    {% block index %}{% endblock index %}
+    <div class="container">
+      <!-- body -->
+      {% block body %}{% endblock body %}
+    </div>
+  </main>
+  <footer>
+    <div id="footer">
+      <p>&copy; TEMBYTEM 2022</p>
+    </div>
+
     </footer>
     {% bootstrap_javascript %}
     {% block js %}{% endblock js %}
