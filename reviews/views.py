@@ -89,17 +89,32 @@ def update(
 #     return JsonResponse(context)
 
 
+# def likes(request, review_pk):
+#     if request.user.is_authenticated:
+#         review = Review.objects.get(pk=review_pk)
+#         if review.like_users.filter(pk=request.user.pk).exists():
+#             review.like_users.remove(request.user)
+#             is_liked = False
+#         else:
+#             review.like_users.add(request.user)
+#             is_liked = True
+#         context = {
+#             "is_liked": is_liked,
+#         }
+#         return JsonResponse(context)
+#     return redirect("accounts:login")
+
+
 def likes(request, review_pk):
-    if request.user.is_authenticated:
-        review = Review.objects.get(pk=review_pk)
-        if review.like_users.filter(pk=request.user.pk).exists():
-            review.like_users.remove(request.user)
-            is_liked = False
-        else:
-            review.like_users.add(request.user)
-            is_liked = True
-        context = {
-            "is_liked": is_liked,
-        }
-        return JsonResponse(context)
-    return redirect("accounts:login")
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.user in review.like.all():
+        review.like.remove(request.user)
+        is_liked = False
+    else:
+        review.like.add(request.user)
+        is_liked = True
+    context = {
+        "isLiked": is_liked,
+        "likeCount": review.like.count(),
+    }
+    return JsonResponse(context)
