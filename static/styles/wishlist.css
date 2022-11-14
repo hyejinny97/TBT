@@ -16,6 +16,7 @@
 /* 버튼 */
 .wishlist__btn {
   float: right;
+  transform: translateX(-2rem);
 }
 
 .cart__btn {
@@ -50,22 +51,10 @@
 }
 
 /* 찜 사진 */
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: inline-table;
-}
 
-li {
-  margin: 0 0 0 0;
-  padding: 0 0 0 0;
-  border: 0;
-  float: left;
-}
-
-.wishlist__content {
-  margin-top: 1.5rem;
+.wishlist__container {
+  margin-top: 5.5rem;
+  padding-bottom: 3rem;
 }
 
 .wishlist__img {
@@ -79,21 +68,15 @@ li {
   margin-left: 0.7rem;
 }
 
-.wishlist__box {
-  width: 25%;
-  padding: 0 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
 .wishlist__title {
   margin-top: 0.5rem;
   margin-bottom: 0.1rem;
   font-size: 1rem;
+  line-height: 1.3rem;
 }
 
 .wishlist__price {
+  margin-top: 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
 }
