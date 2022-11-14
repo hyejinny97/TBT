@@ -44,6 +44,12 @@
                 <li>
                   <a href="{% url 'accounts:logout' %}">로그아웃</a>
                 </li>
+                {% comment %} 관리자인 경우에만 상품 등록 가능 {% endcomment %}
+                {% if request.user.is_superuser %}
+                <li>
+                  <a href="{% url 'products:products_create' %}" class='pdt-create-btn'>상품 등록</a>
+                </li>
+                {% endif %}
               {% else %}
                 <li>
                   <a href="{% url 'accounts:signup' %}">회원가입</a>
@@ -68,16 +74,16 @@
         <div class="container">
           <ul class="lnb">
             <li>
-              <a href="#">노트</a>
+              <a href="{% url 'products:note' %}">노트</a>
             </li>
             <li>
-              <a href="#">다이어리</a>
+              <a href="{% url 'products:diary' %}">다이어리</a>
             </li>
             <li>
-              <a href="#">필기류</a>
+              <a href="{% url 'products:pencil' %}">필기류</a>
             </li>
             <li>
-              <a href="#">파일, 바인더</a>
+              <a href="{% url 'products:file' %}">파일/바인더</a>
             </li>
           </ul>
         </div>

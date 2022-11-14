@@ -10,16 +10,16 @@
 {% block banner %}
 {% comment %} 배너 {% endcomment %}
 <section class='pdt-banner'>
+  {% if category == '노트' %}
   <img src="{% static 'img/notepad.jpg' %}" alt="">
   <h1>노트</h1>
-  {% if category == '노트' %}
   {% elif category == '다이어리' %}
   <img src="{% static 'img/diary.jpg' %}" alt="">
   <h1>다이어리</h1>
   {% elif category == '필기류' %}
   <img src="{% static 'img/writing.jpg' %}" alt="">
   <h1>필기류</h1>
-  {% elif category == '파일/바인더' %}
+  {% elif category == '파일' %}
   <img src="{% static 'img/files.jpg' %}" alt="">
   <h1>파일/바인더</h1>
   {% endif %}
@@ -40,10 +40,6 @@
 {% endblock banner %}
 
 {% block body %}
-{% comment %} 관리자인 경우에만 상품 등록 가능 -> 나중에 base.html로 옮기기 {% endcomment %}
-{% if request.user.is_superuser %}
-<a href="{% url 'products:products_create' %}" class='pdt-create-btn'>상품 등록</a>
-{% endif %}
 {% comment %} 상품 목록 {% endcomment %}
 <section class='pdt-list row row-cols-2 row-cols-md-3 row-cols-lg-4 gx-0 gy-3'>
   {% for product in products %}
