@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block body %}
 
@@ -25,7 +26,7 @@
         <div class="profile__container rounded">
           <div class="profile__content">
             <div>
-              <img class="profile__img" src="{{ user.profile_image.url }}" alt="profile-img"/>
+              <img class="profile__img" src="{{ user.profile_image1 }}" alt="profile-img"/>
               <p class="ms-3 mt-3">
                 <span class="profile__name">{{ user.nickname }}</span>
                 님</p>
@@ -167,7 +168,7 @@
                 <div class="wishlist__box">
                   <img class="wishlist__img" src="{{ product.product_image.all.first.image.url }}" alt="wishlist-img"/>
                   <p class="wishlist__title">{{ product.name }}</p>
-                  <p class="wishlist__price">{{ product.pay }}원</p>
+                  <p class="wishlist__price">{{ product.pay|intcomma }}원</p>
                 </a>
               </div>
             {% endfor %}
