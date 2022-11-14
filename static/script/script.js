@@ -10,29 +10,29 @@ const qnaBtnCloseModal = document.querySelector('.btn-close-qna');
 const revBtnOpenModal = document.querySelector('#rev-modal-btn');
 const qnaBtnOpenModal = document.querySelector('.qna-modal-btn');
 const detailArea = document.querySelector('#product-detail');
-
+const body = document.querySelector('body');
 
 
 revBtnOpenModal.addEventListener('click', function (e) {
     e.preventDefault();
     revModal.classList.remove('hidden');
     overlay.classList.remove('hidden');
-    detailArea.classList.add('scroll-block');
+    body.classList.add('scroll-block');
 });
 qnaBtnOpenModal.addEventListener('click', function () {
     qnaModal.classList.remove('hidden');
     overlay.classList.remove('hidden');
-    detailArea.classList.add('scroll-block');
+    body.classList.add('scroll-block');
 });
 revBtnCloseModal.addEventListener('click', function () {
     revModal.classList.add('hidden');
     overlay.classList.add('hidden');
-    detailArea.classList.remove('scroll-block');
+    body.classList.remove('scroll-block');
 });
 qnaBtnCloseModal.addEventListener('click', function () {
     qnaModal.classList.add('hidden');
     overlay.classList.add('hidden');
-    detailArea.classList.remove('scroll-block');
+    body.classList.remove('scroll-block');
 });
 overlay.addEventListener('click', function () {
     revModal.classList.add('hidden');
