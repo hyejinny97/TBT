@@ -8,7 +8,7 @@ class Product(models.Model):
     Description1 = models.TextField(blank=True)
     Description2 = models.ImageField(upload_to="images/", null=True)
     delivery = models.CharField(max_length=80)
-    created_at = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     sale = models.IntegerField()
 
