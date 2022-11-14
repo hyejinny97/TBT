@@ -54,7 +54,10 @@ def delete(request, review_pk):
 
 
 @login_required
-def update(request, review_pk):
+def update(
+    request,
+    review_pk,
+):
     review = Review.objects.get(pk=review_pk)
     if request.user.pk == review.account.pk:
         if request.method == "POST":
@@ -84,7 +87,8 @@ def update(request, review_pk):
 #                 is_likes = True
 #     context = {"islikes": is_likes, "likecount": review.like.all().count()}
 #     return JsonResponse(context)
-@require_POST
+
+
 def likes(request, review_pk):
     if request.user.is_authenticated:
         review = Review.objects.get(pk=review_pk)
