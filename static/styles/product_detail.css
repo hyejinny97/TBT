@@ -1,4 +1,88 @@
+/* breadcrumb */
 .pdt-breadcrumb {
   margin-top: 3rem;
   font-size: 1rem;
+}
+
+/* 상품 이미지 */
+.pdt-first-img {
+  width: 100%;
+}
+.pdt-img {
+  display: block;
+  margin: 3px auto;
+  width: 70%;
+}
+
+/* 상품 기본 정보 */
+.pdt-category-like {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.pdt-category {
+  color: var(--main);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.pdt-like {
+  display: flex;
+  font-size:  1.5rem;
+}
+.pdt-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.pdt-price {
+  margin: 0.5rem 0;
+}
+.pdt-sale {
+  margin-right: 0.5rem;
+  color: var(--highlight);
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.pdt-pay {
+  margin-right: 0.3rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+.before-sale {
+  color: var(--line);
+  font-size: 0.9rem;
+}
+/* 소수점 별점 참고: https://blogpack.tistory.com/1142 */
+/* 소수점 별점 참고: https://devyeogoo.tistory.com/5 */
+.stars-container {
+  display: flex;
+  align-content: center;
+  margin: 0.5rem 0;
+}
+.stars {
+  position: relative;
+  margin-right: 0.8rem;
+}
+.stars-background {
+  width: 118px;
+  height: 20px;
+}
+.stars-background .bi-star-fill {
+  color: #f0f0f0;
+}
+.stars-color {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 118px;
+  overflow:hidden; 
+  white-space:nowrap;
+  color: rgb(255, 184, 0);
+}
+.pdt-review-cnt-wrap {
+  font-size: 1rem;
+}
+.pdt-review-cnt {
+  color: rgb(255, 184, 0);
+  font-weight: 700;
 }
