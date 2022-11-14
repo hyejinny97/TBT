@@ -11,7 +11,10 @@ def index(request):
     products = Product.objects.all()
     
 
-    context = {"products": products}
+    context = {
+        "products": products,
+
+        }
     return render(request, "products/index.html", context)
 
 
@@ -103,3 +106,39 @@ def like(request, products_pk):
             "like_count": product.like_users.count(),
         }
     )
+
+def note(request):
+    products = Product.objects.all()
+
+    context = {
+        'category' : '노트',
+        'products' : products,
+    }
+    return render(request,'products/index.html', context)
+
+def diary(request):
+    products = Product.objects.all()
+
+    context = {
+        'category' : '다이어리',
+        'products' : products,
+    }
+    return render(request,'products/index.html', context)
+
+def pencil(request):
+    products = Product.objects.all()
+
+    context = {
+        'category' : '필기류',
+        'products' : products,
+    }
+    return render(request,'products/index.html', context)
+
+def file(request):
+    products = Product.objects.all()
+
+    context = {
+        'category' : '파일',
+        'products' : products,
+    }
+    return render(request,'products/index.html', context)

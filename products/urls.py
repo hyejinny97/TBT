@@ -11,4 +11,8 @@ urlpatterns = [
     path("<int:products_pk>/update/", views.products_update, name="products_update"),
     path("<int:products_pk>/delete/", views.products_delete, name="products_delete"),
     path("<int:products_pk>/like/", views.like, name="like"),
+    path("note/", views.note, name="note"),
+    path("diary/", views.diary, name="diary"),
+    path("pencil/", views.pencil, name="pencil"),
+    path("file/", views.file, name="file"),
 ]
