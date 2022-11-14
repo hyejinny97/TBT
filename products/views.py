@@ -6,6 +6,7 @@ from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
 def index(request):
     products = Product.objects.all()
@@ -109,38 +110,69 @@ def like(request, products_pk):
 
 def note(request):
     products = Product.objects.filter(category='노트/메모지')
-
+    filter = request.GET.get('filter', default='registor')
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = products.order_by('-pay')
+    if filter == 'low-price':
+        products = products.order_by('pay')
+    if filter == 'registor':
+        products = products.order_by('-sale')
 
     context = {
-        'category' : '노트',
+        'category' : 'note',
         'products' : products,
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+
+    return render(request, "products/index.html", context)
 
 def diary(request):
     products = Product.objects.filter(category='다이어리')
-    
+    filter = request.GET.get('filter', default='registor')
 
     context = {
-        'category' : '다이어리',
+        'category' : 'diary',
         'products' : products,
+        'high-sale' : products.order_by('-sale'),
+        'high-price' : products.order_by('-pay'),
+        'low-price' : products.order_by('pay'),
+        'registor' : products.order_by('-created_at'),
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+   
+    return render(request, "products/index.html", context)
 
 def pencil(request):
     products = Product.objects.filter(category='필기류/필통')
+    filter = request.GET.get('filter', default='registor')
 
     context = {
-        'category' : '필기류',
+        'category' : 'pencil',
         'products' : products,
+        'high-sale' : products.order_by('-sale'),
+        'high-price' : products.order_by('-pay'),
+        'low-price' : products.order_by('pay'),
+        'registor' : products.order_by('-created_at'),
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+
+    return render(request, "products/index.html", context)
 
 def file(request):
     products = Product.objects.filter(category='파일/바인더')
+    filter = request.GET.get('filter', default='registor')
+
 
     context = {
-        'category' : '파일',
+        'category' : 'file',
         'products' : products,
+        'high-sale' : products.order_by('-sale'),
+        'high-price' : products.order_by('-pay'),
+        'low-price' : products.order_by('pay'),
+        'registor' : products.order_by('-created_at'),
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+    
+    return render(request, "products/index.html", context)
