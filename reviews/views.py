@@ -73,7 +73,7 @@ def update(request, review_pk):
 def likes(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     if request.user.is_authenticated:
-        if not request.user.pk == review.account.pk:
+        if request.user.pk != review.account.pk:
             if review.like.filter(pk=request.user.pk).exists():
                 review.like.remove(request.user)
                 is_likes = False

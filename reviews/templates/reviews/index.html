@@ -22,14 +22,14 @@
 <p>{{review.content}}</p>
 <p>{{review.grade}}</p>
 <p>작성시간:{{review.created_at}}</p>
-<p id='like-cnt'>좋아요:{{review.like.count}}</p>
+<p id="like-cnt">좋아요:{{review.like.count}}</p>
 {% if not request.user.pk == review.account.pk %}
 {% if request.user in review.like.all %}
-<button id='like-btn' type='button' data-user-id="{{review.pk}}">
+<button id="like-btn" type='button' data-user-id="{{review.pk}}">
   unlike
 </button>
 {% elif request.user.is_authenticated %}
-<button id='like-btn' type='button' data-user-id="{{review.pk}}">
+<button id="like-btn" type='button' data-user-id="{{review.pk}}">
   like
 </button>
 {% elif not request.user.is_authenticated %}
@@ -48,11 +48,11 @@
 {% endif %}
 <hr>
 {% endfor %}
+
 {% endblock body %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-  const likebtn = document.queryselector('#like-btn')
-
+  const likebtn = document.querySelector('#like-btn')
   likebtn.addEventListener('click', function (event) {
     axios({
       method: 'get',
@@ -64,7 +64,7 @@
         } else {
           likebtn.innertext = 'like'
         }
-        const likecnt = document.queryselector('#like-cnt')
+        const likecnt = document.querySelector('#like-cnt')
         likecnt.innertext = 'count:' + response.data.likecount
       })
 
