@@ -3,6 +3,8 @@ from products.models import Product
 from .models import Review
 from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, JsonResponse
+import json
 
 # Create your views here.
 def index(request, product_pk):
@@ -59,8 +61,8 @@ def update(request, review_pk):
             if review_form.is_valid():
                 review_form.save()
                 return redirect("reviews:index", review.product.pk)
-            else:
-                review_form = ReviewForm(instance=review)
+        else:
+            review_form = ReviewForm(instance=review)
         context = {"review_form": review_form}
     else:
         return redirect("products:index")
@@ -69,12 +71,14 @@ def update(request, review_pk):
 
 @login_required
 def likes(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
     if request.user.is_authenticated:
-        review = get_object_or_404(Review, pk=review_pk)
         if not request.user.pk == review.account.pk:
             if review.like.filter(pk=request.user.pk).exists():
                 review.like.remove(request.user)
+                is_likes = False
             else:
                 review.like.add(request.user)
-            return redirect("reviews:index", review_pk)
-    return redirect("accounts:login")
+                is_likes = True
+    context = {"islikes": is_likes, "likecount": review.like.all().count()}
+    return JsonResponse(context)

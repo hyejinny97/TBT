@@ -32,9 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "accounts",
-    "products",
-    "reviews",
+    "accounts",  # 상용자
+    "products",  # 상품
+    "reviews",  # 리뷰
+    # "cart",  # 장바구니
     "django_bootstrap5",
     "django_extensions",
     "imagekit",
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",  # 가격 표시(천단위)
 ]
 
 MIDDLEWARE = [

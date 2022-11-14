@@ -16,21 +16,27 @@
 {% endif %}
 {{review.pk}}
 <p>{{review.title}}</p>
-<p>{{review.account}}</p>
+<a href="{% url 'accounts:detail' review.account.pk %}">
+  <p>{{review.account}}</p>
+</a>
 <p>{{review.content}}</p>
 <p>{{review.grade}}</p>
 <p>작성시간:{{review.created_at}}</p>
-<p>좋아요{{review.like.count}}</p>
+<p id='like-cnt'>좋아요:{{review.like.count}}</p>
 {% if not request.user.pk == review.account.pk %}
 {% if request.user in review.like.all %}
-<button><a href="{% url 'reviews:likes' review.pk %}">좋아요!</a></button>
-{% else %}
-<button><a href="{% url 'reviews:likes' review.pk %}">좋아요?</a></button>
-{% endif %}
+<button id='like-btn' type='button' data-user-id="{{review.pk}}">
+  unlike
+</button>
+{% elif request.user.is_authenticated %}
+<button id='like-btn' type='button' data-user-id="{{review.pk}}">
+  like
+</button>
 {% elif not request.user.is_authenticated %}
 <p>비로그인은 좋아요를 누를 수 없어요</p>
+{% endif %}
 {% else %}
-<P>자기자신 추천x</P>
+<P>자기자신 추천x</p>
 {% endif %}
 
 {% if not review.updated_at == review.created_at %}
@@ -43,3 +49,23 @@
 <hr>
 {% endfor %}
 {% endblock body %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const likebtn = document.queryselector('#like-btn')
+
+  likebtn.addEventListener('click', function (event) {
+    axios({
+      method: 'get',
+      url: `/reviews/like/${event.target.dataset.userid}/`
+    })
+      .then(response => {
+        if (response.data.islikes === true) {
+          likebtn.innertext = 'unlike'
+        } else {
+          likebtn.innertext = 'like'
+        }
+        const likecnt = document.queryselector('#like-cnt')
+        likecnt.innertext = 'count:' + response.data.likecount
+      })
+
+  })</script>
