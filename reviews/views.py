@@ -5,6 +5,7 @@ from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 import json
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 def index(request, product_pk):
@@ -69,16 +70,32 @@ def update(request, review_pk):
     return render(request, "reviews/update.html", context)
 
 
-@login_required
+# @login_required
+# def likes(request, review_pk):
+#     review = Review.objects.get(pk=review_pk)
+#     print(review)
+#     if request.user.is_authenticated:
+#         if request.user.pk != review.account.pk:
+#             if review.like.filter(pk=request.user.pk).exists():
+#                 review.like.remove(request.user)
+#                 is_likes = False
+#             else:
+#                 review.like.add(request.user)
+#                 is_likes = True
+#     context = {"islikes": is_likes, "likecount": review.like.all().count()}
+#     return JsonResponse(context)
+@require_POST
 def likes(request, review_pk):
-    review = Review.objects.get(pk=review_pk)
     if request.user.is_authenticated:
-        if not request.user.pk == review.account.pk:
-            if review.like.filter(pk=request.user.pk).exists():
-                review.like.remove(request.user)
-                is_likes = False
-            else:
-                review.like.add(request.user)
-                is_likes = True
-    context = {"islikes": is_likes, "likecount": review.like.all().count()}
-    return JsonResponse(context)
+        review = Review.objects.get(pk=review_pk)
+        if review.like_users.filter(pk=request.user.pk).exists():
+            review.like_users.remove(request.user)
+            is_liked = False
+        else:
+            review.like_users.add(request.user)
+            is_liked = True
+        context = {
+            "is_liked": is_liked,
+        }
+        return JsonResponse(context)
+    return redirect("accounts:login")

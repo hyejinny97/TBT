@@ -22,14 +22,14 @@
 <p>{{review.content}}</p>
 <p>{{review.grade}}</p>
 <p>작성시간:{{review.created_at}}</p>
-<p id='like-cnt'>좋아요:{{review.like.count}}</p>
-{% if not request.user.pk == review.account.pk %}
+<p id="like-cnt">좋아요:{{review.like.count}}</p>
+<!--{% if not request.user.pk == review.account.pk %}
 {% if request.user in review.like.all %}
-<button id='like-btn' type='button' data-user-id="{{review.pk}}">
+<button id="like-btn" type='button' data-user-id="{{review.pk}}">
   unlike
 </button>
 {% elif request.user.is_authenticated %}
-<button id='like-btn' type='button' data-user-id="{{review.pk}}">
+<button id="like-btn" type='button' data-user-id="{{review.pk}}">
   like
 </button>
 {% elif not request.user.is_authenticated %}
@@ -38,7 +38,17 @@
 {% else %}
 <P>자기자신 추천x</p>
 {% endif %}
-
+-->
+<div>
+  <form class="like-forms" data-review-id="{{ review.pk }}">
+    {% csrf_token %}
+    {% if request.user in review.like.all %}
+    <input type="submit" value="좋아요 취소" id="like-{{ review.pk }}">
+    {% else %}
+    <input type="submit" value="좋아요" id="like-{{ review.pk }}">
+    {% endif %}
+  </form>
+</div>
 {% if not review.updated_at == review.created_at %}
 <p>수정시간:{{review.updated_at}}</p>
 {% endif %}
@@ -48,15 +58,44 @@
 {% endif %}
 <hr>
 {% endfor %}
-{% endblock body %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-  const likebtn = document.queryselector('#like-btn')
+  const forms = document.querySelectorAll('.like-forms')
 
+  const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+  forms.forEach((form) => {
+    form.addEventListener('submit', function (event) {
+      event.preventDefault()
+      const reviewId = event.target.dataset.reviewId
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/reviews/like/${reviewId}/`,
+        headers: { 'X-CSRFToken': csrftoken },
+      })
+        .then((response) => {
+          const isLiked = response.data.is_liked
+          const likeBtn = document.querySelector(`#like-${reviewId}`)
+          if (isLiked === true) {
+            likeBtn.value = '좋아요 취소'
+          } else {
+            likeBtn.value = '좋아요'
+          }
+        })
+        .catch((error) => {
+          console.log(error.response)
+        })
+    })
+  })
+</script>
+{% endblock body %}
+<!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const likebtn = document.querySelector('#like-btn')
   likebtn.addEventListener('click', function (event) {
     axios({
       method: 'get',
-      url: `/reviews/like/${event.target.dataset.userid}/`
+      url: `/reviews/like/${event.target.dataset.reviewId}/`
     })
       .then(response => {
         if (response.data.islikes === true) {
@@ -64,8 +103,8 @@
         } else {
           likebtn.innertext = 'like'
         }
-        const likecnt = document.queryselector('#like-cnt')
+        const likecnt = document.querySelector('#like-cnt')
         likecnt.innertext = 'count:' + response.data.likecount
       })
 
-  })</script>
+  })</script>-->
