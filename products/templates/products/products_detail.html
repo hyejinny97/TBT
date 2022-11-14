@@ -81,9 +81,11 @@
         <p class='pdt-name'>{{ products.name }}</p>
         <hr>
         <div class='pdt-price'>
+          {% if products.sale != 0 %}
           <span class='pdt-sale'>{{ products.sale }}%</span>
+          {% endif %}
           <span class='pdt-pay'>{{ products.pay|discount:products.sale|intcomma }}원</span>
-          {% if products.sale != '0' %}
+          {% if products.sale != 0 %}
           <del class='before-sale'>{{ products.pay|intcomma }}원</del>
           {% endif %}
         </div>

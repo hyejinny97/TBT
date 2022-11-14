@@ -4,13 +4,13 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField(max_length=80)
     category = models.CharField(max_length=80)
-    pay = models.IntegerField(max_length=80)
+    pay = models.IntegerField()
     Description1 = models.TextField(blank=True)
     Description2 = models.ImageField(upload_to="images/", null=True)
     delivery = models.CharField(max_length=80)
-    created_at = models.IntegerField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    sale = models.TextField()
+    sale = models.IntegerField()
 
 
 class ProductImage(models.Model):
