@@ -1,0 +1,94 @@
+@import url(./main.css);
+
+/* 배너 */
+.pdt-banner {
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+.pdt-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(50%)
+}
+.pdt-banner h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  font-weight: 600;
+  /* letter-spacing: 0.8rem; */
+}
+
+/* 분류 필터 */
+.pdt-filter {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid var(--main);
+}
+.dropdown-toggle, .dropdown-toggle:visited {
+  background-color: var(--main-sub) !important;
+}
+.dropdown-toggle:hover, .dropdown-toggle:active {
+  background-color: var(--main) !important;
+}
+.dropdown-item {
+  color: var(--txt);
+}
+.dropdown-item:hover {
+  background-color: rgb(33, 104, 79, 0.3);
+}
+.dropdown-item.active {
+  background-color: var(--main);
+}
+
+/* 상품 목록 */
+.pdt-list {
+  margin: 3rem 0 3rem 0;
+}
+.pdt-item {
+  position: relative;
+  padding: 1rem;
+  height: 100%;
+}
+.page-item img {
+  width: 100%;
+}
+.pdt-item-name {
+  display: block;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.pdt-item-name:hover {
+  color: var(--main-sub);
+}
+.pdt-item-price {
+  text-align: center;
+}
+.before-sale {
+  color: var(--line);
+  font-size: 0.9rem;
+}
+.pdt-pay {
+  color: var(--highlight);
+  font-size: 0.9rem;
+}
+.pdt-sale-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--highlight);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  line-height: 60px;
+}
