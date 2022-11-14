@@ -93,3 +93,27 @@
 	color: var(--highlight);
 	font-weight: 700;
 }
+
+#update .img-edit .upload-btn {
+	border: 2px solid var(--main);
+	border-radius: 0.2rem;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	padding: 1rem;
+	margin-top: 1rem;
+	transition: 0.2s;
+	color: var(--main);
+	font-weight: 700;
+}
+#update .img-edit .upload-btn:hover {
+	background: var(--main);
+	color: var(--bg);
+}
+#update .img-edit .prof_img {
+	text-align: center;
+}
+#update .img-edit input[type="file"] {
+	border: none;
+	opacity: 0.6;
+}

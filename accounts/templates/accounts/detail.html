@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block body %}
 
@@ -25,7 +26,7 @@
         <div class="profile__container rounded">
           <div class="profile__content">
             <div>
-              <img class="profile__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/491/B004917674.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="profile-img"/>
+              <img class="profile__img" src="{{ user.profile_image1 }}" alt="profile-img"/>
               <p class="ms-3 mt-3">
                 <span class="profile__name">{{ user.nickname }}</span>
                 님</p>
@@ -53,15 +54,17 @@
                   </form>
                 {% else %}
                   {% if request.user.pk == user.pk %}
-                    <button class="update__btn">회원 정보 수정</button>
+                    <a href="{% url "accounts:update"%}">
+                      <button class="update__btn">회원 정보 수정</button>
+                    </a>
                   {% endif %}
                 {% endif %}
               {% endif %}
             </div>
             <div class="profile__bottom">
               {% if request.user != user %}
-                <a class="profile__link--notuser">
-                  주문 내역
+                <a class="profile__link--notuser" href="{% url 'accounts:review_list' user.pk %}">
+                  리뷰 목록
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill arrow" viewbox="0 0 16 16">
                     <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                   </svg>
@@ -73,12 +76,13 @@
                     <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                   </svg>
                 </a>
-                <a class="profile__link">
+                <a class="profile__link" href="{% url 'accounts:review_list' user.pk %}">
                   리뷰 목록
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill arrow" viewbox="0 0 16 16">
                     <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
                   </svg>
                 </a>
+
               {% endif %}
             </div>
           </div>
@@ -125,7 +129,7 @@
         <!-- 최근 리뷰 -->
         <div class="main__title">
           <p class="sub__title">최근 리뷰</p>
-          <a class="plus__title" href="{% url 'accounts:review_list' request.user.pk%}">더보기 ></a>
+          <a class="plus__title" href="{% url 'accounts:review_list' user.pk %}">더보기 ></a>
         </div>
         <section class="review">
           <div class="review__category">
@@ -155,7 +159,7 @@
         <!-- Wish List -->
         <div class="main__title">
           <p class="sub__title">Wish List</p>
-          <a class="plus__title" href="{% url 'accounts:wishlist' request.user.pk%}">더보기 ></a>
+          <a class="plus__title" href="{% url 'accounts:wishlist' user.pk %}">더보기 ></a>
         </div>
         <div class="wishlist__content">
           {% if user.like_products.all %}
@@ -164,21 +168,11 @@
                 <div class="wishlist__box">
                   <img class="wishlist__img" src="{{ product.product_image.all.first.image.url }}" alt="wishlist-img"/>
                   <p class="wishlist__title">{{ product.name }}</p>
-                  <p class="wishlist__price">{{ product.pay }}원</p>
+                  <p class="wishlist__price">{{ product.pay|intcomma }}원</p>
                 </a>
               </div>
             {% endfor %}
           {% endif %}
-          <div class="wishlist__box">
-            <img class="wishlist__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/482/B004820641.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="wishlist-img"/>
-            <p class="wishlist__title">아이코닉 2023 두줄 다이어리</p>
-            <p class="wishlist__price">10,880원</p>
-          </div>
-          <div class="wishlist__box">
-            <img class="wishlist__img" src="http://thumbnail.10x10.co.kr/webimage/image/basic600/482/B004820641.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false" alt="wishlist-img"/>
-            <p class="wishlist__title">아이코닉 2023 두줄 다이어리</p>
-            <p class="wishlist__price">10,880원</p>
-          </div>
         </div>
       </section>
 

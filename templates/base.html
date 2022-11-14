@@ -96,6 +96,12 @@
     <footer>
       <div id="footer">
         <p>&copy; TEMBYTEM 2022</p>
+        <ul class="lnb">
+          <li><a href="{% url 'products:note' %}">노트</a></li>
+          <li><a href="{% url 'products:diary' %}">다이어리</a></li>
+          <li><a href="{% url 'products:pencil' %}">필기류</a></li>
+          <li><a href="{% url 'products:file' %}">파일, 바인더</a></li>
+        </ul>
       </div>
     </footer>
     {% bootstrap_javascript %}

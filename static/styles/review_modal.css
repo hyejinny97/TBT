@@ -4,7 +4,8 @@
 	--rate: #ffd61e;
 	--gr: #f1f1f1;
 }
-.btnC {
+#review .btnC,
+#qna .btnC {
 	background: var(--main);
 	color: var(--bg);
 	border-radius: 0.2rem;
@@ -13,7 +14,8 @@
 	cursor: pointer;
 }
 
-.btnC:hover {
+#review .btnC:hover,
+#qna .btnC:hover {
 	background: var(--main-sub);
 }
 
@@ -23,15 +25,16 @@
 }
 .modalC {
 	position: absolute;
-	top: 50%;
+	top: 5%;
 	left: 50%;
-	transform: translate(-50%, -30%);
-	max-width: 80rem;
+	transform: translate(-50%, 0%);
+	max-width: 80vh;
 	background: var(--bg);
 	padding: 5rem 6rem;
 	box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
 	z-index: 1000;
 	transition: all 0.5s;
+	overflow-y: auto;
 }
 .overlayC {
 	position: fixed;
@@ -43,10 +46,12 @@
 	backdrop-filter: blur(4px);
 	z-index: 100;
 	transition: all 0.5s;
+	overflow: auto;
 }
 .scroll-block {
 	overflow: hidden;
 }
+
 #product-detail #rev-modal-btn,
 #product-detail .qna-modal-btn {
 	font-weight: 700;
