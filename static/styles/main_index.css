@@ -1,12 +1,139 @@
 @import url(./main.css);
 
+/* 시즌 상품 */
 #home .tit {
-	font-size: 1.5rem;
-	font-weight: 700;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
+
 #home .sec {
-	margin: 5rem 0 0;
+  margin: 5rem 0;
 }
+
 #home .sec .item-area {
-	display: flex;
+  display: flex;
+}
+
+.season__items {
+  justify-content: center;
+}
+
+.img-area {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.sale-tag {
+  position: absolute;
+  display: table;
+  top: 5%;
+  left: 80%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--highlight);
+  border-radius: 50%;
+}
+
+.sale-per {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bg);
+}
+
+.item-tit,
+.item-price {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.item-price {
+  margin-left: 4.5rem;
+}
+
+.origin__price {
+  text-decoration: line-through;
+}
+
+.discount__price {
+  margin-left: 0.5rem;
+  color: var(--highlight);
+}
+
+/* event */
+.discount__title--area {
+  margin-top: 2rem;
+  margin-right: 3rem;
+}
+
+.discount__title {
+  white-space: nowrap;
+  color: var(--main);
+}
+
+.discount__subtitle {
+  display: inline-block;
+  padding-bottom: 0.6rem;
+  border-bottom: 4px solid var(--highlight);
+}
+
+.day {
+  color: var(--highlight);
+  font-weight: 600;
+}
+
+.sale__img {
+  border-radius: 50%;
+}
+
+.discount__price {
+  margin-left: 0;
+  color: var(--highlight);
+  font-weight: 600;
+}
+
+/* md */
+.md-item {
+  position: relative;
+}
+
+.md__title--container {
+  display: table;
+  margin-right: 6.2rem;
+}
+
+.md__title--area {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.mb__title {
+  color: var(--main);
+}
+
+.md__subtitle2 {
+  margin-top: 0.5rem;
+  white-space: nowrap;
+  display: inline-block;
+  padding-bottom: 0.6rem;
+  border-bottom: 4px solid var(--main);
+}
+
+.md__category {
+  position: absolute;
+  top: 70%;
+  left: 10%;
+  color: var(--bg);
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.md__img {
+  width: 500px;
+  height: 200px;
+  object-fit: cover;
 }
