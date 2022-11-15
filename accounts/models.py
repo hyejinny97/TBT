@@ -25,7 +25,6 @@ class User(AbstractUser):
     def profile_image1(self):
         if self.profile_image and hasattr(self.profile_image, "url"):
             return self.profile_image.url
-        else:
-            return (
-                "https://kr.seaicons.com/wp-content/uploads/2015/08/green-user-icon.png"
-            )
+
+    def __self__(self):
+        return self.name
