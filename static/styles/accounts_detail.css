@@ -1,5 +1,10 @@
 @import url(./main.css);
 
+a:hover {
+  transition: all 300ms ease-in;
+  color: var(--main);
+}
+
 .containers {
   padding: 0rem 10%;
 }
@@ -35,6 +40,8 @@
 }
 
 .profile__name {
+  display: inline-block;
+  margin-top: 0.5rem;
   color: var(--main);
   font-weight: 600;
 }
@@ -216,6 +223,14 @@
 }
 
 /* 최근 리뷰 */
+.empty{
+  margin-top: 3rem;
+  text-align: center;
+  color: var(--main);
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
 .main__title {
   display: flex;
   justify-content: space-between;
@@ -235,6 +250,7 @@
 
 .review {
   margin-left: 1rem;
+  min-height: 7rem;
 }
 
 .review__category {
@@ -307,9 +323,14 @@
 }
 
 /* 위시리스트 */
+
 .wishlist__img {
   width: 13rem;
   height: 13rem;
+}
+
+.wishlist{
+  min-height: 6rem;
 }
 
 .wishlist__content {
