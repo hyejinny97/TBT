@@ -1,12 +1,12 @@
 @import url(./main.css);
 
-.container {
-  min-height: 90vh;
+.review__container {
+  min-height: 50vh;
   font-size: 1rem;
 }
 
 .title {
-  margin: 2rem 0;
+  margin: 3rem 0;
   font-size: 1.7rem;
 }
 
@@ -63,7 +63,7 @@
   color: var(--line);
 }
 
-.review__container {
+.review__list {
   white-space: nowrap;
   transform: translateY(-1.5rem);
   margin-bottom: 1.5rem;
