@@ -1,6 +1,6 @@
 @import url(./main.css);
 
-.containers {
+.container {
   min-height: 90vh;
   font-size: 1rem;
 }
