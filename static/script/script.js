@@ -103,8 +103,8 @@ try {
         };
 
         const prevSlide = function () {
-            if (curSlide === maxSlide - 1) {
-                curSlide = 0;
+            if (curSlide === 0) {
+                curSlide = maxSlide - 1;
             } else {
                 curSlide--;
             }
@@ -135,7 +135,7 @@ try {
                 activeDot(slide);
             }
         });
-
+        setInterval(nextSlide, 6000);
     };
 
     slider();
