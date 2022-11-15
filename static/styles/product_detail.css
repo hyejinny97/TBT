@@ -3,6 +3,9 @@
   margin-top: 3rem;
   font-size: 1rem;
 }
+.breadcrumb-item a:hover {
+  color: var(--main-sub);
+}
 
 /* 상품 이미지 */
 .pdt-first-img {
@@ -56,7 +59,7 @@
 /* 소수점 별점 참고: https://devyeogoo.tistory.com/5 */
 .stars-container {
   display: flex;
-  align-content: center;
+  align-items: center;
   margin: 0.5rem 0;
 }
 .stars {
@@ -85,4 +88,92 @@
 .pdt-review-cnt {
   color: rgb(255, 184, 0);
   font-weight: 700;
+}
+.purchase-table {
+  margin: 1rem 0;
+}
+.purchase-table th, .purchase-table td {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+}
+.purchase-table td {
+  padding-left: 1rem;
+}
+.buy-mount-btn {
+  display: flex;
+}
+.minus-btn, .buy-mount, .plus-btn {
+  display: block;
+  padding: 0.4rem 1rem;
+  background-color: rgb(248, 248, 248);
+  border: 1px solid rgb(245, 245, 245);
+  text-align: center;
+}
+.minus-btn:hover, .plus-btn:hover {
+  background-color:rgb(240, 240, 240);
+  cursor: pointer;
+}
+.total-purchase-price-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 800;
+}
+.total-purchase-price {
+  font-weight: 800;
+}
+.basket-buy-btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+.basket-btn {
+  display: inline-block;
+  padding: 1rem 0;
+  width: 49%;
+  background-color: var(--sub-b);
+  border-radius: 0.5rem;
+  color: white;
+  text-align: center;
+}
+.basket-btn:hover {
+  color: white;
+  background-color: var(--sub);
+}
+.buy-btn {
+  display: inline-block;
+  padding: 1rem 0;
+  width: 49%;
+  background-color: var(--main-sub);
+  border-radius: 0.5rem;
+  color: white;
+  text-align: center;
+}
+.buy-btn:hover {
+  color: white;
+  background-color: var(--main);
+}
+
+@media screen and (width >= 1200px) {
+  .pdt-name {
+    font-size: 1.5rem;
+  }
+  .pdt-price {
+    margin: 1rem 0;
+  }
+  .stars-container {
+    margin: 1rem 0;
+  }
+  .purchase-table {
+    margin: 2rem 0;
+  }
+  .purchase-table td {
+    padding-left: 2rem;
+  }
+  .total-purchase-price-wrap {
+    margin: 2rem 0;
+  }
 }

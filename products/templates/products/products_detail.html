@@ -110,13 +110,28 @@
             <span class='pdt-review-cnt'>{{ reviews.count }}</span>개의 리뷰
           </div>
         </div>
-  
-
-          
-          <p>{{products.delivery}}
-          </p>
-          <p>{{products.sale}}
-          </p>
+        <table class='purchase-table'>
+          <tr>
+            <th>배송비</th>
+            <td>{{ products.delivery|intcomma }}원</td>
+          </tr>
+          <tr>
+            <th>수량</th>
+            <td class='buy-mount-btn'>
+              <span class='minus-btn'>-</span>
+              <span class='buy-mount'>0</span>
+              <span class='plus-btn'>+</span>
+            </td>
+          </tr>
+        </table>
+        <div class='total-purchase-price-wrap'>
+          <span>주문 금액</span>
+          <span class='total-purchase-price' data-delivery='{{ products.delivery }}' data-price='{{ products.pay }}' data-sale='{{ products.sale }}'>0원</span>
+        </div>
+        <div class='basket-buy-btn-wrap'>
+          <a class='basket-btn' href="">장바구니</a>
+          <a class='buy-btn' href="">바로구매</a>
+        </div>
       </div>
     </section>
     {% comment %} 상품정보/리뷰/문의/추천 탭 {% endcomment %}
