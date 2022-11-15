@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .form import ProductsForm, ProductImageForm
-from .models import Product,ProductImage
+from .models import Product, ProductImage
 from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -11,34 +11,30 @@ from django.db.models import F, Q
 # Create your views here.
 def index(request):
     products = Product.objects.all()
-    
 
     context = {
         "products": products,
-
-        }
+    }
     return render(request, "products/index.html", context)
-
 
 
 # Create your views here.
 def products_create(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         create_form = ProductsForm(request.POST, request.FILES)
-        product_images = request.FILES.getlist('image')
+        product_images = request.FILES.getlist("image")
         if create_form.is_valid():
             product = create_form.save()
             for img in product_images:
                 ProductImage.objects.create(product=product, image=img)
-            return redirect('products:index')
+            return redirect("products:index")
     else:
         create_form = ProductsForm()
         product_image_form = ProductImageForm()
 
     context = {
-        'create_form' : create_form,
-        'product_image_form': product_image_form,
-
+        "create_form": create_form,
+        "product_image_form": product_image_form,
     }
 
     return render(request, "products/products_create.html", context)
@@ -47,19 +43,20 @@ def products_create(request):
 def products_index(request):
     products = Product.objects.all()
     context = {
-        'products': products,
+        "products": products,
     }
-    return render(request, 'products/products_index.html', context)
+    return render(request, "products/products_index.html", context)
+
 
 def products_detail(request, products_pk):
     products = get_object_or_404(Product, pk=products_pk)
     reviews = products.review_set.all()
-    total = products.review_set.aggregate(review_avg=Avg('grade'))
+    total = products.review_set.aggregate(review_avg=Avg("grade"))
 
     context = {
-        'products' : products,
-        'reviews' : reviews,
-        'total' : total,
+        "products": products,
+        "reviews": reviews,
+        "total": total,
     }
 
     return render(request, "products/products_detail.html", context)
@@ -109,6 +106,7 @@ def like(request, products_pk):
         }
     )
 
+
 def note(request):
     products = Product.objects.filter(category='노트/메모지')
     filter = request.GET.get('filter', default='register')
@@ -124,12 +122,13 @@ def note(request):
         products = products.order_by('-created_at')
 
     context = {
-        'category' : 'note',
-        'products' : products,
-        'filter' : filter,
+        "category": "note",
+        "products": products,
+        "filter": filter,
     }
 
     return render(request, "products/index.html", context)
+
 
 def diary(request):
     products = Product.objects.filter(category='다이어리')
@@ -144,14 +143,15 @@ def diary(request):
         products = discount.order_by('discount')
     if filter == 'register':
         products = products.order_by('-created_at')
-    
+
     context = {
-        'category' : 'diary',
-        'products' : products,
-        'filter' : filter,
+        "category": "diary",
+        "products": products,
+        "filter": filter,
     }
-   
+
     return render(request, "products/index.html", context)
+
 
 def pencil(request):
     products = Product.objects.filter(category='필기류/필통')
@@ -168,12 +168,13 @@ def pencil(request):
         products = products.order_by('-created_at')
 
     context = {
-        'category' : 'pencil',
-        'products' : products,
-        'filter' : filter,
+        "category": "pencil",
+        "products": products,
+        "filter": filter,
     }
 
     return render(request, "products/index.html", context)
+
 
 def file(request):
     products = Product.objects.filter(category='파일/바인더')
@@ -190,9 +191,34 @@ def file(request):
         products = products.order_by('-created_at')
 
     context = {
-        'category' : 'file',
-        'products' : products,
-        'filter' : filter,
+        "category": "file",
+        "products": products,
+        "filter": filter,
     }
-    
+
     return render(request, "products/index.html", context)
+
+
+def search(request):
+    search = request.GET.get("search", "")
+    search_list = Product.objects.filter(name__icontains=search)
+
+    if search:
+        if search_list:
+            context = {
+                "search": search,
+                "search_list": search_list,
+            }
+            return render(
+                request,
+                "products/search.html",
+                context,
+            )
+        else:
+            return render(request, "products/searchfail.html")
+    else:
+        return render(request, "products/searchfail.html")
+
+
+def searchfail(request):
+    return render(request, "articles/searchfail.html")
