@@ -95,6 +95,10 @@
 #qna .item-area .img-area {
 	margin-right: 1.5rem;
 }
+#review .item-area .img-area img,
+#qna .item-area .img-area img {
+	max-width: 200px;
+}
 #review .item-area .info p,
 #qna .item-area .info p {
 	color: var(--main);
