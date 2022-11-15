@@ -46,7 +46,7 @@
   {% for product in products %}
   <article class='col'>
     <div class='pdt-item'>
-      <a href="{% url 'products:products_detail' product.pk %}">
+      <a class='pdt-item-img-wrap' href="{% url 'products:products_detail' product.pk %}">
         <img class='pdt-item-img' src="{{ product.product_image.all.0.image.url }}" alt="">
       </a>
       <a class='pdt-item-name' href="{% url 'products:products_detail' product.pk %}">
