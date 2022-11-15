@@ -4,7 +4,7 @@
 
 {% block body %}
 
-  <section class="container">
+  <section class="wishlist__container">
     <p class="title text-center fw-semibold">
       <span class="title__user">{{ users.nickname }}</span>
       님의 Wish List
@@ -15,10 +15,8 @@
       <button class="delete__btn">삭제하기</button>
     </div>
     <!-- 찜 목록 -->
-    <div class="wishlist__content wishlist__container">
-      {% if not user.like_products.all %}
-        <h1 class="empty fs-2 pt-5">위시리스트가 비어있어요</h1>
-      {% else %}
+    <div class="wishlist__content wishlist__list">
+      {% if user.like_products.all %}
         {% for product in user.like_products.all %}
           <div class="wishlist__box">
             <a href="{% url "products:products_detail" product.pk %}">
