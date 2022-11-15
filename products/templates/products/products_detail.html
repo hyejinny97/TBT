@@ -136,7 +136,101 @@
     </section>
     {% comment %} 상품정보/리뷰/문의/추천 탭 {% endcomment %}
     <section>
-      <img src="{{ products.Description2.url }}" alt="">
+      {% comment %} 탭 {% endcomment %}
+      <ul class='pdt-4tab'>
+        <li class='tab active'>
+          <a href="#pdt-info">상품정보</a>
+        </li>
+        <li class='tab'>
+          <a href="#pdt-review">리뷰
+            <span class='small-count'>{{ reviews.count }}</span>
+          </a>
+        </li>
+        <li class='tab'>
+          <a href="#pdt-qna">문의
+            <span class='small-count'></span>
+          </a>
+        </li>
+        <li class='tab'>
+          <a href="#pdt-recommend">추천</a>
+        </li>
+      </ul>
+      <div class='row g-2'>
+        <div class='col-8'>
+          {% comment %} 상품정보 {% endcomment %}
+          <article id='pdt-info'>
+            <h3>상품정보</h3>
+            <img src="{{ products.Description2.url }}" alt="">
+          </article>
+          {% comment %} 리뷰 {% endcomment %}
+          <article id='pdt-review'>
+            <h3>리뷰 <span class='small-count'>{{ reviews.count }}</span></h3>
+            <div class='review-grade-wrap'>
+              <div class='stars-container'>
+                <div class='stars'>
+                  <div class='stars-background'>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                  <div class='stars-color' data-avg-grade='{{ total.review_avg|floatformat }}'>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                </div>
+                <div class='avg-grade'>
+                  {% if total.review_avg %}
+                  {{ total.review_avg }}
+                  {% else %}
+                  {{ 0 }}
+                  {% endif %}
+                </div>
+              </div>
+              <div class='grade-bar-container'>
+                <div class='grade-bar'>
+                  <div class='grade-bar-background'>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                  </div>
+                  <div class='grade-bar-color'>
+                    <div>
+                      <div class='bar'></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+          {% comment %} 문의 {% endcomment %}
+          <article id='pdt-qna'>
+            <h3>문의 <span class='small-count'></span></h3>
+          </article>
+          {% comment %} 추천 {% endcomment %}
+          <article id='pdt-recommend'>
+            <h3>추천</h3>
+          </article>
+        </div>
+        <div class='col-4'>
+          <div class='basket-buy-btn-wrap small'>
+            <a class='basket-btn' href="">장바구니</a>
+            <a class='buy-btn' href="">바로구매</a>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+      
+      
+      
       <div class="rev-area">
         <p id="rev-modal-btn">리뷰쓰기</p>
       </div>

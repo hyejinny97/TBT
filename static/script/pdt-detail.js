@@ -1,9 +1,10 @@
 // 별점 소수점으로 채우기
-const starsColor = document.querySelector('.stars-color')
+const starsColorAll = document.querySelectorAll('.stars-color')
 
-avgOfGrade = starsColor.dataset.avgGrade ? starsColor.dataset.avgGrade : 0
-starsColor.style.width = `${avgOfGrade / 5 * 118}px`
-
+for (let starsColor of starsColorAll) {
+  avgOfGrade = starsColor.dataset.avgGrade ? starsColor.dataset.avgGrade : 0
+  starsColor.style.width = `${avgOfGrade / 5 * 118}px`
+}
 
 
 
@@ -41,3 +42,15 @@ minusBtn.addEventListener('click', function () {
 
 
 
+// 상품정보/리뷰/문의/추천 탭 클릭 시, 클래스에 active 추가
+const tabs = document.querySelectorAll('.tab')
+
+tabs.forEach(function (tab) {
+  tab.addEventListener('click', function (event) {
+    for (let tab of tabs) {
+      tab.classList.remove('active')
+    }
+    event.currentTarget.classList.add('active')
+    console(event.currentTarget)
+  })
+})
