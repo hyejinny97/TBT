@@ -16,25 +16,25 @@
         <a href="/">홈</a>
       </li>
       <li class="breadcrumb-item">
-        {% if products.category == '노트/메모지' %}
+        {% if product.category == '노트/메모지' %}
         <a href="{% url 'products:note' %}">
-          {{ products.category }}
+          {{ product.category }}
         </a>
-        {% elif products.category == '다이어리' %}
+        {% elif product.category == '다이어리' %}
         <a href="{% url 'products:diary' %}">
-          {{ products.category }}
+          {{ product.category }}
         </a>
-        {% elif products.category == '필기류/필통' %}
+        {% elif product.category == '필기류/필통' %}
         <a href="{% url 'products:pencil' %}">
-          {{ products.category }}
+          {{ product.category }}
         </a>
-        {% elif products.category == '파일/바인더' %}
-        <a href="{% url 'products:file' %}">
-          {{ products.category }}
+        {% elif product.category == '파일/바인더' %}
+        <a href="{% url 'product:file' %}">
+          {{ product.category }}
         </a>
         {% endif %}
       </li>
-      <li class="breadcrumb-item active" aria-current="page">{{ products.name }}</li>
+      <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
     </ol>
   </nav>
   <main id="product-detail" >
@@ -44,49 +44,49 @@
       <div class='col'>
         <div class='row g-1'>
           <div class='col-2'>
-            {% for productimage in products.product_image.all %}
+            {% for productimage in product.product_image.all %}
             <img class='pdt-img' src="{{ productimage.image.url }}" alt="">
             {% endfor %}
           </div>
           <div class='col-10'>
-            <img class='pdt-first-img' src="{{products.product_image.all.0.image.url }}" alt="">
+            <img class='pdt-first-img' src="{{product.product_image.all.0.image.url }}" alt="">
           </div>
         </div>
       </div>
       {% comment %} 상품 기본 정보 {% endcomment %}
       <div class='col'>
         <div class='pdt-category-like'>
-          <p class='pdt-category'>{{ products.category }}</p>
+          <p class='pdt-category'>{{ product.category }}</p>
           <!-- 찜하기 비동기 구현 -->
           {% if request.user.is_authenticated %}
             <div class='pdt-like'>
-              <form class="like-forms" data-product-id="{{ products.pk }}">
+              <form class="like-forms" data-product-id="{{ product.pk }}">
                 {% csrf_token %}
-                {% if user in products.like_users.all %}
-                  <button type="submit" class="" id="like-{{ products.pk }}">
-                    <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart-fill"></i>
+                {% if user in product.like_users.all %}
+                  <button type="submit" class="" id="like-{{ product.pk }}">
+                    <i id="heart-{{ product.pk }}" class="bi bi-bookmark-heart-fill"></i>
                   </button>
                 {% else %}
-                  <button type="submit" class="" id="like-{{ products.pk }}">
-                    <i id="heart-{{ products.pk }}" class="bi bi-bookmark-heart"></i>
+                  <button type="submit" class="" id="like-{{ product.pk }}">
+                    <i id="heart-{{ product.pk }}" class="bi bi-bookmark-heart"></i>
                   </button>
                 {% endif %}
               </form>
               <div id="heart-count">
-                <p>{{ products.like_users.count }}</p>
+                <p>{{ product.like_users.count }}</p>
               </div>
             </div>
           {% endif %}
         </div>
-        <p class='pdt-name'>{{ products.name }}</p>
+        <p class='pdt-name'>{{ product.name }}</p>
         <hr>
         <div class='pdt-price'>
-          {% if products.sale != 0 %}
-          <span class='pdt-sale'>{{ products.sale }}%</span>
+          {% if product.sale != 0 %}
+          <span class='pdt-sale'>{{ product.sale }}%</span>
           {% endif %}
-          <span class='pdt-pay'>{{ products.pay|discount:products.sale|intcomma }}원</span>
-          {% if products.sale != 0 %}
-          <del class='before-sale'>{{ products.pay|intcomma }}원</del>
+          <span class='pdt-pay'>{{ product.pay|discount:product.sale|intcomma }}원</span>
+          {% if product.sale != 0 %}
+          <del class='before-sale'>{{ product.pay|intcomma }}원</del>
           {% endif %}
         </div>
         <div class='stars-container'>
@@ -113,7 +113,7 @@
         <table class='purchase-table'>
           <tr>
             <th>배송비</th>
-            <td>{{ products.delivery|intcomma }}원</td>
+            <td>{{ product.delivery|intcomma }}원</td>
           </tr>
           <tr>
             <th>수량</th>
@@ -126,7 +126,7 @@
         </table>
         <div class='total-purchase-price-wrap'>
           <span>주문 금액</span>
-          <span class='total-purchase-price' data-delivery='{{ products.delivery }}' data-price='{{ products.pay }}' data-sale='{{ products.sale }}'>0원</span>
+          <span class='total-purchase-price' data-delivery='{{ product.delivery }}' data-price='{{ product.pay }}' data-sale='{{ product.sale }}'>0원</span>
         </div>
         <div class='basket-buy-btn-wrap'>
           <a class='basket-btn' href="">장바구니</a>
@@ -160,7 +160,7 @@
           {% comment %} 상품정보 {% endcomment %}
           <article id='pdt-info'>
             <h3>상품정보</h3>
-            <img src="{{ products.Description2.url }}" alt="">
+            <img src="{{ product.Description2.url }}" alt="">
           </article>
           {% comment %} 리뷰 {% endcomment %}
           <article id='pdt-review'>
@@ -194,66 +194,107 @@
                   {% endif %}
                 </div>
               </div>
-              <div class='grade-bar-container'>
-                <div class='grade-bar'>
-                  <div class='grade-bar-background'>
-                    <div class='bar'></div>
-                    <div class='bar'></div>
-                    <div class='bar'></div>
-                    <div class='bar'></div>
-                    <div class='bar'></div>
-                  </div>
-                  <div class='grade-bar-color'>
-                    <div>
-                      <div class='bar'></div>
+              <div class='grade-bar-container d-none d-lg-block'>
+                <div class='grade-bar-item'>
+                  <span>5점</span>
+                  <div class='grade-bar'>
+                    <div class='grade-bar-background'>
+                    </div>
+                    <div class='grade-bar-color-wrap'>
+                      <div class='grade-bar-color'></div>
                     </div>
                   </div>
+                  <span class='pdt-review-grade-count'>25</span>
+                </div>
+                <div class='grade-bar-item'>
+                  <span>4점</span>
+                  <div class='grade-bar'>
+                    <div class='grade-bar-background'>
+                    </div>
+                    <div class='grade-bar-color-wrap'>
+                      <div class='grade-bar-color'></div>
+                    </div>
+                  </div>
+                  <span class='pdt-review-grade-count'>9</span>
+                </div>
+                <div class='grade-bar-item'>
+                  <span>3점</span>
+                  <div class='grade-bar'>
+                    <div class='grade-bar-background'>
+                    </div>
+                    <div class='grade-bar-color-wrap'>
+                      <div class='grade-bar-color'></div>
+                    </div>
+                  </div>
+                  <span class='pdt-review-grade-count'>3</span>
+                </div>
+                <div class='grade-bar-item'>
+                  <span>2점</span>
+                  <div class='grade-bar'>
+                    <div class='grade-bar-background'>
+                    </div>
+                    <div class='grade-bar-color-wrap'>
+                      <div class='grade-bar-color'></div>
+                    </div>
+                  </div>
+                  <span class='pdt-review-grade-count'>1</span>
+                </div>
+                <div class='grade-bar-item'>
+                  <span>1점</span>
+                  <div class='grade-bar'>
+                    <div class='grade-bar-background'>
+                    </div>
+                    <div class='grade-bar-color-wrap'>
+                      <div class='grade-bar-color'></div>
+                    </div>
+                  </div>
+                  <span class='pdt-review-grade-count'>2</span>
                 </div>
               </div>
             </div>
             <div id="review-area">
               <div class="rev-sec">
-                  <div class="rev-prof-img">
-                      <img src="https://source.unsplash.com/random/80x80" alt="user profile image">
+                <div class="rev-prof-img">
+                  <img src="https://source.unsplash.com/random/80x80" alt="user profile image">
+                </div>
+                <div class="rev-main">
+                  <div class="rev-header">
+                    <p class="rev-user">username</p>
+                    <p class="rev-date">2022.10.12</p>
+                    <p class="rev-rate">
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star-fill"></i>
+                      <i class="bi bi-star"></i>
+                    </p>
+                    <div class="rev-btn">
+                      <a href="{% url 'products:products_update' product.pk %}">수정</a>
+                      <form action="{% url 'products:products_delete' product.pk  %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="삭제">
+                      </form>
+                    </div>
                   </div>
-                  <div class="rev-main">
-                      <div class="rev-header">
-                          <p class="rev-user">username</p>
-                          <p class="rev-date">2022.10.12</p>
-                          <p class="rev-rate">
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star-fill"></i>
-                              <i class="bi bi-star"></i>
-                          </p>
-                          <div class="rev-btn">
-                              <a href="{% url 'products:products_update' products.pk %}">수정</a>
-                              <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
-                                {% csrf_token %}
-                                <input type="submit" value="삭제">
-                              </form>
-                          </div>
-                      </div>
-                      <div class="rev-body">
-                          <p class="rev-cont">
-                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est sit asperiores optio velit
-                              porro
-                              minus
-                              recusandae mollitia vel, odit illo? Vitae doloribus repudiandae corporis iste qui! Provident
-                              assumenda adipisci voluptatibus.
-                          </p>
-                          <img src="https://source.unsplash.com/random/200x300" alt="" class="rev-img">
-                      </div>
+                  <div class="rev-body">
+                    <p class="rev-cont">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est sit asperiores optio velit
+                        porro
+                        minus
+                        recusandae mollitia vel, odit illo? Vitae doloribus repudiandae corporis iste qui! Provident
+                        assumenda adipisci voluptatibus.
+                    </p>
+                    <img src="https://source.unsplash.com/random/200x300" alt="" class="rev-img">
                   </div>
+                </div>
               </div>
-          </div>
+            </div>
           </article>
           {% comment %} 문의 {% endcomment %}
           <article id='pdt-qna'>
             <div class="pdt-qna-titarea">
               <h3>문의 <span class='small-count'></span></h3>
-                <p class="qna-modal-btn">문의하기</p>            
+              <p class="qna-modal-btn">문의하기</p>            
             </div>
             <div id="qna-area">
               <div class="qna-sec">
@@ -277,7 +318,6 @@
                     <span>A.</span>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam, at. Ipsa voluptatibus ipsum alias, vitae rem assumenda magni pariatur facere quam illo eveniet iusto facilis nam, provident quisquam dicta consectetur?</p>
                   </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -285,6 +325,31 @@
           {% comment %} 추천 {% endcomment %}
           <article id='pdt-recommend'>
             <h3>추천</h3>
+            <div class='pdt-list row row-cols-1 row-cols-md-2 row-cols-lg-3 gx-0 gy-3'>
+              {% for product in recommend_products %}
+              <div class='col'>
+                <div class='pdt-item'>
+                  <a class='pdt-item-img-wrap' href="{% url 'products:products_detail' product.pk %}">
+                    <img class='pdt-item-img' src="{{ product.product_image.all.0.image.url }}" alt="">
+                  </a>
+                  <a class='pdt-item-name' href="{% url 'products:products_detail' product.pk %}">
+                    {{ product.name }}
+                  </a>
+                  <div class='pdt-item-price'>
+                    {% if product.sale != 0 %}
+                    <del class='before-sale'>{{ product.pay|intcomma }}원</del>
+                    {% endif %}
+                    <span class='pdt-pay'>{{ product.pay|discount:product.sale|intcomma }}원</span>
+                  </div>
+                  {% if product.sale != 0 %}
+                  <div class='pdt-sale-badge'>
+                    {{ product.sale }}%
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
           </article>
         </div>
         <div class='col-4'>
@@ -294,23 +359,23 @@
           </div>
         </div>
       </div>
+    </section>
       
       
       
 
-    <div>
+
       <p>
-        <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
+        <a href="{% url 'reviews:index' product.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
       </p>
       <p>
-        <a href="{% url 'products:products_update' products.pk %}">수정하기</a>
+        <a href="{% url 'products:products_update' product.pk %}">수정하기</a>
       </p>
-      <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
+      <form action="{% url 'products:products_delete' product.pk  %}" method="POST">
         {% csrf_token %}
         <input type="submit" value="삭제">
       </form>
     </div>
-    </section>
     
     {% comment %} 리뷰/문의 모달 {% endcomment %}
     <section>
@@ -325,11 +390,11 @@
           </div>
           <div class="item-area sect">
             <div class="img-area">
-              <img src="{{products.product_image.all.0.image.url }}" alt="">
+              <img src="{{product.product_image.all.0.image.url }}" alt="">
             </div>
             <div class="info">
-              <p>{{ products.category }}</p>
-              <h3 class="sub-tit">{{ products.name }}</h3>
+              <p>{{ product.category }}</p>
+              <h3 class="sub-tit">{{ product.name }}</h3>
             </div>
           </div>
           <div class="form-area ">
@@ -405,11 +470,11 @@
           <h3 class="sub-tit">상품</h3>
           <div class="item-area sect">
             <div class="img-area">
-              <img src="{{products.product_image.all.0.image.url }}" alt="">
+              <img src="{{product.product_image.all.0.image.url }}" alt="">
             </div>
             <div class="info">
-              <p>{{ products.category }}</p>
-              <h3 class="sub-tit">{{ products.name }}</h3>
+              <p>{{ product.category }}</p>
+              <h3 class="sub-tit">{{ product.name }}</h3>
             </div>
           </div>
           <div class="form-area ">

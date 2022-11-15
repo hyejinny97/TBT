@@ -6,6 +6,7 @@ from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import F, Q
+import random
 
 
 # Create your views here.
@@ -49,14 +50,21 @@ def products_index(request):
 
 
 def products_detail(request, products_pk):
-    products = get_object_or_404(Product, pk=products_pk)
-    reviews = products.review_set.all()
-    total = products.review_set.aggregate(review_avg=Avg("grade"))
+    product = get_object_or_404(Product, pk=products_pk)
+    products = Product.objects.all()
+    reviews = product.review_set.all()
+    total = product.review_set.aggregate(review_avg=Avg("grade"))
+
+    recommend_products = []
+    pick_3 = random.sample(list(range(len(products))), 3)
+    for i in pick_3:
+        recommend_products.append(products[i])
 
     context = {
-        "products": products,
+        "product": product,
         "reviews": reviews,
         "total": total,
+        'recommend_products': recommend_products,
     }
 
     return render(request, "products/products_detail.html", context)
