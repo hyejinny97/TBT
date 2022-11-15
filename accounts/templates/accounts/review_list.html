@@ -3,8 +3,8 @@
 
 {% block body %}
 
-  <section class="containers">
-    <p class="title text-center fw-semibold">
+  <section class="review__container">
+    <p class="title text-center fw-semibold pt-3">
       <span class="title__user">{{ users.nickname }}</span>
       님의 리뷰 목록
     </p>
@@ -17,7 +17,7 @@
       <hr class="line"/>
       <!-- 리뷰 아이템 -->
       {% for review in reviews %}
-        <div class="review__container">
+        <div class="review__list">
           <a href="{% url 'products:products_detail' review.product.pk %}">
             <img class="review__img" src="{{ review.product.product_image.all.first.image.url }}" alt="review-img"/>
             <span class="review__name">{{ review.product.name }}</span>

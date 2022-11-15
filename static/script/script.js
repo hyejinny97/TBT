@@ -35,12 +35,12 @@ try {
         overlay.classList.add('hidden');
         body.classList.remove('scroll-block');
     });
-    overlay.addEventListener('click', function () {
-        body.classList.remove('scroll-block');
-        revModal.classList.add('hidden');
-        qnaModal.classList.add('hidden');
-        overlay.classList.add('hidden');
-    })
+    // overlay.addEventListener('click', function () {
+    //     body.classList.remove('scroll-block');
+    //     revModal.classList.add('hidden');
+    //     qnaModal.classList.add('hidden');
+    //     overlay.classList.add('hidden');
+    // })
 
 
     document.addEventListener('keydown', function (e) {
@@ -103,8 +103,8 @@ try {
         };
 
         const prevSlide = function () {
-            if (curSlide === maxSlide - 1) {
-                curSlide = 0;
+            if (curSlide === 0) {
+                curSlide = maxSlide - 1;
             } else {
                 curSlide--;
             }
@@ -135,7 +135,7 @@ try {
                 activeDot(slide);
             }
         });
-
+        setInterval(nextSlide, 6000);
     };
 
     slider();
