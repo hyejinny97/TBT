@@ -1,164 +1,168 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block index %}
-<div id="home">
-  <div class="slide-area">
-    <div class="slider">
-      <div class="slide slide--1">
-        <img src="{% static 'img/slide01.jpg' %}" alt="slide banner 01">
+  <div id="home">
+    <div class="slide-area">
+      <div class="slider">
+        <div class="slide slide--1">
+          <img src="{% static 'img/slide01.jpg' %}" alt="slide banner 01">
+        </div>
+        <div class="slide slide--2">
+          <img src="{% static 'img/slide02.jpg' %}" alt="slide banner 01">
+        </div>
+        <div class="slide slide--3">
+          <img src="{% static 'img/slide03.jpg' %}" alt="slide banner 01">
+        </div>
+        <button class="slider-btn slider-btn-left">
+          <i class="bi bi-arrow-left"></i>
+        </button>
+        <button class="slider-btn slider-btn-right">
+          <i class="bi bi-arrow-right"></i>
+        </button>
+        <div class="dots"></div>
       </div>
-      <div class="slide slide--2">
-        <img src="{% static 'img/slide02.jpg' %}" alt="slide banner 01">
+
+    </div>
+    <!-- 시즌 상품-->
+    <div class="container">
+
+      <section class="sec season">
+        <h3 class="tit">시즌 상품</h3>
+        <div class="item-area season__items">
+          <div class="item">
+            <div class="img-area">
+              <p class="sale-tag">
+                <span class="sale-per">20%</span>
+              </p>
+              <img src="https://source.unsplash.com/random/385x300" alt="item image">
+              <div class="overlay"></div>
+            </div>
+            <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
+            <p class="item-price">
+              <span class="origin__price">12,000원</span>
+              <span class="discount__price">9,600원</span>
+            </p>
+          </div>
+          <div class="item">
+            <div class="img-area">
+              <p class="sale-tag">
+                <span class="sale-per">20%</span>
+              </p>
+              <img src="https://source.unsplash.com/random/385x300" alt="item image">
+              <div class="overlay"></div>
+            </div>
+            <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
+            <p class="item-price">
+              <span class="origin__price">12,000원</span>
+              <span class="discount__price">9,600원</span>
+            </p>
+          </div>
+          <div class="item">
+            <div class="img-area">
+              <p class="sale-tag">
+                <span class="sale-per">20%</span>
+              </p>
+              <img src="https://source.unsplash.com/random/385x300" alt="item image">
+              <div class="overlay"></div>
+            </div>
+            <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
+            <p class="item-price">
+              <span class="origin__price">12,000원</span>
+              <span class="discount__price">9,600원</span>
+            </div>
+          </div>
+        </section>
       </div>
-      <div class="slide slide--3">
-        <img src="{% static 'img/slide03.jpg' %}" alt="slide banner 01">
+
+      <section class="sec event">
+        <div class="event-banner">
+          <img src="{% static 'img/event_banner.jpg' %}" alt="템바이템 필기구 기획전">
+        </div>
+      </section>
+      <div class="container">
+        <section class="sec sale-item">
+          <div class="item-area">
+            <div class="text-area discount__title--area">
+              <h3 class="tit discount__title">이번주 한정 할인 상품</h3>
+              <p class="discount__subtitle">할인 종료까지
+                <span class="day">3일</span>
+              </p>
+            </div>
+            <div class="item">
+              <a href="{% url 'products:products_detail' sale_under_40.pk %}">
+                <div class="img-area">
+                  <img class="sale__img" src="{{ sale_under_40.product_image.all.0.image.url }}" alt="item image">
+                  <div class="overlay"></div>
+                </div>
+              </a>
+              <p class="item-tit">{{ sale_under_40.name }}</p>
+              <p class="item-price discount__price">~40%
+              </p>
+            </div>
+            <div class="item">
+              <a href="{% url 'products:products_detail' sale_under_30.pk %}">
+                <div class="img-area">
+                  <img class="sale__img" src="{{ sale_under_30.product_image.all.0.image.url }}" alt="item image">
+                  <div class="overlay"></div>
+                </div>
+              </a>
+              <p class="item-tit">{{ sale_under_30.name }}</p>
+              <p class="item-price discount__price">~30%
+              </p>
+            </div>
+            <div class="item">
+              <a href="{% url 'products:products_detail' sale_under_20.pk %}">
+                <div class="img-area">
+                  <img class="sale__img" src="{{ sale_under_20.product_image.all.0.image.url }}" alt="item image">
+                  <div class="overlay"></div>
+                </div>
+              </a>
+              <p class="item-tit">{{ sale_under_20.name }}</p>
+              <p class="item-price discount__price">~20%
+              </p>
+            </div>
+          </div>
+        </section>
+        <section class="sec md-item">
+          <div class="item-area md__item--area">
+            <div class="md__title--container">
+              <div class="text-area md__title--area">
+                <h3 class="tit mb__title">MD'S Pick</h3>
+                <p>템바이템 엠디가</p>
+                <p class="md__subtitle2">자신있게 추천합니다</p>
+              </div>
+            </div>
+            <a href="{% url 'products:products_detail' weekly_planner.pk %}">
+              <div class="item md-item">
+                <div class="img-area">
+                  <img class="md__img" src="{{ weekly_planner.product_image.all.0.image.url }}" alt="item image">
+                  <div class="overlay"></div>
+                </div>
+                <p class="item-tit md__category">위클리 플래너</p>
+              </div>
+            </a>
+            <a href="{% url 'products:products_detail' monthly_planner.pk %}">
+              <div class="item md-item">
+                <div class="img-area">
+                  <img class="md__img" src="{{ monthly_planner.product_image.all.0.image.url }}" alt="item image">
+                  <div class="overlay"></div>
+                </div>
+                <p class="item-tit md__category">먼슬리 플래너</p>
+              </div>
+            </a>
+            <a href="{% url 'products:products_detail' photo_album.pk %}">
+              <div class="item md-item">
+                <div class="img-area">
+                  <img class="md__img" src="{{ photo_album.product_image.all.0.image.url }}" alt="item image">
+                  <div class="overlay"></div>
+                </div>
+                <p class="item-tit md__category">포토 앨범</p>
+              </div>
+            </a>
+          </div>
+        </section>
       </div>
-      <button class="slider-btn slider-btn-left"><i class="bi bi-arrow-left"></i></button>
-      <button class="slider-btn slider-btn-right"><i class="bi bi-arrow-right"></i></button>
-      <div class="dots"></div>
+
     </div>
 
-  </div>
-  <!-- 시즌 상품-->
-  <div class="container">
-
-    <section class="sec season">
-      <h3 class="tit">시즌 상품</h3>
-      <div class="item-area season__items">
-        <div class="item">
-          <div class="img-area">
-            <p class="sale-tag">
-              <span class="sale-per">20%</span>
-            </p>
-            <img src="https://source.unsplash.com/random/385x300" alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
-          <p class="item-price">
-            <span class="origin__price">12,000원</span>
-            <span class="discount__price">9,600원</span>
-          </p>
-        </div>
-        <div class="item">
-          <div class="img-area">
-            <p class="sale-tag">
-              <span class="sale-per">20%</span>
-            </p>
-            <img src="https://source.unsplash.com/random/385x300" alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
-          <p class="item-price">
-            <span class="origin__price">12,000원</span>
-            <span class="discount__price">9,600원</span>
-          </p>
-        </div>
-        <div class="item">
-          <div class="img-area">
-            <p class="sale-tag">
-              <span class="sale-per">20%</span>
-            </p>
-            <img src="https://source.unsplash.com/random/385x300" alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
-          <p class="item-price">
-            <span class="origin__price">12,000원</span>
-            <span class="discount__price">9,600원</span>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <section class="sec event">
-    <div class="event-banner">
-      <img src="{% static 'img/event_banner.jpg' %}" alt="템바이템 필기구 기획전">
-    </div>
-  </section>
-  <div class="container">
-    <section class="sec sale-item">
-      <div class="item-area">
-        <div class="text-area discount__title--area">
-          <h3 class="tit discount__title">이번주 한정 할인 상품</h3>
-          <p class="discount__subtitle">할인 종료까지
-            <span class="day">N 일</span>
-          </p>
-        </div>
-        <div class="item">
-          <div class="img-area">
-            <img class="sale__img"
-              src="http://thumbnail.10x10.co.kr/webimage/image/basic600/490/B004904556-1.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false"
-              alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit">상품 이름</p>
-          <p class="item-price discount__price">~40%
-          </p>
-        </div>
-        <div class="item">
-          <div class="img-area">
-            <img class="sale__img"
-              src="http://thumbnail.10x10.co.kr/webimage/image/basic600/486/B004860685-2.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false"
-              alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit">상품 이름</p>
-          <p class="item-price discount__price">~30%
-          </p>
-        </div>
-        <div class="item">
-          <div class="img-area">
-            <img class="sale__img"
-              src="http://thumbnail.10x10.co.kr/webimage/image/basic600/497/B004978628.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false"
-              alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit">상품 이름</p>
-          <p class="item-price discount__price">~20%
-          </p>
-        </div>
-      </div>
-    </section>
-    <section class="sec md-item">
-      <div class="item-area md__item--area">
-        <div class="md__title--container">
-          <div class="text-area md__title--area">
-            <h3 class="tit mb__title">MD'S Pick</h3>
-            <p>템바이템 엠디가</p>
-            <p class="md__subtitle2">자신있게 추천합니다</p>
-          </div>
-        </div>
-        <div class="item md-item">
-          <div class="img-area">
-            <img class="md__img"
-              src="http://thumbnail.10x10.co.kr/webimage/image/basic600/490/B004904556-1.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false"
-              alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit md__category">위클리 플래너</p>
-        </div>
-        <div class="item md-item">
-          <div class="img-area">
-            <img class="md__img"
-              src="http://thumbnail.10x10.co.kr/webimage/image/basic600/486/B004860685-2.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false"
-              alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit md__category">먼슬리 플래너</p>
-        </div>
-        <div class="item md-item">
-          <div class="img-area">
-            <img class="md__img"
-              src="http://thumbnail.10x10.co.kr/webimage/image/basic600/497/B004978628.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false"
-              alt="item image">
-            <div class="overlay"></div>
-          </div>
-          <p class="item-tit md__category">미니 달력</p>
-        </div>
-      </div>
-    </section>
-  </div>
-
-</div>
-
-{% endblock index %}
+  {% endblock index %}
