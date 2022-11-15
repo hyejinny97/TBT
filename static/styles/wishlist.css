@@ -15,8 +15,7 @@
 
 /* 버튼 */
 .wishlist__btn {
-  float: right;
-  transform: translateX(-2rem);
+  float: right; 
 }
 
 .cart__btn {
@@ -55,6 +54,7 @@
 .wishlist__container {
   margin-top: 5.5rem;
   padding-bottom: 3rem;
+  min-height: 20vh;
 }
 
 .wishlist__img {
