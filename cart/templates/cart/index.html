@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+<!-- 장바구니 body-->
+{% block body %}
+  {% if not cart_items %}
+    <div class='text-center'>
+      <h1>
+        cart is empty
+      </h1>
+      <p class='text-center'>
+        쇼핑을 더하려면
+        <a href="{% url 'product:index' %}"></a>메인페이지 를 클릭하세요</p>
+    </div>
+  {% endif %}
+{% endblock body %}
+<div class='text-center'>
+  <h1>
+    너님의 마구니가 꼈어
+  </h1>
+</div>
+
+<div>
+  <table class="table">
+    <thread>
+      <tr>
+        <th>너님의 상품</th>
+      </tr>
+    </thread>
+    <thbody>
+      {% for cart_item in cart_items %}
+        <tr>
+          <td>
+            <a href="{{ cart_item.product.get_absolute_url }}"></a>
+          </td>
+        </tr>
+
+      </table>
+    </div>

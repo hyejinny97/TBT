@@ -5,6 +5,8 @@ from .models import Product,ProductImage
 from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models import F
+
 
 # Create your views here.
 def index(request):
@@ -109,38 +111,88 @@ def like(request, products_pk):
 
 def note(request):
     products = Product.objects.filter(category='노트/메모지')
-
+    filter = request.GET.get('filter', default='register')
+    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01)
+    
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = discount.order_by('-discount')
+    if filter == 'low-price':
+        products = discount.order_by('discount')
+    if filter == 'register':
+        products = products.order_by('-created_at')
 
     context = {
-        'category' : '노트',
+        'category' : 'note',
         'products' : products,
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+
+    return render(request, "products/index.html", context)
 
 def diary(request):
-    products = Product.objects.filter(category='다이어리')
+    products = Product.objects.filter(category='노트/메모지')
+    filter = request.GET.get('filter', default='register')
+    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01)
     
-
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = discount.order_by('-discount')
+    if filter == 'low-price':
+        products = discount.order_by('discount')
+    if filter == 'register':
+        products = products.order_by('-created_at')
+    
     context = {
-        'category' : '다이어리',
+        'category' : 'diary',
         'products' : products,
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+   
+    return render(request, "products/index.html", context)
 
 def pencil(request):
-    products = Product.objects.filter(category='필기류/필통')
+    products = Product.objects.filter(category='노트/메모지')
+    filter = request.GET.get('filter', default='register')
+    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01)
+    
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = discount.order_by('-discount')
+    if filter == 'low-price':
+        products = discount.order_by('discount')
+    if filter == 'register':
+        products = products.order_by('-created_at')
 
     context = {
-        'category' : '필기류',
+        'category' : 'pencil',
         'products' : products,
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+
+    return render(request, "products/index.html", context)
 
 def file(request):
-    products = Product.objects.filter(category='파일/바인더')
+    products = Product.objects.filter(category='노트/메모지')
+    filter = request.GET.get('filter', default='register')
+    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01)
+    
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = discount.order_by('-discount')
+    if filter == 'low-price':
+        products = discount.order_by('discount')
+    if filter == 'register':
+        products = products.order_by('-created_at')
 
     context = {
-        'category' : '파일',
+        'category' : 'file',
         'products' : products,
+        'filter' : filter,
     }
-    return render(request,'products/index.html', context)
+    
+    return render(request, "products/index.html", context)

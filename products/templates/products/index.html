@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
+{% load humanize %}
 {% load index_tag %}
 
 {% block css %}
@@ -25,12 +26,12 @@
   {% endif %}
 </section>
 {% comment %} 분류 필터 {% endcomment %}
-<section class='pdt-filter' data-filter='high-sale'>
+<section class='pdt-filter' data-filter='{{ filter }}'>
   <div class="dropdown container">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     </button>
     <ul class="dropdown-menu" name='filter'>
-      <li><a class="dropdown-item active" href="/products/{{ category }}?filter=registor">등록일순</a></li>
+      <li><a class="dropdown-item active" href="/products/{{ category }}?filter=register">등록일순</a></li>
       <li><a class="dropdown-item" href="/products/{{ category }}?filter=high-sale">높은할인률순</a></li>
       <li><a class="dropdown-item" href="/products/{{ category }}?filter=high-price">높은가격순</a></li>
       <li><a class="dropdown-item" href="/products/{{ category }}?filter=low-price">낮은가격순</a></li>
@@ -52,12 +53,12 @@
         {{ product.name }}
       </a>
       <div class='pdt-item-price'>
-        {% if product.sale != '0' %}
-        <del class='before-sale'>{{ product.pay }}원</del>
+        {% if product.sale != 0 %}
+        <del class='before-sale'>{{ product.pay|intcomma }}원</del>
         {% endif %}
-        <span class='pdt-pay'>{{ product.pay|discount:product.sale }}원</span>
+        <span class='pdt-pay'>{{ product.pay|discount:product.sale|intcomma }}원</span>
       </div>
-      {% if product.sale != '0' %}
+      {% if product.sale != 0 %}
       <div class='pdt-sale-badge'>
         {{ product.sale }}%
       </div>
