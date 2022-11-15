@@ -35,12 +35,12 @@ try {
         overlay.classList.add('hidden');
         body.classList.remove('scroll-block');
     });
-    overlay.addEventListener('click', function () {
-        body.classList.remove('scroll-block');
-        revModal.classList.add('hidden');
-        qnaModal.classList.add('hidden');
-        overlay.classList.add('hidden');
-    })
+    // overlay.addEventListener('click', function () {
+    //     body.classList.remove('scroll-block');
+    //     revModal.classList.add('hidden');
+    //     qnaModal.classList.add('hidden');
+    //     overlay.classList.add('hidden');
+    // })
 
 
     document.addEventListener('keydown', function (e) {
