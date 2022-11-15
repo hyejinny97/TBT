@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomCreationUserForm, CustomChangeUserForm
 from .forms import CustomAuthenticationForm
 from products.models import Product, ProductImage
+from .models import User
 from reviews.models import Review
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -114,6 +115,13 @@ def follow(request, user_pk):
 
 def wishlist(request, user_pk):
     users = get_user_model().objects.get(pk=user_pk)
+    like_product = users.like_products.all()
+    if request.method == "POST":
+        selected = request.POST.getlist("answer[]")
+        for product in selected:
+            for i in range(len(like_product)):
+                if int(product) == like_product[i].pk:
+                    like_product[i].delete()
     context = {"users": users}
     return render(request, "accounts/wishlist.html", context)
 
@@ -126,3 +134,10 @@ def review_list(request, user_pk):
         "reviews": reviews,
     }
     return render(request, "accounts/review_list.html", context)
+
+
+# def like_delete(request, user_pk):
+#     if request.method == "POST":
+#         selected = request.POST.getlist("answer[]")
+#         print(selected)
+#     return redirect("accounts:wishlist", user_pk)
