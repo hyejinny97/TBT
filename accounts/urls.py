@@ -18,4 +18,5 @@ urlpatterns = [
     path("<int:user_pk>/follow/", views.follow, name="follow"),
     path("<int:user_pk>/wishlist/", views.wishlist, name="wishlist"),
     path("<int:user_pk>/review_list/", views.review_list, name="review_list"),
+    # path("<int:user_pk>/like_delete/", views.like_delete, name="like_delete"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

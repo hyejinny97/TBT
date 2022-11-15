@@ -12,23 +12,29 @@
     <!-- 버튼 -->
     <div class="wishlist__btn">
       <button class="cart__btn">장바구니 담기</button>
-      <button class="delete__btn">삭제하기</button>
+      <button class="delete__btn" type="submit" form="like_form">
+        삭제하기
+      </button>
     </div>
     <!-- 찜 목록 -->
-    <div class="wishlist__content wishlist__container">
-      {% if user.like_products.all %}
-        {% for product in user.like_products.all %}
-          <div class="wishlist__box">
-            <a href="{% url "products:products_detail" product.pk %}">
-              <input class="checkbox" type="checkbox" name="answer[]" id="opt-in"/>
-              <img class="wishlist__img" src="{{ product.product_image.all.first.image.url }}" alt="wishlist-img"/>
-              <p class="wishlist__title">{{ product.name }}</p>
-              <p class="wishlist__price">{{ product.pay|intcomma }}원</p>
-            </a>
-          </div>
-        {% endfor %}
-      {% endif %}
-    </div>
+    <form action="" method="POST" name='delete_form' id="like_form">
+      <div class="wishlist__content wishlist__container">
+        {% if user.like_products.all %}
+          {% for product in user.like_products.all %}
+            {% csrf_token %}
+            <div class="wishlist__box">
+              <a href="{% url "products:products_detail" product.pk %}">
+                <input class="checkbox" type="checkbox" name="answer[]" id="opt-in" value="{{ product.pk }}"/>
+                <img class="wishlist__img" src="{{ product.product_image.all.first.image.url }}" alt="wishlist-img"/>
+                <p class="wishlist__title">{{ product.name }}</p>
+                <p class="wishlist__price">{{ product.pay|intcomma }}원</p>
+              </a>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <input type="submit" value="" name="delete_input" id="ckbox">
+    </form>
     <div class="ment text-center">
       <p class="info">
         더 많은 상품을
@@ -40,4 +46,18 @@
     </div>
   </section>
 
+
+{% comment %} 
+  <script type="text/javascript">
+    const form = document.forms.delete_form
+    const input = form.elements.delete_input
+    const delete_like = document.querySelector('delete-item')
+    const btn = document.getElementById('delete_like')
+    btn.addEventListener('click', function () {
+      document
+        .getElementById('like_form')
+        .submit();
+      return false;
+    });
+  </script> {% endcomment %}
 {% endblock body %}
