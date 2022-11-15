@@ -164,7 +164,10 @@
           </article>
           {% comment %} 리뷰 {% endcomment %}
           <article id='pdt-review'>
-            <h3>리뷰 <span class='small-count'>{{ reviews.count }}</span></h3>
+            <div class="pdt-rev-titarea">
+              <h3>리뷰 <span class='small-count'>{{ reviews.count }}</span></h3>
+              <p id="rev-modal-btn">리뷰쓰기</p>
+            </div>
             <div class='review-grade-wrap'>
               <div class='stars-container'>
                 <div class='stars'>
@@ -208,10 +211,76 @@
                 </div>
               </div>
             </div>
+            <div id="review-area">
+              <div class="rev-sec">
+                  <div class="rev-prof-img">
+                      <img src="https://source.unsplash.com/random/80x80" alt="user profile image">
+                  </div>
+                  <div class="rev-main">
+                      <div class="rev-header">
+                          <p class="rev-user">username</p>
+                          <p class="rev-date">2022.10.12</p>
+                          <p class="rev-rate">
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star-fill"></i>
+                              <i class="bi bi-star"></i>
+                          </p>
+                          <div class="rev-btn">
+                              <a href="{% url 'products:products_update' products.pk %}">수정</a>
+                              <form action="{% url 'products:products_delete' products.pk  %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="삭제">
+                              </form>
+                          </div>
+                      </div>
+                      <div class="rev-body">
+                          <p class="rev-cont">
+                              Lorem ipsum dolor sit amet consectetur adipisicing elit. Est sit asperiores optio velit
+                              porro
+                              minus
+                              recusandae mollitia vel, odit illo? Vitae doloribus repudiandae corporis iste qui! Provident
+                              assumenda adipisci voluptatibus.
+                          </p>
+                          <img src="https://source.unsplash.com/random/200x300" alt="" class="rev-img">
+                      </div>
+                  </div>
+              </div>
+          </div>
           </article>
           {% comment %} 문의 {% endcomment %}
           <article id='pdt-qna'>
-            <h3>문의 <span class='small-count'></span></h3>
+            <div class="pdt-qna-titarea">
+              <h3>문의 <span class='small-count'></span></h3>
+                <p class="qna-modal-btn">문의하기</p>            
+            </div>
+            <div id="qna-area">
+              <div class="qna-sec">
+                <div class="qna-header">
+                  <p class="qna-info">
+                    <span>구매 |</span>
+                    <span>배송 |</span>
+                    <span class="qna-status">미답변</span>
+                  </p>
+                  <p class="qna-user">
+                    <span>username |</span>
+                    <span>2022년 11월 09일 22시 07분</span>
+                  </p>
+                </div>
+                <div class="qna-main">
+                  <div class="qna-cont qna-q">
+                    <span>Q.</span>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam, at. Ipsa voluptatibus ipsum alias, vitae rem assumenda magni pariatur facere quam illo eveniet iusto facilis nam, provident quisquam dicta consectetur?</p>
+                  </div>
+                  <div class="qna-cont qna-a">
+                    <span>A.</span>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam, at. Ipsa voluptatibus ipsum alias, vitae rem assumenda magni pariatur facere quam illo eveniet iusto facilis nam, provident quisquam dicta consectetur?</p>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </article>
           {% comment %} 추천 {% endcomment %}
           <article id='pdt-recommend'>
@@ -228,15 +297,8 @@
       
       
       
-      
-      
-      
-      <div class="rev-area">
-        <p id="rev-modal-btn">리뷰쓰기</p>
-      </div>
-      <div class="qna-area">
-        <p class="qna-modal-btn">문의하기</p>
-      </div>
+
+    <div>
       <p>
         <a href="{% url 'reviews:index' products.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
       </p>
@@ -247,7 +309,9 @@
         {% csrf_token %}
         <input type="submit" value="삭제">
       </form>
+    </div>
     </section>
+    
     {% comment %} 리뷰/문의 모달 {% endcomment %}
     <section>
       <div class="overlayC hidden">
