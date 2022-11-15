@@ -3,6 +3,10 @@
 {% load humanize %}
 {% load index_tag %}
 
+{% block css %}
+  <link rel="stylesheet" href="{% static 'styles/product_index.css' %} ">
+{% endblock css %}
+
 {% block body %}
 
   <section class='pdt-list row row-cols-2 row-cols-md-3 row-cols-lg-4 gx-0 gy-3'>
