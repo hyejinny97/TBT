@@ -167,11 +167,11 @@
           </div>
           <div class="item-area sect">
             <div class="img-area">
-              <img src="https://source.unsplash.com/random/200x200" alt="">
+              <img src="{{products.product_image.all.0.image.url }}" alt="">
             </div>
             <div class="info">
-              <p>category</p>
-              <h3 class="sub-tit">다이어리</h3>
+              <p>{{ products.category }}</p>
+              <h3 class="sub-tit">{{ products.name }}</h3>
             </div>
           </div>
           <div class="form-area ">
@@ -247,11 +247,11 @@
           <h3 class="sub-tit">상품</h3>
           <div class="item-area sect">
             <div class="img-area">
-              <img src="https://source.unsplash.com/random/200x200" alt="">
+              <img src="{{products.product_image.all.0.image.url }}" alt="">
             </div>
             <div class="info">
-              <p>category</p>
-              <h3 class="sub-tit">상품명</h3>
+              <p>{{ products.category }}</p>
+              <h3 class="sub-tit">{{ products.name }}</h3>
             </div>
           </div>
           <div class="form-area ">
