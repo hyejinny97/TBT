@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
+{% load index_tag %}
 {% block index %}
   <div id="home">
     <div class="slide-area">
       <div class="slider">
         <div class="slide slide--1">
-          <a href="">
+          <a href="{% url 'products:card' %}">
             <img src="{% static 'img/slide01.jpg' %}" alt="slide banner 01">
           </a>
         </div>
         <div class="slide slide--2">
-          <img src="{% static 'img/slide02.jpg' %}" alt="slide banner 01">
+          <a href="{% url 'products:decoration' %}">
+            <img src="{% static 'img/slide02.jpg' %}" alt="slide banner 01">
+          </a>
         </div>
         <div class="slide slide--3">
-          <img src="{% static 'img/slide03.jpg' %}" alt="slide banner 01">
+          <a href="{% url 'products:diary' %}">
+            <img src="{% static 'img/slide03.jpg' %}" alt="slide banner 01">
+          </a>
         </div>
         <button class="slider-btn slider-btn-left">
           <i class="bi bi-arrow-left"></i>
@@ -31,51 +37,27 @@
       <section class="sec season">
         <div class='season-more'>
           <h3 class="tit">시즌 상품</h3>
-          <a class='season-more-btn' href=''>더보기</a>
+          <a class='season-more-btn' href="{% url 'products:card' %}">더보기</a>
         </div>
         <div class="item-area season__items">
-          <div class="item">
-            <div class="img-area">
-              <p class="sale-tag">
-                <span class="sale-per">20%</span>
-              </p>
-              <img src="https://source.unsplash.com/random/385x300" alt="item image">
-              <div class="overlay"></div>
-            </div>
-            <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
-            <p class="item-price">
-              <span class="origin__price">12,000원</span>
-              <span class="discount__price">9,600원</span>
-            </p>
-          </div>
-          <div class="item">
-            <div class="img-area">
-              <p class="sale-tag">
-                <span class="sale-per">20%</span>
-              </p>
-              <img src="https://source.unsplash.com/random/385x300" alt="item image">
-              <div class="overlay"></div>
-            </div>
-            <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
-            <p class="item-price">
-              <span class="origin__price">12,000원</span>
-              <span class="discount__price">9,600원</span>
-            </p>
-          </div>
-          <div class="item">
-            <div class="img-area">
-              <p class="sale-tag">
-                <span class="sale-per">20%</span>
-              </p>
-              <img src="https://source.unsplash.com/random/385x300" alt="item image">
-              <div class="overlay"></div>
-            </div>
-            <p class="item-tit">크리스마스 빈티지 엽서 세트</p>
-            <p class="item-price">
-              <span class="origin__price">12,000원</span>
-              <span class="discount__price">9,600원</span>
-            </div>
-          </div>
+          {% for season_product in season_products %}
+            <a href="{% url 'products:products_detail' season_product.pk %}">
+              <div class="item">
+                <div class="img-area">
+                  <p class="sale-tag">
+                    <span class="sale-per">{{ season_product.sale }}%</span>
+                  </p>
+                  <img src="{{ season_product.product_image.all.0.image.url }}" alt="item image">
+                  <div class="overlay"></div>
+                </div>
+                <p class="item-tit">{{ season_product.name }}</p>
+                <p class="item-price">
+                  <span class="origin__price">{{ season_product.pay|intcomma }}원</span>
+                  <span class="discount__price">{{ season_product.pay|discount:season_product.sale|intcomma }}원</span>
+                </p>
+              </div>
+            </a>
+          {% endfor %}
         </section>
       </div>
 

@@ -9,6 +9,12 @@ def index(request):
     monthly_planner = get_object_or_404(Product, pk=57)
     photo_album = get_object_or_404(Product, pk=87)
     
+    season_products = [
+        get_object_or_404(Product, pk=263),
+        get_object_or_404(Product, pk=165),
+        get_object_or_404(Product, pk=201),
+    ]
+    
     context = {
         'sale_under_40': sale_under_40,
         'sale_under_30': sale_under_30,
@@ -16,6 +22,7 @@ def index(request):
         'weekly_planner': weekly_planner,
         'monthly_planner': monthly_planner,
         'photo_album': photo_album,
+        'season_products': season_products,
     }
 
     return render(request, "index.html", context)
