@@ -290,6 +290,24 @@
                     <img src="{{ review.review_image.url }}" alt="" class="rev-img" onclick="window.open(this.src)">
                     {% endif %}
                   </div>
+                  <div class="rev-footer">
+                    {% if request.user in review.like.all %}
+                    <button  class="like-btn" >
+                      <span class="like-cnt">
+                        {{review.like.count}}
+                      </span>
+                      <i class="bi bi-hand-thumbs-up-fill" data-review-id="{{ review.pk }}"></i>
+                    </button>
+                    {% else %}
+                    <button class="like-btn">
+                      <span class="like-cnt">
+                        {{review.like.count}}
+                        {{review.pk}}
+                      </span>
+                      <i class="bi bi-hand-thumbs-up" data-review-id="{{ review.pk }}"></i>
+                    </button>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
               {% endfor %}
