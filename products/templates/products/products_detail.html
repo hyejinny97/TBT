@@ -129,7 +129,7 @@
           <span class='total-purchase-price' data-delivery='{{ products.delivery }}' data-price='{{ products.pay }}' data-sale='{{ products.sale }}'>0원</span>
         </div>
         <div class='basket-buy-btn-wrap'>
-          <a class='basket-btn' href="">장바구니</a>
+          <a class='basket-btn' href="{% url "cart:add_cart" products.pk %}">장바구니</a>
           <a class='buy-btn' href="">바로구매</a>
         </div>
       </div>
@@ -220,7 +220,7 @@
         </div>
         <div class='col-4'>
           <div class='basket-buy-btn-wrap small'>
-            <a class='basket-btn' href="">장바구니</a>
+            <a class='basket-btn' href="{% url "cart:add_cart" products.pk %}">장바구니</a>
             <a class='buy-btn' href="">바로구매</a>
           </div>
         </div>

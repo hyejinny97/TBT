@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "accounts",  # 상용자
     "products",  # 상품
     "reviews",  # 리뷰
-    # "cart",  # 장바구니
+    "cart",  # 장바구니
     "bulletin",
     "django_bootstrap5",
     "django_extensions",
