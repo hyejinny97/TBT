@@ -33,16 +33,16 @@ body {
 #header .navi .search-area {
   position: relative;
 }
-#header .navi .search-area input[type='text'] {
+#header .navi .search-area input[type='search'] {
   border: 2px solid var(--main);
   border-radius: 0.5rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0.3rem 0.8rem;
   font-size: 0.9rem;
 }
 #header .navi .search-area button {
   color: var(--main);
   position: absolute;
-  right: 5%;
+  right: 3%;
   top: 20%;
 }
 

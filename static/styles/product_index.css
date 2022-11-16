@@ -56,8 +56,20 @@
   padding: 1rem;
   height: 100%;
 }
-.page-item img {
+.pdt-item-img-wrap {
+  display: inline-block;
   width: 100%;
+  height: 226px;
+  overflow: hidden;
+}
+.pdt-item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pdt-item-img:hover {
+  transform: scale(1.1) ;
+  transition: all 0.7s;
 }
 .pdt-item-name {
   display: block;

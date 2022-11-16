@@ -15,4 +15,6 @@ urlpatterns = [
     path("diary/", views.diary, name="diary"),
     path("pencil/", views.pencil, name="pencil"),
     path("file/", views.file, name="file"),
+    path("search/", views.search, name="search"),
+    path("searchfail/", views.searchfail, name="searchfail"),
 ]

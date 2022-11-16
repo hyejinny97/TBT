@@ -54,3 +54,22 @@ tabs.forEach(function (tab) {
     console(event.currentTarget)
   })
 })
+
+
+
+// 각 리뷰의 평점 갯수에 따라 grade-bar 채우기
+const gradeBarColorAll = document.querySelectorAll('.grade-bar-color-wrap')
+const gradeCounts = document.querySelectorAll('.pdt-review-grade-count')
+
+let totCounts = 0
+for (let gradeCount of gradeCounts) {
+  totCounts += parseInt(gradeCount.innerText)
+}
+
+for (i = 0; i < 5; i++) {
+  if (totCounts === 0) {
+    gradeBarColorAll[i].style.width = `0px`
+  } else {
+    gradeBarColorAll[i].style.width = `${160 * parseInt(gradeCounts[i].innerText) / totCounts}px`
+  }
+}
