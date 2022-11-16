@@ -4,13 +4,48 @@ const form = document.querySelector('#follow-form');
 
 const revModal = document.querySelector('#review');
 const qnaModal = document.querySelector('#qna');
+
 const overlay = document.querySelector('.overlayC');
 const revBtnCloseModal = document.querySelector('.btn-close-rev');
 const qnaBtnCloseModal = document.querySelector('.btn-close-qna');
 const revBtnOpenModal = document.querySelector('#rev-modal-btn');
 const qnaBtnOpenModal = document.querySelector('.qna-modal-btn');
-const detailArea = document.querySelector('#product-detail');
 const body = document.querySelector('body');
+
+const alertModal = document.querySelector('.modal-alert');
+const alertOpenBtns = document.querySelectorAll('.btn-modal-delete')
+const alertCloseBtn = document.querySelector('.btn-cancel');
+const alertDeleteBtn = document.querySelector('.btn-delete');
+
+// 경고 모달창
+try {
+    const openAlert = function (e) {
+        e.preventDefault();
+        // console.log(e.target.href);
+        alertModal.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+        body.classList.add('scroll-block');
+
+        let urls = e.target.href;
+        alertDeleteBtn.setAttribute('href', `${urls}`);
+    }
+    const closeAlert = function (e) {
+        e.preventDefault();
+        alertModal.classList.add('hidden');
+        overlay.classList.add('hidden');
+        body.classList.remove('scroll-block');
+    }
+
+    alertOpenBtns.forEach(alertBtn => {
+        alertBtn.addEventListener('click', openAlert)
+    });
+    alertCloseBtn.addEventListener('click', closeAlert);
+
+} catch {
+
+}
+
+// 리뷰, 문의 모달창
 
 try {
 
@@ -67,6 +102,7 @@ try {
 
 }
 
+// 메인 인덱스 슬라이드
 try {
     const slider = function () {
         const slides = document.querySelectorAll('.slide');
@@ -143,6 +179,7 @@ try {
 
 }
 
+// 유저 팔로우
 try {
 
     form.addEventListener('submit', function (e) {
@@ -181,4 +218,38 @@ try {
 
 }
 
+// 리뷰 좋아요
+const likeBtn = document.querySelectorAll(".like-btn");
+try {
 
+    const reviewlike = function (event) {
+        // console.log(event.target.closest('.like-btn'));
+        const reviewId = event.target.dataset.reviewId
+        axios({
+            method: 'get',
+            url: `/reviews/${reviewId}/likes/`
+        })
+            .then((response) => {
+                const isLiked = response.data.isLiked;
+                if (isLiked === true) {
+                    event.target.classList.add('bi-hand-thumbs-up-fill');
+                    event.target.classList.remove('bi-hand-thumbs-up');
+                    event.target.closest('.like-btn').classList.add('like-active');
+                } else {
+                    event.target.classList.add('bi-hand-thumbs-up');
+                    event.target.classList.remove('bi-hand-thumbs-up-fill');
+                    event.target.closest('.like-btn').classList.remove('like-active');
+
+                }
+
+                const likeCount = event.target.nextElementSibling;
+                likeCount.innerText = response.data.likeCount;
+            })
+    }
+
+    likeBtn.forEach(btn => {
+        btn.addEventListener('click', reviewlike);
+    })
+} catch {
+
+}

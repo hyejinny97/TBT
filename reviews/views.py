@@ -36,21 +36,22 @@ def create(request, product_pk):
             review.product = product
             review.account = request.user
             review.save()
-            return redirect("reviews:index", product_pk)
+            return redirect("products:products_detail", product_pk)
     else:
         review_form = ReviewForm()
     context = {
         "review_form": review_form,
     }
-    return render(request, "reviews/create.html", context)
+    return redirect(request, "products/products_detail.html", context)
 
 
 @login_required
 def delete(request, review_pk):
     review = Review.objects.get(pk=review_pk)
+    product_pk = review.product.pk
     if request.user.pk == review.account.pk:
         review.delete()
-    return redirect("reviews:index", review.product.pk)
+    return redirect("products:products_detail", product_pk)
 
 
 @login_required

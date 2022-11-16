@@ -7,7 +7,12 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import F, Q
 import random
+from django.db.models import Func
 
+# aggregate 사용시 Round로 반올림 해주는 클래스
+class Round(Func):
+    function = 'ROUND'
+    template='%(function)s(%(expressions)s, 1)'
 
 # Create your views here.
 def index(request):
@@ -53,7 +58,7 @@ def products_detail(request, products_pk):
     product = get_object_or_404(Product, pk=products_pk)
     products = Product.objects.all()
     reviews = product.review_set.all()
-    total = product.review_set.aggregate(review_avg=Avg("grade"))
+    total = product.review_set.aggregate(review_avg=Round(Avg("grade")))
 
     recommend_products = []
     pick_3 = random.sample(list(range(len(products))), 3)

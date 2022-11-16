@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+<!-- 장바구니 body-->
+{% block body %}
+  <div class='text-center'>
+    <h1>
+      너님의 마구니가 꼈어
+    </h1>
+  </div>
+  {% if not cart_items %}
+    <div class='text-center'>
+      <h1>
+        cart is empty
+      </h1>
+      <p class='text-center'>
+        쇼핑을 더하려면
+        <a color="blue" href="{% url 'products:index' %}">메인페이지</a>
+        를 클릭하세요</p>
+    </div>
+  {% else %}
+    <div>
+      <table class="table">
+        <thread>
+          <tr>
+            <th>너님의 상품</th>
+          </tr>
+        </thread>
+        <thbody>
+          {% for cart_item in cart_items %}
+            <tr>
+              <td>
+                <a href="{% url "products:products_detail" cart_item.product.id %}"><img style="height: 100px;" src="{{ cart_item.product.product_image.all.first.image.url }}" alt=""></a>
+              </td>
+              <td>
+                {{ cart_item.product.name }}
+                {{ cart_item.product.id }}
+                금액 :
+                {{cart_item.product.pay|intcomma }}
+                수량 :
+                {{cart_item.quantity }}
+
+              </td>
+              <td>
+                합계 :
+                {{ cart_item.sub_total|intcomma }}
+              </td>
+              {% if cart_item.quantity < cart_item.product.stock %}
+                <td>
+                  <a href="{% url "cart:add_cart" cart_item.product.id %}">추가</a>
+                </td>
+              {% else %}
+                <td>
+                  <a href="#">
+                    삭제하기
+                  </a>
+                </td>
+              {% endif %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br>
+      <div class="text-center my-4 container">
+        <span>총 상품 건수 :
+          {{ total_count }}건 |
+        </span>
+        <span>
+          주문 합계 :
+          {{ pay_total|intcomma}}원
+        </span>
+      </div>
+
+    </div>
+  {% endif %}
+
+{% endblock body %}

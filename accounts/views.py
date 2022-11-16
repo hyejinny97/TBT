@@ -55,6 +55,7 @@ def logout(request):
 def detail(request, user_pk):
     user = get_user_model().objects.get(pk=user_pk)
     reviews = get_user_model().objects.get(pk=user_pk).review_set.all()
+    print(reviews)
     context = {
         "user": user,
         "my": request.user,
@@ -134,10 +135,3 @@ def review_list(request, user_pk):
         "reviews": reviews,
     }
     return render(request, "accounts/review_list.html", context)
-
-
-# def like_delete(request, user_pk):
-#     if request.method == "POST":
-#         selected = request.POST.getlist("answer[]")
-#         print(selected)
-#     return redirect("accounts:wishlist", user_pk)

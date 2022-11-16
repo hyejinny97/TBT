@@ -36,6 +36,27 @@
 	transition: all 0.5s;
 	overflow-y: auto;
 }
+.modal-alert {
+	top: 40%;
+	text-align: center;
+}
+.modal-alert .btn-area {
+	margin-top: 2rem;
+}
+.modal-alert .btn-area .btnA {
+	padding: 0.5rem 1rem;
+	margin-right: 0.5rem;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.modal-alert .btn-area .btn-cancel {
+	border: 1px solid var(--line);
+}
+.modal-alert .btn-area .btn-delete {
+	background: var(--highlight);
+	color: var(--bg);
+}
+
 .overlayC {
 	position: fixed;
 	top: 0;
@@ -66,12 +87,15 @@
 #review-area .rev-sec .rev-prof-img {
 	border-radius: 50%;
 	height: 100%;
-	min-width: 50px;
+	min-width: 60px;
+	min-height: 60px;
+	max-width: 60px;
 	overflow: hidden;
 	margin-right: 2rem;
 }
 #review-area .rev-sec .rev-prof-img img {
 	width: 100%;
+	height: 100%;
 }
 #review-area .rev-sec .rev-main .rev-header {
 	position: relative;
@@ -97,6 +121,25 @@
 }
 #review-area .rev-sec .rev-main .rev-body p {
 	margin-bottom: 1.5rem;
+}
+#review-area .rev-sec .rev-main .rev-footer .like-btn {
+	border: 2px solid var(--main);
+	border-radius: 2rem;
+	color: var(--main);
+	padding: 0.5rem 0.3rem 0.5rem 0;
+	margin-top: 1.5rem;
+	transition: all 0.2s ease;
+}
+#review-area .rev-sec .rev-main .rev-footer .like-btn i {
+	padding: 0.5rem;
+	z-index: 1;
+}
+#review-area .rev-sec .rev-main .rev-footer .like-btn span {
+	margin-right: 0.3rem;
+}
+#review-area .rev-sec .rev-main .rev-footer .like-active {
+	background: var(--main);
+	color: var(--bg);
 }
 
 #qna-area .qna-sec {
@@ -218,14 +261,15 @@
 #review .review-form .rate-stars input:checked ~ label {
 	color: var(--rate);
 }
-
+#review .review-form .review-txt input,
 #review .review-form .review-txt textarea,
 #qna .qna-form .qna-txt textarea {
-	border: 1px solid var(--line);
+	border: 1px solid var(--main);
 	border-radius: 0.2rem;
 	padding: 0.3rem 0.5rem;
 	background: var(--gr);
 	width: 100%;
+	margin-top: 1rem;
 }
 
 #review .review-form .review-img span {
@@ -250,6 +294,7 @@
 #review .review-form .review-img input[type="file"] {
 	display: none;
 }
+#review .review-form .review-txt input:focus,
 #review .review-form .review-txt textarea:focus,
 #review .review-form .review-txt textarea:active,
 #qna .qna-form .qna-txt textarea:focus,
