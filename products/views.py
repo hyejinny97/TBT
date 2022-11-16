@@ -258,3 +258,74 @@ def search(request):
 
 def searchfail(request):
     return render(request, "articles/searchfail.html")
+
+def card(request):
+    products = Product.objects.filter(category='크리스마스 카드')
+    filter = request.GET.get('filter', default='register')
+    chrismas = request.GET.get('chrismas', default='card')
+    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='필기류/필통')
+    
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = discount.order_by('-discount')
+    if filter == 'low-price':
+        products = discount.order_by('discount')
+    if filter == 'register':
+        products = products.order_by('-created_at')
+
+
+    context = {
+        "category": "card",
+        "products": products,
+        "filter": filter,
+        "chrismas" : chrismas,
+    }
+    return render(request, "products/index.html", context)
+
+def decoration(request):
+    products = Product.objects.filter(category='크리스마스 트리 장식')
+    filter = request.GET.get('filter', default='register')
+    chrismas = request.GET.get('chrismas', default='card')
+    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='필기류/필통')
+    
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = discount.order_by('-discount')
+    if filter == 'low-price':
+        products = discount.order_by('discount')
+    if filter == 'register':
+        products = products.order_by('-created_at')
+
+    context = {
+        "category": "wreath",
+        "products": products,
+        "filter": filter,
+        "chrismas" : chrismas,
+    }
+    return render(request, "products/index.html", context)
+
+def wreath(request):
+    products = Product.objects.filter(category='크리스마스 리스')
+    filter = request.GET.get('filter', default='register')
+    chrismas = request.GET.get('chrismas', default='card')
+    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='필기류/필통')
+    
+    if filter == 'high-sale':
+        products = products.order_by('-sale')
+    if filter == 'high-price':
+        products = discount.order_by('-discount')
+    if filter == 'low-price':
+        products = discount.order_by('discount')
+    if filter == 'register':
+        products = products.order_by('-created_at')
+
+    context = {
+        "category": "decoration",
+        "products": products,
+        "filter": filter,
+        "chrismas" : chrismas,
+    }
+    return render(request, "products/index.html", context)
+
