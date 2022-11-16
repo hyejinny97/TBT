@@ -277,7 +277,7 @@
                   {% if request.user.is_authenticated and request.user.pk == review.account.pk %}
                     <div class="rev-btn">
                       <a href="{% url 'reviews:update' review.pk %}">수정</a>
-                      <a href=" {% url 'reviews:delete' review.pk   %} ">삭제</a>
+                      <a href="{% url 'reviews:delete' review.pk %}" class="btn-modal-delete">삭제</a>
                     </div>
                   {% endif %}
                   </div>
@@ -579,6 +579,13 @@
               </div>
               <button class="btnC" type="submit">완료</button>
             </form>
+          </div>
+        </div>
+        <div class="modalC modal-alert hidden">
+          <p>리뷰를 정말 삭제하시겠습니까?</p>
+          <div class="btn-area">
+            <a class="btnA btn-cancel">취소</a>
+            <a href="" class="btnA btn-delete">삭제</a>
           </div>
         </div>
       </div>    

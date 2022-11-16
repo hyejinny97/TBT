@@ -1,6 +1,7 @@
 @import url(./main.css);
 
-.wishlist__container{
+.wishlist__container {
+  min-height: 50vh;
   padding: 0 10%;
 }
 
@@ -15,7 +16,7 @@
 
 /* 버튼 */
 .wishlist__btn {
-  float: right; 
+  float: right;
 }
 
 .cart__btn {
@@ -51,7 +52,7 @@
 
 /* 찜 사진 */
 
-.wishlist__list{
+.wishlist__list {
   margin-top: 6.5rem;
   padding-bottom: 3rem;
   min-height: 20vh;
