@@ -145,64 +145,27 @@ a:hover {
 /* 최근 주문 내역 */
 .sub__title {
   margin-top: 2.5rem;
+  margin-bottom: 2rem;
   margin-left: 0.5rem;
   color: var(--main);
   font-weight: 600;
   font-size: 1.2rem;
 }
 
-.order__history__category {
-  margin-top: 2rem;
-  white-space: nowrap;
+.order__td--number {
+  width: 20%;
 }
 
-.order__category__number,
-.order__category__title,
-.order__category__status {
-  font-weight: 600;
+.order__td--img {
+  width: 10%;
 }
 
-.order__category__number {
-  margin-left: 2rem;
+.order__name {
+  width: 40%;
 }
 
-.order__category__title {
-  margin-left: 20rem;
-}
-
-.order__category__status {
-  margin-left: 18.5rem;
-}
-
-.order__history__container {
-  margin-top: 1rem;
-  white-space: nowrap;
-  transform: translateY(-1.5rem);
-}
-
-.order__number {
-  margin-left: 1.5rem;
-}
-
-.order__img {
-  width: 5rem;
-  height: 5rem;
-  margin-left: 6rem;
-  transform: translateY(2rem);
-}
-
-.order__title {
-  display: inline-block;
-  width: 20rem;
-  transform: translateY(0.5rem);
-  margin-left: 6rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.order__status {
-  margin-left: 4rem;
+.order__td--status {
+  width: 40%;
   color: var(--sub);
   font-weight: 600;
 }
@@ -223,84 +186,46 @@ a:hover {
 }
 
 /* 최근 리뷰 */
-.empty{
-  margin-top: 3rem;
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+tr {
+  margin-top: 0.5rem;
+}
+
+th,
+td {
   text-align: center;
-  color: var(--main);
-  font-weight: 600;
-  font-size: 1.4rem;
+  vertical-align: middle;
+}
+th:first-child,
+td:first-child {
+  border-left: none;
 }
 
-.main__title {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2.5rem;
+td {
+  padding: 10px;
+  height: 100%;
 }
 
-.sub__title {
-  font-size: 1.4rem;
+.review__td--img {
+  width: 10%;
 }
 
-.plus__title {
-  cursor: pointer;
-  margin-top: 2.4rem;
-  margin-bottom: 2rem;
-  font-weight: 600;
-}
-
-.review {
-  margin-left: 1rem;
-  min-height: 7rem;
-}
-
-.review__category {
-  margin: 1rem 0;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.category__name {
-  margin-left: 13rem;
-}
-
-.category__grade {
-  margin-left: 16.5rem;
-}
-
-.category__title {
-  margin-left: 12rem;
-}
-
-.line {
-  color: var(--line);
-}
-
-.review__container {
-  white-space: nowrap;
-  transform: translateY(-1.5rem);
-}
-
-.review__img {
-  width: 5rem;
-  height: 5rem;
-  margin-left: 1.3rem;
-  transform: translateY(2rem);
-}
-
-.review__name {
-  display: inline-block;
-  margin-left: 5rem;
-  width: 15rem;
-  height: 3rem;
-  transform: translateY(1.7rem);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.review__td--name {
+  width: 40%;
 }
 
 .review__grade {
-  margin-top: 1.5rem;
-  margin-left: 7rem;
+  width: 10%;
   font-weight: 700;
   color: var(--sub-b);
 }
@@ -311,15 +236,8 @@ a:hover {
   color: var(--sub-b);
 }
 
-.review__title {
-  width: 20rem;
-  height: 3rem;
-  display: inline-block;
-  transform: translateY(1.7rem);
-  margin-left: 6.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.review__td--title {
+  width: 40%;
 }
 
 /* 위시리스트 */
@@ -329,7 +247,7 @@ a:hover {
   height: 13rem;
 }
 
-.wishlist{
+.wishlist {
   min-height: 6rem;
 }
 
@@ -354,6 +272,14 @@ a:hover {
 
 .wishlist__price {
   font-weight: 600;
+}
+
+.empty {
+  margin-top: 3rem;
+  text-align: center;
+  color: var(--main);
+  font-weight: 600;
+  font-size: 1.4rem;
 }
 
 /* js */
