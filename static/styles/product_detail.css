@@ -349,6 +349,7 @@
 /* 이미지 확대 */
 .img-magnifier-container {
   position: relative;
+  overflow: hidden;
 }
 
 .img-magnifier-glass {
