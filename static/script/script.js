@@ -186,7 +186,7 @@ const likeBtn = document.querySelectorAll(".like-btn");
 try {
 
     const reviewlike = function (event) {
-        console.log(event.target.previousElementSibling);
+        // console.log(event.target.closest('.like-btn'));
         const reviewId = event.target.dataset.reviewId
         axios({
             method: 'get',
@@ -195,14 +195,17 @@ try {
             .then((response) => {
                 const isLiked = response.data.isLiked;
                 if (isLiked === true) {
-                    event.target.classList.remove('bi-hand-thumbs-up-fill');
-                    event.target.classList.add('bi-hand-thumbs-up');
-                } else {
-                    event.target.classList.remove('bi-hand-thumbs-up');
                     event.target.classList.add('bi-hand-thumbs-up-fill');
+                    event.target.classList.remove('bi-hand-thumbs-up');
+                    event.target.closest('.like-btn').classList.add('like-active');
+                } else {
+                    event.target.classList.add('bi-hand-thumbs-up');
+                    event.target.classList.remove('bi-hand-thumbs-up-fill');
+                    event.target.closest('.like-btn').classList.remove('like-active');
+
                 }
 
-                const likeCount = event.target.previousElementSibling;
+                const likeCount = event.target.nextElementSibling;
                 likeCount.innerText = response.data.likeCount;
             })
     }

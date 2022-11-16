@@ -129,7 +129,7 @@
           <span class='total-purchase-price' data-delivery='{{ product.delivery }}' data-price='{{ product.pay }}' data-sale='{{ product.sale }}'>0원</span>
         </div>
         <div class='basket-buy-btn-wrap'>
-          <a class='basket-btn' href="{% url "cart:add_cart" products.pk %}">장바구니</a>
+          <a class='basket-btn' href="{% url "cart:add_cart" product.pk %}">장바구니</a>
           <a class='buy-btn' href="">바로구매</a>
         </div>
       </div>
@@ -292,19 +292,18 @@
                   </div>
                   <div class="rev-footer">
                     {% if request.user in review.like.all %}
-                    <button  class="like-btn" >
+                    <button  class="like-btn like-active" >
+                      <i class="bi bi-hand-thumbs-up-fill" data-review-id="{{ review.pk }}"></i>
                       <span class="like-cnt">
                         {{review.like.count}}
                       </span>
-                      <i class="bi bi-hand-thumbs-up-fill" data-review-id="{{ review.pk }}"></i>
                     </button>
                     {% else %}
                     <button class="like-btn">
+                      <i class="bi bi-hand-thumbs-up" data-review-id="{{ review.pk }}"></i>
                       <span class="like-cnt">
                         {{review.like.count}}
-                        {{review.pk}}
                       </span>
-                      <i class="bi bi-hand-thumbs-up" data-review-id="{{ review.pk }}"></i>
                     </button>
                     {% endif %}
                   </div>
@@ -383,7 +382,7 @@
         </div>
         <div class='col-4'>
           <div class='basket-buy-btn-wrap small'>
-            <a class='basket-btn' href="{% url "cart:add_cart" products.pk %}">장바구니</a>
+            <a class='basket-btn' href="{% url "cart:add_cart" product.pk %}">장바구니</a>
             <a class='buy-btn' href="">바로구매</a>
           </div>
         </div>

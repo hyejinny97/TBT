@@ -101,6 +101,25 @@
 #review-area .rev-sec .rev-main .rev-body p {
 	margin-bottom: 1.5rem;
 }
+#review-area .rev-sec .rev-main .rev-footer .like-btn {
+	border: 2px solid var(--main);
+	border-radius: 2rem;
+	color: var(--main);
+	padding: 0.5rem 0.3rem 0.5rem 0;
+	margin-top: 1.5rem;
+	transition: all 0.2s ease;
+}
+#review-area .rev-sec .rev-main .rev-footer .like-btn i {
+	padding: 0.5rem;
+	z-index: 1;
+}
+#review-area .rev-sec .rev-main .rev-footer .like-btn span {
+	margin-right: 0.3rem;
+}
+#review-area .rev-sec .rev-main .rev-footer .like-active {
+	background: var(--main);
+	color: var(--bg);
+}
 
 #qna-area .qna-sec {
 	padding: 1rem 0;
