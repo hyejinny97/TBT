@@ -204,7 +204,7 @@
                       <div class='grade-bar-color'></div>
                     </div>
                   </div>
-                  <span class='pdt-review-grade-count'>25</span>
+                  <span class='pdt-review-grade-count'>{% if grades_5.0 %}{{grades_5.0.gra}}{% else %}0 {% endif %}  </span>
                 </div>
                 <div class='grade-bar-item'>
                   <span>4점</span>
@@ -215,7 +215,7 @@
                       <div class='grade-bar-color'></div>
                     </div>
                   </div>
-                  <span class='pdt-review-grade-count'>9</span>
+                  <span class='pdt-review-grade-count'> {% if grades_4.0 %}{{grades_4.0.gra}}{% else %}0 {% endif %}</span>
                 </div>
                 <div class='grade-bar-item'>
                   <span>3점</span>
@@ -226,7 +226,7 @@
                       <div class='grade-bar-color'></div>
                     </div>
                   </div>
-                  <span class='pdt-review-grade-count'>3</span>
+                  <span class='pdt-review-grade-count'>{% if grades_3.0 %}{{grades_3.0.gra}}{% else %}0 {% endif %}</span>
                 </div>
                 <div class='grade-bar-item'>
                   <span>2점</span>
@@ -237,7 +237,7 @@
                       <div class='grade-bar-color'></div>
                     </div>
                   </div>
-                  <span class='pdt-review-grade-count'>1</span>
+                  <span class='pdt-review-grade-count'>{% if grades_2.0 %}{{grades_2.0.gra}}{% else %}0 {% endif %}</span>
                 </div>
                 <div class='grade-bar-item'>
                   <span>1점</span>
@@ -248,7 +248,7 @@
                       <div class='grade-bar-color'></div>
                     </div>
                   </div>
-                  <span class='pdt-review-grade-count'>2</span>
+                  <span class='pdt-review-grade-count'>{% if grades_1.0 %}{{grades_1.0.gra}}{% else %}0 {% endif %}</span>
                 </div>
               </div>
             </div>
