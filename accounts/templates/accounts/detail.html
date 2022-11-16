@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %} {% load static %} {% load humanize %} {% block body %}
 <section class="containers">
   <p class="title text-center fw-semibold">
@@ -41,7 +42,26 @@
             >
             <span class="follow__title">팔로워</span>
           </div>
+          {% if request.user.is_authenticated %}
+            {% if request.user != user %}
+              <form id="follow-form" data-user-id="{{ user.pk }}" data-my-id="{{ my.pk }}">
+                {% csrf_token %}
+                {% if request.user in user.followings.all %}
+                  <button type="submit" class="follow__btn" id="follow-btn">follow</button>
+                {% else %}
+                  <button type="submit" class="unfollow__btn" id="follow-btn">unfollow</button>
+                {% endif %}
+              </form>
+            {% else %}
+              {% if request.user.pk == user.pk %}
+                <a href="{% url 'accounts:update' %}">
+                  <button class="update__btn">회원 정보 수정</button>
+                </a>
+              {% endif %}
+            {% endif %}
+          {% endif %}
         </div>
+
         {% if request.user.is_authenticated %} {% if request.user != user %}
         <form
           id="follow-form"
@@ -122,7 +142,6 @@
         {% endif %}
       </div>
     </div>
-  </div>
 
   <!-- 최근 주문 내역 -->
   {% if request.user == user %}
@@ -270,7 +289,25 @@
       <h1 class="empty">위시리스트가 없어요 :(</h1>
       {% endif %}
     </div>
+    <section class="wishlist">
+      <div class="wishlist__content">
+        {% if user.like_products.all %}
+          {% for product in user.like_products.all|slice:":4"%}
+            <a href="{% url "products:products_detail" product.pk %}">
+              <div class="wishlist__box">
+                <img class="wishlist__img" src="{{ product.product_image.all.first.image.url }}" alt="wishlist-img"/>
+                <p class="wishlist__title">{{ product.name }}</p>
+                <p class="wishlist__price">{{ product.pay|intcomma }}원</p>
+              </a>
+            </div>
+          {% endfor %}
+        {% else %}
+          <h1 class="empty">위시리스트가 없어요 :(</h1>
+        {% endif %}
+      </div>
+    </section>
   </section>
+
 </section>
 {% endblock body %} {% block js %}
 <script>
@@ -284,3 +321,4 @@
   }
 </script>
 {% endblock js %}
+

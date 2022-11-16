@@ -55,6 +55,7 @@ def logout(request):
 def detail(request, user_pk):
     user = get_user_model().objects.get(pk=user_pk)
     reviews = get_user_model().objects.get(pk=user_pk).review_set.all()
+    print(reviews)
     context = {
         "user": user,
         "my": request.user,
