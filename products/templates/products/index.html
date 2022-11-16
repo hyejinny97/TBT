@@ -48,12 +48,12 @@
       </ul>
     </div>
     {% comment %} 크리스마스 카드/리스/트리장식 {% endcomment %}
-    {% if category == card or category == wreath or category == decoration %}
+    {% if category == 'card' or category == 'wreath' or category == 'decoration' %}
     <ul class='christmas-category-btn'>
       <input type="hidden" id='xmas-category' value='{{ category }}'>
-      <li><a href="" class='xmas-btn active'># Card</a></li>
-      <li><a href="" class='xmas-btn'># Wreath</a></li>
-      <li><a href="" class='xmas-btn'># Tree Decoration</a></li>
+      <li><a href="{% url 'products:card' %}" class='xmas-btn active'># Card</a></li>
+      <li><a href="{% url 'products:wreath' %}" class='xmas-btn'># Wreath</a></li>
+      <li><a href="{% url 'products:decoration' %}" class='xmas-btn'># Tree Decoration</a></li>
     </ul>
     {% endif %}
   </div>

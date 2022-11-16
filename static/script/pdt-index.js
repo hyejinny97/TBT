@@ -36,4 +36,4 @@ for (i = 0; i < xmasBtns.length; i++) {
 }
 
 const xmasCategoryIdx = xmasCategoryType[xmasCategory]
-dropdownItems[xmasCategoryIdx].classList.add('active')
+xmasBtns[xmasCategoryIdx].classList.add('active')
