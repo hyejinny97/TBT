@@ -59,12 +59,23 @@ def products_detail(request, products_pk):
     pick_3 = random.sample(list(range(len(products))), 3)
     for i in pick_3:
         recommend_products.append(products[i])
-
+    
+    grades = product.review_set.values('grade').annotate(gra=Count('grade')).order_by('-grade')
+    grades_1 = grades.filter(grade='1')
+    grades_2 = grades.filter(grade='2')
+    grades_3 = grades.filter(grade='3')
+    grades_4 = grades.filter(grade='4')
+    grades_5 = grades.filter(grade='5')
     context = {
         "product": product,
         "reviews": reviews,
         "total": total,
         'recommend_products': recommend_products,
+        'grades_1' : grades_1,
+        'grades_2' : grades_2,
+        'grades_3' : grades_3,
+        'grades_4' : grades_4,
+        'grades_5' : grades_5,
     }
 
     return render(request, "products/products_detail.html", context)
