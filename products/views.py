@@ -64,23 +64,27 @@ def products_detail(request, products_pk):
     pick_3 = random.sample(list(range(len(products))), 3)
     for i in pick_3:
         recommend_products.append(products[i])
-    
-    grades = product.review_set.values('grade').annotate(gra=Count('grade')).order_by('-grade')
-    grades_1 = grades.filter(grade='1')
-    grades_2 = grades.filter(grade='2')
-    grades_3 = grades.filter(grade='3')
-    grades_4 = grades.filter(grade='4')
-    grades_5 = grades.filter(grade='5')
+
+    grades = (
+        product.review_set.values("grade")
+        .annotate(gra=Count("grade"))
+        .order_by("-grade")
+    )
+    grades_1 = grades.filter(grade="1")
+    grades_2 = grades.filter(grade="2")
+    grades_3 = grades.filter(grade="3")
+    grades_4 = grades.filter(grade="4")
+    grades_5 = grades.filter(grade="5")
     context = {
         "product": product,
         "reviews": reviews,
         "total": total,
-        'recommend_products': recommend_products,
-        'grades_1' : grades_1,
-        'grades_2' : grades_2,
-        'grades_3' : grades_3,
-        'grades_4' : grades_4,
-        'grades_5' : grades_5,
+        "recommend_products": recommend_products,
+        "grades_1": grades_1,
+        "grades_2": grades_2,
+        "grades_3": grades_3,
+        "grades_4": grades_4,
+        "grades_5": grades_5,
     }
 
     return render(request, "products/products_detail.html", context)
@@ -132,18 +136,20 @@ def like(request, products_pk):
 
 
 def note(request):
-    products = Product.objects.filter(category='노트/메모지')
-    filter = request.GET.get('filter', default='register')
-    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='노트/메모지')
-    
-    if filter == 'high-sale':
-        products = products.order_by('-sale')
-    if filter == 'high-price':
-        products = discount.order_by('-discount')
-    if filter == 'low-price':
-        products = discount.order_by('discount')
-    if filter == 'register':
-        products = products.order_by('-created_at')
+    products = Product.objects.filter(category="노트/메모지")
+    filter = request.GET.get("filter", default="register")
+    discount = Product.objects.annotate(
+        discount=F("pay") * (100 - F("sale")) * 0.01
+    ).filter(category="노트/메모지")
+
+    if filter == "high-sale":
+        products = products.order_by("-sale")
+    if filter == "high-price":
+        products = discount.order_by("-discount")
+    if filter == "low-price":
+        products = discount.order_by("discount")
+    if filter == "register":
+        products = products.order_by("-created_at")
 
     context = {
         "category": "note",
@@ -155,18 +161,20 @@ def note(request):
 
 
 def diary(request):
-    products = Product.objects.filter(category='다이어리')
-    filter = request.GET.get('filter', default='register')
-    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='다이어리')
-    
-    if filter == 'high-sale':
-        products = products.order_by('-sale')
-    if filter == 'high-price':
-        products = discount.order_by('-discount')
-    if filter == 'low-price':
-        products = discount.order_by('discount')
-    if filter == 'register':
-        products = products.order_by('-created_at')
+    products = Product.objects.filter(category="다이어리")
+    filter = request.GET.get("filter", default="register")
+    discount = Product.objects.annotate(
+        discount=F("pay") * (100 - F("sale")) * 0.01
+    ).filter(category="다이어리")
+
+    if filter == "high-sale":
+        products = products.order_by("-sale")
+    if filter == "high-price":
+        products = discount.order_by("-discount")
+    if filter == "low-price":
+        products = discount.order_by("discount")
+    if filter == "register":
+        products = products.order_by("-created_at")
 
     context = {
         "category": "diary",
@@ -178,18 +186,20 @@ def diary(request):
 
 
 def pencil(request):
-    products = Product.objects.filter(category='필기류/필통')
-    filter = request.GET.get('filter', default='register')
-    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='필기류/필통')
-    
-    if filter == 'high-sale':
-        products = products.order_by('-sale')
-    if filter == 'high-price':
-        products = discount.order_by('-discount')
-    if filter == 'low-price':
-        products = discount.order_by('discount')
-    if filter == 'register':
-        products = products.order_by('-created_at')
+    products = Product.objects.filter(category="필기류/필통")
+    filter = request.GET.get("filter", default="register")
+    discount = Product.objects.annotate(
+        discount=F("pay") * (100 - F("sale")) * 0.01
+    ).filter(category="필기류/필통")
+
+    if filter == "high-sale":
+        products = products.order_by("-sale")
+    if filter == "high-price":
+        products = discount.order_by("-discount")
+    if filter == "low-price":
+        products = discount.order_by("discount")
+    if filter == "register":
+        products = products.order_by("-created_at")
 
     context = {
         "category": "pencil",
@@ -201,18 +211,20 @@ def pencil(request):
 
 
 def file(request):
-    products = Product.objects.filter(category='파일/바인더')
-    filter = request.GET.get('filter', default='register')
-    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='파일/바인더')
+    products = Product.objects.filter(category="파일/바인더")
+    filter = request.GET.get("filter", default="register")
+    discount = Product.objects.annotate(
+        discount=F("pay") * (100 - F("sale")) * 0.01
+    ).filter(category="파일/바인더")
 
-    if filter == 'high-sale':
-        products = products.order_by('-sale')
-    if filter == 'high-price':
-        products = discount.order_by('-discount')
-    if filter == 'low-price':
-        products = discount.order_by('discount')
-    if filter == 'register':
-        products = products.order_by('-created_at')
+    if filter == "high-sale":
+        products = products.order_by("-sale")
+    if filter == "high-price":
+        products = discount.order_by("-discount")
+    if filter == "low-price":
+        products = discount.order_by("discount")
+    if filter == "register":
+        products = products.order_by("-created_at")
 
     context = {
         "category": "file",

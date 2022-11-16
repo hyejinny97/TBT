@@ -60,18 +60,30 @@ def update(
     review_pk,
 ):
     review = Review.objects.get(pk=review_pk)
+    product_pk = review.product.pk
     if request.user.pk == review.account.pk:
         if request.method == "POST":
             review_form = ReviewForm(request.POST, request.FILES, instance=review)
+            is_update = True
             if review_form.is_valid():
                 review_form.save()
-                return redirect("reviews:index", review.product.pk)
+                return redirect("products:products_detail", product_pk)
         else:
             review_form = ReviewForm(instance=review)
-        context = {"review_form": review_form}
+            json.dumps(review_form)
+            is_update = False
+            return JsonResponse(
+                {
+                    "reviewForm": review_form,
+                }
+            )
     else:
         return redirect("products:index")
-    return render(request, "reviews/update.html", context)
+    context = {
+        "reviewForm": review_form,
+    }
+    return JsonResponse(context)
+    # return render(request, "reviews/update.html", context)
 
 
 # @login_required

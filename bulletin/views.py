@@ -7,19 +7,26 @@ from products.models import Product
 
 
 def create(request, product_pk):
-    product = Product.object.get(pk=product_pk)
+    product = Product.objects.get(pk=product_pk)
     if request.method == "POST":
         form = QuestionForm(request.POST)
         if form.is_valid():
             question = form.save(commit=False)
-            question.product = product
             question.account = request.user
+            question.name = product
             question.save()
             return redirect("products:index")
     else:
         form = QuestionForm()
     context = {"form": form}
     return render(request, "bulletin/create.html", context)
+
+
+def detail(request, product_pk):
+    product = Product.objects.get(pk=product_pk)
+    question = product.question_set.all()
+    context = {"question": question}
+    return render(request, "bulletin/detail.html", context)
 
 
 def delete(request, question_pk):
@@ -50,16 +57,18 @@ def update(
 
 # Answer 쪽 crud
 def createA(request, question_pk):
-    question = Question.object.get(pk=question_pk)
+    question = Question.objects.get(pk=question_pk)
 
     if request.method == "POST":
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save(commit=False)
             answer.question = question
+            answer.account = request.user
             answer.save()
             if question.answer_set.exists():
                 question.check = True
+                question.save()
             return redirect("products:index")
     else:
         form = AnswerForm()
