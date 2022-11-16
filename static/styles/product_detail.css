@@ -31,7 +31,7 @@
 }
 .pdt-like {
   display: flex;
-  font-size:  1.5rem;
+  font-size: 1.5rem;
 }
 .pdt-name {
   font-size: 1.2rem;
@@ -79,8 +79,8 @@
   top: 0px;
   left: 0px;
   width: 118px;
-  overflow:hidden; 
-  white-space:nowrap;
+  overflow: hidden;
+  white-space: nowrap;
   color: rgb(255, 184, 0);
 }
 .stars-color .bi-star-fill {
@@ -96,7 +96,8 @@
 .purchase-table {
   margin: 1rem 0;
 }
-.purchase-table th, .purchase-table td {
+.purchase-table th,
+.purchase-table td {
   padding: 0.5rem 0;
   font-size: 1rem;
 }
@@ -106,15 +107,18 @@
 .buy-mount-btn {
   display: flex;
 }
-.minus-btn, .buy-mount, .plus-btn {
+.minus-btn,
+.buy-mount,
+.plus-btn {
   display: block;
   padding: 0.4rem 1rem;
   background-color: rgb(248, 248, 248);
   border: 1px solid rgb(245, 245, 245);
   text-align: center;
 }
-.minus-btn:hover, .plus-btn:hover {
-  background-color:rgb(240, 240, 240);
+.minus-btn:hover,
+.plus-btn:hover {
+  background-color: rgb(240, 240, 240);
   cursor: pointer;
 }
 .total-purchase-price-wrap {
@@ -190,7 +194,7 @@
   top: 0;
   margin-top: 5rem;
   margin-bottom: 2rem;
-  width: 100%;  
+  width: 100%;
   border-bottom: 1px solid var(--line);
   background-color: rgba(255, 255, 255, 0.8);
   z-index: 1;
@@ -217,16 +221,22 @@
 /* small 장바구니/바로구매 버튼 */
 .basket-buy-btn-wrap.small {
   position: sticky;
-  top:5rem;
+  top: 5rem;
 }
 
 /* 상품정보/리뷰/문의/추천 탭 - 공통 */
-#pdt-info, #pdt-qna, #pdt-review, #pdt-recommend {
+#pdt-info,
+#pdt-qna,
+#pdt-review,
+#pdt-recommend {
   margin-top: -60px;
   margin-bottom: 2rem;
   padding-top: 60px;
 }
-#pdt-info h3, #pdt-qna h3, #pdt-review h3, #pdt-recommend h3 {
+#pdt-info h3,
+#pdt-qna h3,
+#pdt-review h3,
+#pdt-recommend h3 {
   margin-bottom: 0.5rem;
   font-weight: 700;
   font-size: 1.3rem;
@@ -269,8 +279,8 @@
   top: 0;
   width: 10rem;
   height: 0.5rem;
-  overflow:hidden; 
-  white-space:nowrap;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .grade-bar-color {
   position: absolute;
@@ -279,7 +289,7 @@
   height: 0.5rem;
   background-color: var(--main);
   border-radius: 10px;
-}  
+}
 
 /* 추천 탭 */
 #pdt-recommend .pdt-item {
@@ -299,7 +309,7 @@
   object-fit: cover;
 }
 #pdt-recommend .pdt-item-img:hover {
-  transform: scale(1.1) ;
+  transform: scale(1.1);
   transition: all 0.7s;
 }
 #pdt-recommend .pdt-item-name {
@@ -334,4 +344,18 @@
   font-weight: bold;
   text-align: center;
   line-height: 60px;
+}
+
+/* 이미지 확대 */
+.img-magnifier-container {
+  position: relative;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 5px solid white;
+  border-radius: 50%;
+  cursor: none;
+  width: 200px;
+  height: 200px;
 }
