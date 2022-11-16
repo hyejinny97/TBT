@@ -12,6 +12,11 @@ const revBtnOpenModal = document.querySelector('#rev-modal-btn');
 const qnaBtnOpenModal = document.querySelector('.qna-modal-btn');
 const body = document.querySelector('body');
 
+const revUpdateForm = document.querySelector('#review-form-update');
+const revUpdateModal = document.querySelector('#review_update');
+const revOpenUpdateBtns = document.querySelectorAll('.btn-modal-update');
+const revCloseUpdateBtn = document.querySelector('.btn-close-rev-update');
+
 const alertModal = document.querySelector('.modal-alert');
 const alertOpenBtns = document.querySelectorAll('.btn-modal-delete')
 const alertCloseBtn = document.querySelector('.btn-cancel');
@@ -27,7 +32,10 @@ try {
         body.classList.add('scroll-block');
 
         let urls = e.target.href;
+        // if (!alertDeleteBtn) return;
         alertDeleteBtn.setAttribute('href', `${urls}`);
+
+
     }
     const closeAlert = function (e) {
         e.preventDefault();
@@ -46,7 +54,6 @@ try {
 }
 
 // 리뷰, 문의 모달창
-
 try {
 
     revBtnOpenModal.addEventListener('click', function (e) {
@@ -101,6 +108,46 @@ try {
 } catch {
 
 }
+
+// 리뷰 수정 모달창
+try {
+    const openUpdateModal = function (e) {
+        e.preventDefault();
+        // console.log(e.target.href);
+        revUpdateModal.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+        body.classList.add('scroll-block');
+
+        let urls = e.target.href;
+        // 폼액션변경? or 비동기...
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+        axios({
+            method: 'POST',
+            url: `${urls}`,
+            headers: { 'X-CSRFToken': csrftoken, }
+        })
+            .then(response => {
+                console.log(response.data);
+
+            });
+    }
+    const closeUpdateModal = function () {
+        revUpdateModal.classList.add('hidden');
+        overlay.classList.add('hidden');
+        body.classList.remove('scroll-block');
+    }
+
+    revOpenUpdateBtns.forEach(updateBtn => {
+        updateBtn.addEventListener('click', openUpdateModal)
+    });
+
+    revCloseUpdateBtn.addEventListener('click', closeUpdateModal);
+
+} catch {
+
+}
+
 
 // 메인 인덱스 슬라이드
 try {

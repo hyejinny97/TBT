@@ -176,22 +176,26 @@
 	cursor: pointer;
 }
 #review,
-#qna {
+#qna,
+#review_update {
 	padding: 2rem;
 }
 #review .tit-area,
-#qna .tit-area {
+#qna .tit-area,
+#review_update .tit-area {
 	position: relative;
 	margin-bottom: 3rem;
 }
 #review .tit-area .tit,
-#qna .tit-area .tit {
+#qna .tit-area .tit,
+#review_update .tit-area .tit {
 	font-size: 2rem;
 	font-weight: 700;
 	text-align: center;
 }
 #review .tit-area .btn-close,
-#qna .tit-area .btn-close {
+#qna .tit-area .btn-close,
+#review_update .tit-area .btn-close {
 	font-size: 1.5rem;
 	position: absolute;
 	right: -1rem;
@@ -199,53 +203,65 @@
 	cursor: pointer;
 }
 #review .sect,
-#qna .sect {
+#qna .sect,
+#review_update .sect {
 	margin-bottom: 3rem;
 }
 #review .item-area,
-#qna .item-area {
+#qna .item-area,
+#review_update .item-area {
 	display: flex;
 	align-items: flex-end;
 }
 #review .item-area .img-area,
-#qna .item-area .img-area {
+#qna .item-area .img-area,
+#review_update .item-area .img-area {
 	margin-right: 1.5rem;
 }
 #review .item-area .img-area img,
-#qna .item-area .img-area img {
+#qna .item-area .img-area img,
+#review_update .item-area .img-area img {
 	max-width: 200px;
 }
 #review .item-area .info p,
-#qna .item-area .info p {
+#qna .item-area .info p,
+#review_update .item-area .info p {
 	color: var(--main);
 	font-weight: 700;
 	margin-bottom: 1rem;
 }
 #review .sub-tit,
-#qna .sub-tit {
+#qna .sub-tit,
+#review_update .sub-tit {
 	font-size: 1.5rem;
 	font-weight: 700;
 	margin-bottom: 1rem;
 }
-#review .sub-tit span {
+#review .sub-tit span,
+#review_update .sub-tit span {
 	color: var(--highlight);
 }
 
 #review .review-form .btnC,
-#qna .qna-form .btnC {
+#qna .qna-form .btnC,
+#review_update .review-form .btnC {
 	width: 100%;
 }
 
-#review .review-form .rate-area {
+#review .review-form .rate-area,
+#review_update .review-form .rate-area {
 	margin-bottom: 5rem;
 }
-#review .review-form .rate-area .rate-stars {
+#review .review-form .rate-area .rate-stars,
+#review_update .review-form .rate-area .rate-stars {
 	width: 200px;
 }
-#review .review-form .rate-area input {
+#review .review-form .rate-area input,
+#review_update .review-form .rate-area input {
 	display: none;
 }
-#review .review-form .rate-area label {
+#review .review-form .rate-area label,
+#review_update .review-form .rate-area label {
 	color: var(--line);
 	transition: all 0.2s ease;
 	float: right;
@@ -255,15 +271,25 @@
 }
 
 #review .review-form .rate-stars input:not(:checked) ~ label:hover,
-#review .review-form .rate-stars input:not(:checked) ~ label:hover ~ label {
+#review .review-form .rate-stars input:not(:checked) ~ label:hover ~ label,
+#review_update .review-form .rate-stars input:not(:checked) ~ label:hover,
+#review_update
+	.review-form
+	.rate-stars
+	input:not(:checked)
+	~ label:hover
+	~ label {
 	color: var(--rate);
 }
-#review .review-form .rate-stars input:checked ~ label {
+#review .review-form .rate-stars input:checked ~ label,
+#review_update .review-form .rate-stars input:checked ~ label {
 	color: var(--rate);
 }
 #review .review-form .review-txt input,
 #review .review-form .review-txt textarea,
-#qna .qna-form .qna-txt textarea {
+#qna .qna-form .qna-txt textarea,
+#review_update .review-form .review-txt input,
+#review_update .review-form .review-txt textarea {
 	border: 1px solid var(--main);
 	border-radius: 0.2rem;
 	padding: 0.3rem 0.5rem;
@@ -272,10 +298,12 @@
 	margin-top: 1rem;
 }
 
-#review .review-form .review-img span {
+#review .review-form .review-img span,
+#review_update .review-form .review-img span {
 	font-size: 0.95rem;
 }
-#review .review-form .review-img .upload-btn {
+#review .review-form .review-img .upload-btn,
+#review_update .review-form .review-img .upload-btn {
 	border: 2px solid var(--main);
 	border-radius: 0.2rem;
 	display: block;
@@ -287,16 +315,21 @@
 	color: var(--main);
 	font-weight: 700;
 }
-#review .review-form .review-img .upload-btn:hover {
+#review .review-form .review-img .upload-btn:hover,
+#review_update .review-form .review-img .upload-btn:hover {
 	background: var(--main);
 	color: var(--bg);
 }
-#review .review-form .review-img input[type="file"] {
+#review .review-form .review-img input[type="file"],
+#review_update .review-form .review-img input[type="file"] {
 	display: none;
 }
 #review .review-form .review-txt input:focus,
 #review .review-form .review-txt textarea:focus,
 #review .review-form .review-txt textarea:active,
+#review_update .review-form .review-txt input:focus,
+#review_update .review-form .review-txt textarea:focus,
+#review_update .review-form .review-txt textarea:active,
 #qna .qna-form .qna-txt textarea:focus,
 #qna .qna-form .qna-txt textarea:active {
 	border: 2px solid var(--main);
