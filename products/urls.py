@@ -17,4 +17,7 @@ urlpatterns = [
     path("file/", views.file, name="file"),
     path("search/", views.search, name="search"),
     path("searchfail/", views.searchfail, name="searchfail"),
+    path("card/", views.card, name="card"),
+    path("decoration/", views.decoration, name="decoration"),
+    path("wreath/", views.wreath, name="wreath"),
 ]
