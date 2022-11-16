@@ -67,10 +67,9 @@ for (let gradeCount of gradeCounts) {
 }
 
 for (i = 0; i < 5; i++) {
-  gradeBarColorAll[i].style.width = `${160 * parseInt(gradeCounts[i].innerText) / totCounts}px`
+  if (totCounts === 0) {
+    gradeBarColorAll[i].style.width = `0px`
+  } else {
+    gradeBarColorAll[i].style.width = `${160 * parseInt(gradeCounts[i].innerText) / totCounts}px`
+  }
 }
-
-// for (let starsColor of gradeBarColorAll) {
-//   avgOfGrade = starsColor.dataset.avgGrade ? starsColor.dataset.avgGrade : 0
-//   starsColor.style.width = `${avgOfGrade / 5 * 118}px`
-// }
