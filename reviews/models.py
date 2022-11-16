@@ -5,13 +5,13 @@ from products.models import Product
 from django.conf import settings
 
 # Create your models here.
-rate = (
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-)
+# rate = (
+#     (1, 1),
+#     (2, 2),
+#     (3, 3),
+#     (4, 4),
+#     (5, 5),
+# )
 
 
 class Review(models.Model):
@@ -19,7 +19,7 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     title = models.CharField(max_length=80)
     content = models.TextField()
-    grade = models.IntegerField(choices=rate, default=3)
+    grade = models.IntegerField(default=3)
     review_image = ProcessedImageField(
         upload_to="review_images/",
         blank=True,

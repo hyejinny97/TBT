@@ -253,41 +253,52 @@
               </div>
             </div>
             <div id="review-area">
+              {% if reviews %}
+              {% for review in reviews %}
               <div class="rev-sec">
                 <div class="rev-prof-img">
-                  <img src="https://source.unsplash.com/random/80x80" alt="user profile image">
+                  {% if user.profile_image %}
+                  <img class="profile__img" src="{{user.profile_image.url}}" alt="profile-img" />
+                  {% else %}
+                  <img class="profile__img" src="{% static 'img/profile_dummy.jpg' %}" alt="profile-img" />
+                  {% endif %}
                 </div>
                 <div class="rev-main">
                   <div class="rev-header">
-                    <p class="rev-user">username</p>
-                    <p class="rev-date">2022.10.12</p>
+                    <p class="rev-user">{{review.account.nickname}}</p>
+                    <p class="rev-date">{{review.created_at|date:'Y.m.d' }}</p>
                     <p class="rev-rate">
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star-fill"></i>
-                      <i class="bi bi-star"></i>
+                      <i class="bi bi-star{% if review.grade >= 1 %}-fill{% elif 0 < review.grade and review.grade < 1 %}{% endif %}"></i>
+                      <i class="bi bi-star{% if review.grade >= 2 %}-fill{% elif 0 < review.grade and review.grade < 2 %}{% endif %}"></i>
+                      <i class="bi bi-star{% if review.grade >= 3 %}-fill{% elif 0 < review.grade and review.grade < 3 %}{% endif %}"></i>
+                      <i class="bi bi-star{% if review.grade >= 4 %}-fill{% elif 0 < review.grade and review.grade < 4 %}{% endif %}"></i>
+                      <i class="bi bi-star{% if review.grade >= 5 %}-fill{% elif 0 < review.grade and review.grade < 5 %}{% endif %}"></i>
                     </p>
+                  {% if request.user.is_authenticated and request.user.pk == review.account.pk %}
                     <div class="rev-btn">
-                      <a href="{% url 'products:products_update' product.pk %}">수정</a>
-                      <form action="{% url 'products:products_delete' product.pk  %}" method="POST">
-                        {% csrf_token %}
-                        <input type="submit" value="삭제">
-                      </form>
+                      <a href="{% url 'reviews:update' review.pk %}">수정</a>
+                      <a href=" {% url 'reviews:delete' review.pk   %} ">삭제</a>
                     </div>
+                  {% endif %}
                   </div>
                   <div class="rev-body">
+                    <p>{{review.title}}</p>
                     <p class="rev-cont">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Est sit asperiores optio velit
-                        porro
-                        minus
-                        recusandae mollitia vel, odit illo? Vitae doloribus repudiandae corporis iste qui! Provident
-                        assumenda adipisci voluptatibus.
+                      {{review.content}}
                     </p>
-                    <img src="https://source.unsplash.com/random/200x300" alt="" class="rev-img">
+                    {% if review.review_image %}
+                    <img src="{{ review.review_image.url }}" alt="" class="rev-img" onclick="window.open(this.src)">
+                    {% endif %}
                   </div>
                 </div>
               </div>
+              {% endfor %}
+              {% else %}
+              <div class="rev-sec">
+                <p>아직 작성된 리뷰가 없어요 :(</p>
+              </div>
+              {% endif %}
+
             </div>
           </article>
           {% comment %} 문의 {% endcomment %}
@@ -373,7 +384,7 @@
       </p>
       <form action="{% url 'products:products_delete' product.pk  %}" method="POST">
         {% csrf_token %}
-        <input type="submit" value="삭제">
+        <input type="submit" value="상품 삭제">
       </form>
     </div>
     
@@ -398,27 +409,28 @@
             </div>
           </div>
           <div class="form-area ">
-            <form action="" class="review-form ">
+            <form action="{% url 'reviews:create' product.pk %}" class="review-form" method='POST' enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="rate-area sect">
                 <h4 class="sub-tit">별점<span>*</span></h4>
                 <div class="rate-stars">
-                  <input type="radio" name="rate" id="rate-5">
+                  <input type="radio" name="grade" id="rate-5" value="5">
                   <label for="rate-5">
                     <i class="bi bi-star-fill"></i>
                   </label>
-                  <input type="radio" name="rate" id="rate-4">
+                  <input type="radio" name="grade" id="rate-4" value="4">
                   <label for="rate-4">
                     <i class="bi bi-star-fill"></i>
                   </label>
-                  <input type="radio" name="rate" id="rate-3">
+                  <input type="radio" name="grade" id="rate-3" value="3">
                   <label for="rate-3">
                     <i class="bi bi-star-fill"></i>
                   </label>
-                  <input type="radio" name="rate" id="rate-2">
+                  <input type="radio" name="grade" id="rate-2" value="2">
                   <label for="rate-2">
                     <i class="bi bi-star-fill"></i>
                   </label>
-                  <input type="radio" name="rate" id="rate-1">
+                  <input type="radio" name="grade" id="rate-1" value="1">
                   <label for="rate-1">
                     <i class="bi bi-star-fill"></i>
                   </label>
@@ -432,11 +444,12 @@
                   <span>
                     사진첨부하기</span>
                 </label>
-                <input type="file" accept="image/jpeg" name="file" id="file"/>
+                <input type="file" accept="image/jpeg" name="review_image" id="file"/>
               </div>
               <div class="review-txt sect">
                 <h4 class="sub-tit">리뷰 작성<span>*</span></h4>
-                <textarea name="review-content" id="review-content" cols="120" rows="10" placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 20자 이상)"></textarea>
+                <input type="text" name="title" placeholder="리뷰 제목을 작성해주세요">
+                <textarea name="content" id="review-content" cols="120" rows="10" placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 20자 이상)"></textarea>
               </div>
               <button class="btnC" type="submit">완료</button>
             </form>
@@ -482,6 +495,70 @@
               <div class="qna-txt sect">
                 <h4 class="sub-tit">문의내용</h4>
                 <textarea name="review-content" id="review-content" cols="120" rows="10" placeholder="문의내용을 입력하세요."></textarea>
+              </div>
+              <button class="btnC" type="submit">완료</button>
+            </form>
+          </div>
+        </div>
+        <!--리뷰 수정 모달-->
+        <div id="review_update" class="modalC hidden">
+          <div class="tit-area">
+            <h1 class="tit">리뷰 수정</h1>
+            <button class="btn-close btn-close-rev">
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
+          <div class="item-area sect">
+            <div class="img-area">
+              <img src="{{product.product_image.all.0.image.url }}" alt="">
+            </div>
+            <div class="info">
+              <p>{{ product.category }}</p>
+              <h3 class="sub-tit">{{ product.name }}</h3>
+            </div>
+          </div>
+          <div class="form-area ">
+            <form action="" class="review-form" method='POST' enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="rate-area sect">
+                <h4 class="sub-tit">별점<span>*</span></h4>
+                <div class="rate-stars">
+                  <input type="radio" name="grade" id="rate-5" value="5">
+                  <label for="rate-5">
+                    <i class="bi bi-star-fill"></i>
+                  </label>
+                  <input type="radio" name="grade" id="rate-4" value="4">
+                  <label for="rate-4">
+                    <i class="bi bi-star-fill"></i>
+                  </label>
+                  <input type="radio" name="grade" id="rate-3" value="3">
+                  <label for="rate-3">
+                    <i class="bi bi-star-fill"></i>
+                  </label>
+                  <input type="radio" name="grade" id="rate-2" value="2">
+                  <label for="rate-2">
+                    <i class="bi bi-star-fill"></i>
+                  </label>
+                  <input type="radio" name="grade" id="rate-1" value="1">
+                  <label for="rate-1">
+                    <i class="bi bi-star-fill"></i>
+                  </label>
+                </div>
+              </div>
+              <div class="review-img sect">
+                <h4 class="sub-tit">사진 첨부</h4>
+                <span>사진을 첨부해주세요 (최대 1장)</span>
+                <label for="file" class="upload-btn">
+                  <i class="bi bi-card-image"></i>
+                  <span>
+                    사진첨부하기</span>
+                </label>
+                <input type="file" accept="image/jpeg" name="review_image" id="file"/>
+              </div>
+              <div class="review-txt sect">
+                <h4 class="sub-tit">리뷰 작성<span>*</span></h4>
+                <input type="text" name="title" placeholder="리뷰 제목을 작성해주세요">
+                <textarea name="content" id="review-content" cols="120" rows="10" placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 20자 이상)"></textarea>
               </div>
               <button class="btnC" type="submit">완료</button>
             </form>
