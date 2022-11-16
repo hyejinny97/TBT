@@ -36,6 +36,27 @@
 	transition: all 0.5s;
 	overflow-y: auto;
 }
+.modal-alert {
+	top: 40%;
+	text-align: center;
+}
+.modal-alert .btn-area {
+	margin-top: 2rem;
+}
+.modal-alert .btn-area .btnA {
+	padding: 0.5rem 1rem;
+	margin-right: 0.5rem;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+.modal-alert .btn-area .btn-cancel {
+	border: 1px solid var(--line);
+}
+.modal-alert .btn-area .btn-delete {
+	background: var(--highlight);
+	color: var(--bg);
+}
+
 .overlayC {
 	position: fixed;
 	top: 0;
