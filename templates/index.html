@@ -5,7 +5,9 @@
     <div class="slide-area">
       <div class="slider">
         <div class="slide slide--1">
-          <img src="{% static 'img/slide01.jpg' %}" alt="slide banner 01">
+          <a href="">
+            <img src="{% static 'img/slide01.jpg' %}" alt="slide banner 01">
+          </a>
         </div>
         <div class="slide slide--2">
           <img src="{% static 'img/slide02.jpg' %}" alt="slide banner 01">
@@ -27,7 +29,10 @@
     <div class="container">
 
       <section class="sec season">
-        <h3 class="tit">시즌 상품</h3>
+        <div class='season-more'>
+          <h3 class="tit">시즌 상품</h3>
+          <a class='season-more-btn' href=''>더보기</a>
+        </div>
         <div class="item-area season__items">
           <div class="item">
             <div class="img-area">

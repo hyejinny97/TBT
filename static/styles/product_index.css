@@ -31,6 +31,11 @@
   height: 50px;
   border-bottom: 1px solid var(--main);
 }
+.dropdown-christmas-btn-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .dropdown-toggle, .dropdown-toggle:visited {
   background-color: var(--main-sub) !important;
 }
@@ -45,6 +50,28 @@
 }
 .dropdown-item.active {
   background-color: var(--main);
+}
+.christmas-category-btn {
+  display: flex;
+  list-style: none;
+  font-size: 1rem;
+}
+.christmas-category-btn li {
+  margin-right: 0.5rem;
+}
+.christmas-category-btn li a {
+  display: block;
+  padding: 0.3rem 0.5rem;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  border-radius: 1rem;
+}
+.christmas-category-btn a:hover {
+  box-shadow: 5px 5px 5px #9595952a;
+}
+.christmas-category-btn a.active {
+  background-color: #959595ad;
+  color: white;
 }
 
 /* 상품 목록 */
