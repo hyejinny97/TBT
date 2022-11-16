@@ -9,7 +9,7 @@
     </p>
 
     <!-- 프로필 -->
-    <div class="profile__container rounded">
+    <section class="profile__container rounded">
       <div class="profile__content">
         <div class="text-center">
           {% if user.profile_image %}
@@ -77,11 +77,10 @@
                 <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
               </svg>
             </a>
-
           {% endif %}
         </div>
       </div>
-    </div>
+    </section>
 
       <!-- 최근 주문 내역 -->
       {% if request.user == user %}
@@ -188,11 +187,9 @@
             <h1 class="empty">위시리스트가 없어요 :(</h1>
           {% endif %}
         </div>
-      </section>
-
-    </section>
-  {% endblock body %}
-  {% block js %}
+  </section>
+{% endblock body %}
+{% block js %}
     <script>
       const hide = document.querySelector('.hide__order');
       const arrowBtn = document.querySelector('.arrow__down');
@@ -205,4 +202,4 @@
           .toggle('hidden');
       }
     </script>
-  {% endblock js %}
+{% endblock js %}
