@@ -182,3 +182,34 @@ try {
 }
 
 
+const likeBtn = document.querySelectorAll(".like-btn");
+try {
+
+    const reviewlike = function (event) {
+        console.log(event.target.previousElementSibling);
+        const reviewId = event.target.dataset.reviewId
+        axios({
+            method: 'get',
+            url: `/reviews/${reviewId}/likes/`
+        })
+            .then((response) => {
+                const isLiked = response.data.isLiked;
+                if (isLiked === true) {
+                    event.target.classList.remove('bi-hand-thumbs-up-fill');
+                    event.target.classList.add('bi-hand-thumbs-up');
+                } else {
+                    event.target.classList.remove('bi-hand-thumbs-up');
+                    event.target.classList.add('bi-hand-thumbs-up-fill');
+                }
+
+                const likeCount = event.target.previousElementSibling;
+                likeCount.innerText = response.data.likeCount;
+            })
+    }
+
+    likeBtn.forEach(btn => {
+        btn.addEventListener('click', reviewlike);
+    })
+} catch {
+
+}
