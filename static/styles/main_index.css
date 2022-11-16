@@ -7,6 +7,23 @@
 	font-weight: 700;
 }
 
+/* 시즌 상품 더보기*/
+#home .season-more {   
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#home .season-more-btn {
+	margin-bottom: 2rem;
+	color: var(--main-sub);
+	font-weight: 700;
+}
+
+#home .season-more-btn:hover {
+	color: var(--main);
+}
+
 #home .sec {
 	margin: 8rem 0 0;
 }

@@ -23,19 +23,39 @@
   {% elif category == 'file' %}
   <img src="{% static 'img/files.jpg' %}" alt="">
   <h1>파일/바인더</h1>
+  {% elif category == 'card' %}
+  <img src="{% static 'img/card.jpg' %}" alt="">
+  <h1>크리스마스 카드</h1>
+  {% elif category == 'wreath' %}
+  <img src="{% static 'img/리스.jpg' %}" alt="">
+  <h1>크리스마스 리스</h1>
+  {% elif category == 'decoration' %}
+  <img src="{% static 'img/장식.jpg' %}" alt="">
+  <h1>크리스마스 트리 장식</h1>
   {% endif %}
 </section>
-{% comment %} 분류 필터 {% endcomment %}
 <section class='pdt-filter' data-filter='{{ filter }}'>
-  <div class="dropdown container">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    </button>
-    <ul class="dropdown-menu" name='filter'>
-      <li><a class="dropdown-item active" href="/products/{{ category }}?filter=register">등록일순</a></li>
-      <li><a class="dropdown-item" href="/products/{{ category }}?filter=high-sale">높은할인률순</a></li>
-      <li><a class="dropdown-item" href="/products/{{ category }}?filter=high-price">높은가격순</a></li>
-      <li><a class="dropdown-item" href="/products/{{ category }}?filter=low-price">낮은가격순</a></li>
+  <div class="container dropdown-christmas-btn-wrap">
+    {% comment %} 분류 필터 {% endcomment %}
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      </button>
+      <ul class="dropdown-menu" name='filter'>
+        <li><a class="dropdown-item active" href="/products/{{ category }}?filter=register">등록일순</a></li>
+        <li><a class="dropdown-item" href="/products/{{ category }}?filter=high-sale">높은할인률순</a></li>
+        <li><a class="dropdown-item" href="/products/{{ category }}?filter=high-price">높은가격순</a></li>
+        <li><a class="dropdown-item" href="/products/{{ category }}?filter=low-price">낮은가격순</a></li>
+      </ul>
+    </div>
+    {% comment %} 크리스마스 카드/리스/트리장식 {% endcomment %}
+    {% if category == card or category == wreath or category == decoration %}
+    <ul class='christmas-category-btn'>
+      <input type="hidden" id='xmas-category' value='{{ category }}'>
+      <li><a href="" class='xmas-btn active'># Card</a></li>
+      <li><a href="" class='xmas-btn'># Wreath</a></li>
+      <li><a href="" class='xmas-btn'># Tree Decoration</a></li>
     </ul>
+    {% endif %}
   </div>
 </section>
 {% endblock banner %}
