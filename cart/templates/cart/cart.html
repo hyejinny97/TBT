@@ -31,7 +31,7 @@
           {% for cart_item in cart_items %}
             <tr>
               <td>
-                <a href=""><img style="height: 100px;" src="{{ cart_item.product.product_image.all.first.image.url }}" alt=""></a>
+                <a href="{% url "products:products_detail" cart_item.product.id %}"><img style="height: 100px;" src="{{ cart_item.product.product_image.all.first.image.url }}" alt=""></a>
               </td>
               <td>
                 {{ cart_item.product.name }}
@@ -53,7 +53,7 @@
               {% else %}
                 <td>
                   <a href="#">
-                    안녕하세요
+                    삭제하기
                   </a>
                 </td>
               {% endif %}
@@ -61,6 +61,17 @@
           {% endfor %}
         </tbody>
       </table>
+      <br>
+      <div class="text-center my-4 container">
+        <span>총 상품 건수 :
+          {{ total_count }}건 |
+        </span>
+        <span>
+          주문 합계 :
+          {{ pay_total|intcomma}}원
+        </span>
+      </div>
+
     </div>
   {% endif %}
 

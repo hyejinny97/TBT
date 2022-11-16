@@ -30,20 +30,30 @@ def add_cart(request, product_pk):
     return redirect("cart:cart_detail")
 
 
-def cart_detail(request, total=0, counter=0, cart_items=None):
+def cart_detail(
+    request, total=0, counter=0, cart_items=None, totalcount=0, pay_total=0
+):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
-        print(cart.pk, type(cart.pk))
         cart_items = CartItem.objects.filter(cart_id=cart.pk)
-        print(cart_items)
+        print(len(cart_items))
+        totalcount = len(cart_items)
+        print(totalcount)
         for cart_item in cart_items:
             total += cart_item.product.pay * cart_item.quantity
             counter += cart_item.quantity
+        pay_total += total
     except ObjectDoesNotExist:
         pass
 
     return render(
         request,
         "cart/cart.html",
-        dict(cart_items=cart_items, total=total, counter=counter),
+        dict(
+            cart_items=cart_items,
+            total=total,
+            counter=counter,
+            total_count=totalcount,
+            pay_total=pay_total,
+        ),
     )
