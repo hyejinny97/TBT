@@ -260,8 +260,8 @@
             {% for review in reviews %}
             <div class="rev-sec">
               <div class="rev-prof-img">
-                {% if user.profile_image %}
-                <img class="profile__img" src="{{user.profile_image.url}}" alt="profile-img" />
+                {% if review.user.profile_image %}
+                <img class="profile__img" src="{{review.user.profile_image.url}}" alt="profile-img" />
                 {% else %}
                 <img class="profile__img" src="{% static 'img/profile_dummy.jpg' %}" alt="profile-img" />
                 {% endif %}
@@ -332,24 +332,34 @@
             <p class="qna-modal-btn">문의하기</p>
           </div>
           <div id="qna-area">
+            {% if questions %}
+            {% for question in questions %}
             <div class="qna-sec">
               <div class="qna-header">
                 <p class="qna-info">
                   <span>구매 |</span>
                   <span>배송 |</span>
-                  <span class="qna-status">미답변</span>
+                  {% if question.check %}
+                  <span class="qna-status">답변</span>
+                  {% else %}
+                  <span>미답변</span>
+                  {% endif %}
                 </p>
                 <p class="qna-user">
-                  <span>username |</span>
-                  <span>2022년 11월 09일 22시 07분</span>
+                  <span>{{question.account.nickname}}</span>
+                  <span>{{question.create_at|date:'Y.m.d' }}</span>
                 </p>
+                {% if request.user.is_authenticated and request.user.pk == question.account.pk %}
+                <div class="qna-btn">
+                  <a href="" class="btn-modal-update">수정</a>
+                  <a href="" class="btn-modal-delete">삭제</a>
+                </div>
+                {% endif %}
               </div>
               <div class="qna-main">
                 <div class="qna-cont qna-q">
                   <span>Q.</span>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam, at. Ipsa voluptatibus ipsum alias,
-                    vitae rem assumenda magni pariatur facere quam illo eveniet iusto facilis nam, provident quisquam
-                    dicta consectetur?</p>
+                  <p>{{question.content}}</p>
                 </div>
                 <div class="qna-cont qna-a">
                   <span>A.</span>
@@ -359,6 +369,12 @@
                 </div>
               </div>
             </div>
+            {% endfor %}
+            {% else %}
+            <div class="qna-sec">
+              <p>작성된 문의가 없습니다.</p>
+            </div>
+            {% endif %}
           </div>
         </article>
         {% comment %} 추천 {% endcomment %}
