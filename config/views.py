@@ -11,7 +11,7 @@ def index(request):
     photo_album = get_object_or_404(Product, pk=87)
 
     season_products = [
-        get_object_or_404(Product, pk=240),
+        get_object_or_404(Product, pk=263),
         get_object_or_404(Product, pk=165),
         get_object_or_404(Product, pk=201),
     ]
