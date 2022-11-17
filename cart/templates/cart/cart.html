@@ -41,106 +41,94 @@
                 <td class="cart__quantity">
                   <div class=" buy-mount-btn">
                     <span class='minus-btn'>-</span>
-                    <span class='buy-mount'>1</span>
+                    <span class='buy-mount'>0</span>
                     <span class='plus-btn'>+</span>
                   </div>
                 </td>
-                <td class="cart__total">
-                  {{ cart_item.sub_total|discount:cart_item.product.sale|intcomma }}
-                  원
-                </p>
-              </td>
-              <td class="cart__quantity">
-                <div class=" buy-mount-btn">
-                  <span class='minus-btn'>-</span>
-                  <span class='buy-mount'>1</span>
-                  <span class='plus-btn'>+</span>
-                </div>
-              </td>
-              <td class='total-purchase-price-wrap cart__total'>
-                <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}'>0원</span>
-              </td>
-              <td>
+                <td class='total-purchase-price-wrap cart__total'>
+                  <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}'>0원</span>
+                </td>
+                <td>
                   <button class="delete__btn" type="submit" form="cart_form">
                     <a href="{% url "cart:cart_remove" cart_item.product.id %}">삭제하기</a>
                   </button>
                 </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
 
-      <p class="cart__choice">총
-        <span id="count__result" class="total__count">0</span>
-        개의 상품을 선택하셨습니다.
-      </p>
-      <div class="cart__result">
-        <p class="cart__pay--total">
-          전체 주문 금액 :
-          {{ pay_total|intcomma}}원
+        <p class="cart__choice">총
+          <span id="count__result" class="total__count">0</span>
+          개의 상품을 선택하셨습니다.
         </p>
-        <button class="cart__btn" type="submit" form="like_form">
-          주문 하기
-        </button>
-      </div>
+        <div class="cart__result">
+          <p class="cart__pay--total">
+            전체 주문 금액 :
+            {{ pay_total|intcomma}}원
+          </p>
+          <button class="cart__btn" type="submit" form="like_form">
+            주문 하기
+          </button>
+        </div>
 
-    {% endif %}
-  </section>
-  <script>
-    // 체크박스 선택 개수
-    function getCheckedCnt() {
-      const query = 'input[name="choice"]:checked';
-      const selectedElements = document.querySelectorAll(query);
+      {% endif %}
+    </section>
+    <script>
+      // 체크박스 선택 개수
+      function getCheckedCnt() {
+        const query = 'input[name="choice"]:checked';
+        const selectedElements = document.querySelectorAll(query);
 
-      const selectedElementsCnt = selectedElements.length;
+        const selectedElementsCnt = selectedElements.length;
 
-      document
-        .getElementById('count__result')
-        .textContent = selectedElementsCnt;
-    }
-
-    // 수량 버튼
-    const minusBtn = document.querySelectorAll('.minus-btn')
-    const plusBtn = document.querySelectorAll('.plus-btn')
-    const buyMount = document.querySelector('.buy-mount')
-
-    const calTotPurchasePrice = function (totalPurchasePrice, pdtPrice, sale, mount) {
-      if (mount !== 0) {
-        totalPurchasePrice.innerText = `${ (pdtPrice * (100 - sale) * 0.01 * mount).toLocaleString('ko-KR')}원`
-      } else {
-        totalPurchasePrice.innerText = '0원'
+        document
+          .getElementById('count__result')
+          .textContent = selectedElementsCnt;
       }
-    }
 
-    plusBtn.forEach(plus => {
-      plus.addEventListener("click", event => {
-        let buyMount = plus.previousElementSibling
-        buyMount.innerText = parseInt(buyMount.innerText) + 1
+      // 수량 버튼
+      const minusBtn = document.querySelectorAll('.minus-btn')
+      const plusBtn = document.querySelectorAll('.plus-btn')
+      const buyMount = document.querySelector('.buy-mount')
 
-        const mount = parseInt(buyMount.innerText)
-        const totalPurchasePrice = plus.parentElement.parentElement.nextElementSibling.firstElementChild
-        const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
-        const sale = parseInt(totalPurchasePrice.dataset.sale)
-
-        calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
-      });
-    });
-
-    minusBtn.forEach(minus => {
-      minus.addEventListener("click", event => {
-        let buyMount = minus.nextElementSibling
-        if (parseInt(buyMount.innerText) - 1 >= 0) {
-          buyMount.innerText = parseInt(buyMount.innerText) - 1
+      const calTotPurchasePrice = function (totalPurchasePrice, pdtPrice, sale, mount) {
+        if (mount !== 0) {
+          totalPurchasePrice.innerText = `${ (pdtPrice * (100 - sale) * 0.01 * mount).toLocaleString('ko-KR')}원`
+        } else {
+          totalPurchasePrice.innerText = '0원'
         }
+      }
 
-        const mount = parseInt(buyMount.innerText)
-        const totalPurchasePrice = minus.parentElement.parentElement.nextElementSibling.firstElementChild
-        const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
-        const sale = parseInt(totalPurchasePrice.dataset.sale)
+      plusBtn.forEach(plus => {
+        plus.addEventListener("click", event => {
+          let buyMount = plus.previousElementSibling
+          buyMount.innerText = parseInt(buyMount.innerText) + 1
 
-        calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+          const mount = parseInt(buyMount.innerText)
+          const totalPurchasePrice = plus.parentElement.parentElement.nextElementSibling.firstElementChild
+          const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
+          const sale = parseInt(totalPurchasePrice.dataset.sale)
+
+          calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+        });
       });
-    });
-  </script>
 
-{% endblock body %}
+      minusBtn.forEach(minus => {
+        minus.addEventListener("click", event => {
+          let buyMount = minus.nextElementSibling
+          if (parseInt(buyMount.innerText) - 1 >= 0) {
+            buyMount.innerText = parseInt(buyMount.innerText) - 1
+          }
+
+          const mount = parseInt(buyMount.innerText)
+          const totalPurchasePrice = minus.parentElement.parentElement.nextElementSibling.firstElementChild
+          const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
+          const sale = parseInt(totalPurchasePrice.dataset.sale)
+
+          calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+        });
+      });
+    </script>
+
+  {% endblock body %}
