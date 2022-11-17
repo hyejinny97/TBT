@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load index_tag %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'styles/orders_ordering.css' %}">
+{% endblock css %}
+
+{% block body %}
+  <h1 class="main-header">주문 / 결제</h1>
+  <main class="row main-container g-5">
+    <!-- (배송지)/주문자/주문상품 -->
+    <section class="col col-8">
+      <div class="domain">
+        <h4 class="buyer-header">주문자</h4>
+        <table class="buyer-info">
+          <tr>
+            <th>아이디</th>
+            <td>{{ request.user.username }}</td>
+          </tr>
+          <tr>
+            <th>닉네임</th>
+            <td>{{ request.user.nickname }}</td>
+          </tr>
+          <tr>
+            <th>이메일</th>
+            <td>{{ request.user.email }}</td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <h4 class="purchase-pdt-header">주문상품</h4>
+        {% for product in products %}
+          <div class="purchase-pdt-item">
+            <img class="purchase-pdt-img" src="{{ product.product_image.all.0.image.url }}" alt="">
+            <div>
+              <p class="pdt-name">{{ product.name }}</p>
+              <div class='pdt-price'>
+                {% if product.sale != 0 %}
+                  <span class='pdt-sale'>{{ product.sale }}%</span>
+                {% endif %}
+                <span class='pdt-pay' data-discounted-price='{{ product.pay|discount:product.sale }}'>{{ product.pay|discount:product.sale|intcomma }}원</span>
+                {% if product.sale != 0 %}
+                  <del class='before-sale'>{{ product.pay|intcomma }}원</del>
+                {% endif %}
+              </div>
+            </div>
+            <div>
+              <p class="buy-mount">
+                <span>1</span>개</p>
+              <p class="pdt-delivery" data-delivery='{{ product.delivery }}'>
+                <i class="bi bi-truck"></i>
+                {% if product.delivery != '0' %}
+                  {{ product.delivery }}원
+                {% else %}
+                  무료배송
+                {% endif %}
+              </p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+    <!-- 주문 결제 창 -->
+    <section class="col col-4">
+      <article class="payment-btn-wrap">
+        <div class="payment-container">
+          <h4 class="payment-header">결제 금액</h4>
+          <table class="payment-list">
+            <tr>
+              <th>총 상품 금액</th>
+              <td id='tot-price'></td>
+            </tr>
+            <tr>
+              <th>총 배송비</th>
+              <td id='tot-delivery'></td>
+            </tr>
+          </table>
+          <div class="final-payment-container">
+            <p>최종 결제 금액</p>
+            <p class="final-payment">
+              <span></span>원</p>
+          </div>
+          <form action="" id="pay-form">
+            <div class="agree-check">
+              <input type="checkbox" name="" id="agree" required="required">
+              <label for="agree">아래 내용에 모두 동의합니다.(필수)</label>
+            </div>
+            <div class="terms">
+              <p>
+                본인은 만 14세 이상이며, 주문 내용을 확인하였습니다.
+              </p>
+              <p>
+                (주)템바이템은 통신판매중개자로 거래 당사자가 아니므로, 판매자가 등록한 상품정보 및 거래 등에 대해 책임을 지지 않습니다.
+              </p>
+            </div>
+          </form>
+        </div>
+        <button type="submit" form="pay-form" id="final-pay-btn" class="final-payment">
+          <span></span>원 결제하기</button>
+      </article>
+    </section>
+  </main>
+
+  <input type="hidden" id='username' value='{{ request.user.username }}'>
+  <input type="hidden" id='email' value='{{ request.user.email }}'>
+
+{% endblock body %}
+
+{% block js %}
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+  <script src="{% static 'script/orders_ordering.js' %}"></script>
+{% endblock js %}

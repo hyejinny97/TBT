@@ -44,15 +44,19 @@
             <a href="{% url 'products:products_detail' season_product.pk %}">
               <div class="item">
                 <div class="img-area">
-                  <p class="sale-tag">
-                    <span class="sale-per">{{ season_product.sale }}%</span>
-                  </p>
+                  {% if season_product.sale != 0 %}
+                    <p class="sale-tag">
+                      <span class="sale-per">{{ season_product.sale }}%</span>
+                    </p>
+                  {% endif %}
                   <img src="{{ season_product.product_image.all.0.image.url }}" alt="item image">
                   <div class="overlay"></div>
                 </div>
                 <p class="item-tit">{{ season_product.name }}</p>
                 <p class="item-price">
-                  <span class="origin__price">{{ season_product.pay|intcomma }}원</span>
+                  {% if season_product.sale != 0 %}
+                    <span class="origin__price">{{ season_product.pay|intcomma }}원</span>
+                  {% endif %}
                   <span class="discount__price">{{ season_product.pay|discount:season_product.sale|intcomma }}원</span>
                 </p>
               </div>
