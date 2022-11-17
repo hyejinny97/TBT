@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
+{% load index_tag %}
 
 <!-- 장바구니 body-->
 {% block body %}
@@ -37,7 +38,7 @@
               <td class="cart__name">
                 <p class="mb-3">
                   {{ cart_item.product.name }}</p>
-                <p>{{cart_item.product.pay|intcomma }}
+                <p>{{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}
                   원
                 </p>
               </td>
@@ -49,7 +50,7 @@
                 </div>
               </td>
               <td class="cart__total">
-                {{ cart_item.sub_total|intcomma }}
+                {{ cart_item.sub_total|discount:cart_item.product.sale|intcomma }}
                 원
               </td>
             </tr>

@@ -11,8 +11,9 @@ from django.db.models import Func
 
 # aggregate 사용시 Round로 반올림 해주는 클래스
 class Round(Func):
-    function = 'ROUND'
-    template='%(function)s(%(expressions)s, 1)'
+    function = "ROUND"
+    template = "%(function)s(%(expressions)s, 1)"
+
 
 # Create your views here.
 def index(request):
@@ -58,6 +59,7 @@ def products_detail(request, products_pk):
     product = get_object_or_404(Product, pk=products_pk)
     products = Product.objects.all()
     reviews = product.review_set.all()
+    questions = product.question_set.all()
     total = product.review_set.aggregate(review_avg=Round(Avg("grade")))
 
     recommend_products = []
@@ -78,6 +80,7 @@ def products_detail(request, products_pk):
     context = {
         "product": product,
         "reviews": reviews,
+        "questions": questions,
         "total": total,
         "recommend_products": recommend_products,
         "grades_1": grades_1,
@@ -259,73 +262,80 @@ def search(request):
 def searchfail(request):
     return render(request, "articles/searchfail.html")
 
-def card(request):
-    products = Product.objects.filter(category='크리스마스 카드')
-    filter = request.GET.get('filter', default='register')
-    christmas = request.GET.get('christmas', default='card')
-    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='크리스마스 카드')
-    
-    if filter == 'high-sale':
-        products = products.order_by('-sale')
-    if filter == 'high-price':
-        products = discount.order_by('-discount')
-    if filter == 'low-price':
-        products = discount.order_by('discount')
-    if filter == 'register':
-        products = products.order_by('-created_at')
 
+def card(request):
+    products = Product.objects.filter(category="크리스마스 카드")
+    filter = request.GET.get("filter", default="register")
+    christmas = request.GET.get("christmas", default="card")
+    discount = Product.objects.annotate(
+        discount=F("pay") * (100 - F("sale")) * 0.01
+    ).filter(category="크리스마스 카드")
+
+    if filter == "high-sale":
+        products = products.order_by("-sale")
+    if filter == "high-price":
+        products = discount.order_by("-discount")
+    if filter == "low-price":
+        products = discount.order_by("discount")
+    if filter == "register":
+        products = products.order_by("-created_at")
 
     context = {
         "category": "card",
         "products": products,
         "filter": filter,
-        "christmas" : christmas,
+        "christmas": christmas,
     }
     return render(request, "products/index.html", context)
 
+
 def decoration(request):
-    products = Product.objects.filter(category='크리스마스 트리 장식')
-    filter = request.GET.get('filter', default='register')
-    christmas = request.GET.get('christmas', default='card')
-    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='크리스마스 트리 장식')
-    
-    if filter == 'high-sale':
-        products = products.order_by('-sale')
-    if filter == 'high-price':
-        products = discount.order_by('-discount')
-    if filter == 'low-price':
-        products = discount.order_by('discount')
-    if filter == 'register':
-        products = products.order_by('-created_at')
+    products = Product.objects.filter(category="크리스마스 트리 장식")
+    filter = request.GET.get("filter", default="register")
+    christmas = request.GET.get("christmas", default="card")
+    discount = Product.objects.annotate(
+        discount=F("pay") * (100 - F("sale")) * 0.01
+    ).filter(category="크리스마스 트리 장식")
+
+    if filter == "high-sale":
+        products = products.order_by("-sale")
+    if filter == "high-price":
+        products = discount.order_by("-discount")
+    if filter == "low-price":
+        products = discount.order_by("discount")
+    if filter == "register":
+        products = products.order_by("-created_at")
 
     context = {
         "category": "decoration",
         "products": products,
         "filter": filter,
-        "christmas" : christmas,
+        "christmas": christmas,
     }
     return render(request, "products/index.html", context)
 
+
 def wreath(request):
-    products = Product.objects.filter(category='크리스마스 리스')
-    filter = request.GET.get('filter', default='register')
-    christmas = request.GET.get('christmas', default='card')
-    discount = Product.objects.annotate(discount= F('pay') *(100 - F('sale')) * 0.01).filter(category='크리스마스 리스')
-    
-    if filter == 'high-sale':
-        products = products.order_by('-sale')
-    if filter == 'high-price':
-        products = discount.order_by('-discount')
-    if filter == 'low-price':
-        products = discount.order_by('discount')
-    if filter == 'register':
-        products = products.order_by('-created_at')
+    products = Product.objects.filter(category="크리스마스 리스")
+    filter = request.GET.get("filter", default="register")
+    christmas = request.GET.get("christmas", default="card")
+    discount = Product.objects.annotate(
+        discount=F("pay") * (100 - F("sale")) * 0.01
+    ).filter(category="크리스마스 리스")
+
+    if filter == "high-sale":
+        products = products.order_by("-sale")
+    if filter == "high-price":
+        products = discount.order_by("-discount")
+    if filter == "low-price":
+        products = discount.order_by("discount")
+    if filter == "register":
+        products = products.order_by("-created_at")
 
     context = {
         "category": "wreath",
         "products": products,
         "filter": filter,
-        "christmas" : christmas,
+        "christmas": christmas,
     }
     return render(request, "products/index.html", context)
-
