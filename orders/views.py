@@ -9,3 +9,11 @@ def index(request):
         'products': products,
     }
     return render(request, 'orders/ordering.html', context)
+
+def complete(request):
+    products = [Product.objects.get(pk=10), Product.objects.get(pk=20), Product.objects.get(pk=30)]
+ 
+    context = {
+        'products': products,
+    }
+    return render(request, 'orders/order_complete.html', context)
