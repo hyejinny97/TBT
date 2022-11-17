@@ -203,32 +203,42 @@ a:hover {
 }
 
 /* 최근 리뷰 */
-table {
+.review__table,
+.order__table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 1.1rem;
 }
 
-th {
+.review__table th,
+.order__table th {
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--line);
   white-space: nowrap;
 }
 
-tr {
+.review__table tr,
+.order__table tr {
   margin-top: 0.5rem;
 }
 
-th,
-td {
+.review__table th,
+.review__table td,
+.order__table th,
+.order__table td {
   text-align: center;
   vertical-align: middle;
 }
-th:first-child,
-td:first-child {
+
+.review__table th:first-child,
+.review__table td:first-child,
+.order__table th:first-child,
+.order__table td:first-child {
   border-left: none;
 }
 
-td {
+.review__table td,
+.order__table td {
   padding: 10px;
   height: 100%;
 }
