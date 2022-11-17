@@ -260,11 +260,13 @@
             {% for review in reviews %}
             <div class="rev-sec">
               <div class="rev-prof-img">
-                {% if review.user.profile_image %}
-                <img class="profile__img" src="{{review.user.profile_image.url}}" alt="profile-img" />
-                {% else %}
-                <img class="profile__img" src="{% static 'img/profile_dummy.jpg' %}" alt="profile-img" />
-                {% endif %}
+                <a href="{% url 'accounts:detail' review.account.pk %}">
+                  {% if review.user.profile_image %}
+                  <img class="profile__img" src="{{review.user.profile_image.url}}" alt="profile-img" />
+                  {% else %}
+                  <img class="profile__img" src="{% static 'img/profile_dummy.jpg' %}" alt="profile-img" />
+                  {% endif %}
+                </a>
               </div>
               <div class="rev-main">
                 <div class="rev-header">
