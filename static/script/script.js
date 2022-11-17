@@ -17,10 +17,15 @@ const revUpdateModal = document.querySelector('#review_update');
 const revOpenUpdateBtns = document.querySelectorAll('.btn-modal-update');
 const revCloseUpdateBtn = document.querySelector('.btn-close-rev-update');
 
-const alertModal = document.querySelector('.modal-alert');
-const alertOpenBtns = document.querySelectorAll('.btn-modal-delete')
-const alertCloseBtn = document.querySelector('.btn-cancel');
+const alertModal = document.querySelector('.rev-alert');
+const alertOpenBtns = document.querySelectorAll('.btn-modal-delete');
+const alertCloseBtns = document.querySelectorAll('.btn-cancel');
 const alertDeleteBtn = document.querySelector('.btn-delete');
+
+const alertModalQna = document.querySelector('.qna-alert');
+const alertOpenBtnsQna = document.querySelectorAll('.btn-modal-delete-qna');
+const alertDeleteBtnQna = document.querySelector('.btn-delete-qna');
+
 
 // 경고 모달창
 try {
@@ -35,8 +40,8 @@ try {
         // if (!alertDeleteBtn) return;
         alertDeleteBtn.setAttribute('href', `${urls}`);
 
-
     }
+
     const closeAlert = function (e) {
         e.preventDefault();
         alertModal.classList.add('hidden');
@@ -47,7 +52,38 @@ try {
     alertOpenBtns.forEach(alertBtn => {
         alertBtn.addEventListener('click', openAlert)
     });
-    alertCloseBtn.addEventListener('click', closeAlert);
+    alertCloseBtns.forEach(alertClose => {
+        alertClose.addEventListener('click', closeAlert);
+    })
+
+
+
+    const openAlertQna = function (e) {
+        e.preventDefault();
+        console.log(e.target.href);
+        alertModalQna.classList.remove('hidden');
+        overlay.classList.remove('hidden');
+        body.classList.add('scroll-block');
+
+        let urls = e.target.href;
+        // if (!alertDeleteBtn) return;
+        alertDeleteBtnQna.setAttribute('href', `${urls}`);
+    }
+
+    const closeAlertQna = function (e) {
+        e.preventDefault();
+        alertModalQna.classList.add('hidden');
+        overlay.classList.add('hidden');
+        body.classList.remove('scroll-block');
+    }
+
+    alertOpenBtnsQna.forEach(alertBtn => {
+        alertBtn.addEventListener('click', openAlertQna);
+    });
+    alertCloseBtns.forEach(alertClose => {
+        alertClose.addEventListener('click', closeAlertQna);
+    })
+
 
 } catch {
 
@@ -119,17 +155,35 @@ try {
         body.classList.add('scroll-block');
 
         let urls = e.target.href;
-        // 폼액션변경? or 비동기...
+        revUpdateForm.setAttribute('action', `${urls}`)
+
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
         axios({
             method: 'POST',
             url: `${urls}`,
-            headers: { 'X-CSRFToken': csrftoken, }
+            headers: {
+                'X-CSRFToken': csrftoken,
+                'Content-Type': 'multipart/form-data'
+            }
         })
             .then(response => {
-                console.log(response.data);
+                // console.log(response.data[0]);
+                const formData = response.data[0];
+                const formTitle = formData.title;
+                const formCont = formData.content;
+                const formGrade = formData.grade;
+                // const formImg = formData.review_image;
+                // console.log(formTitle, formCont);
+                const inputTitle = document.querySelector('#update-title');
+                const inputCont = document.querySelector('#update-content');
+                const inputGrade = document.querySelector(`#update-rate-${formGrade}`)
+                const inputImg = document.querySelector('#file');
 
+                inputTitle.setAttribute('value', `${formTitle}`);
+                inputCont.innerText = formCont;
+                inputGrade.checked = true;
+                // inputImg.setAttribute('value', `${formImg}`);
             });
     }
     const closeUpdateModal = function () {
