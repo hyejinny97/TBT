@@ -15,7 +15,7 @@ def create(request, product_pk):
             question.account = request.user
             question.name = product
             question.save()
-            return redirect("products:index")
+            return redirect("products:products_detail", product_pk)
     else:
         form = QuestionForm()
     context = {"form": form}
