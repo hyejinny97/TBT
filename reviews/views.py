@@ -60,6 +60,7 @@ def update(
     request,
     review_pk,
 ):
+    cnt = Review.objects.count()
     review = Review.objects.get(pk=review_pk)
     reviewForm = list(Review.objects.values())
     is_update = False
