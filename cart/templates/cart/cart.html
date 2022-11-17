@@ -17,46 +17,48 @@
         <h1 class="empty mb-3">장바구니에 담긴 상품이 없어요 :(</h1>
         <p class='text-center'>
           쇼핑을 더하려면
-          <a class="goto" href="{% url 'products:index' %}">메인페이지</a>
+          <a class="goto" href="{% url 'index' %}">메인페이지</a>
           를 클릭하세요</p>
       </div>
     {% else %}
 
-      <div class="wishlist__btn">
-        <button class="delete__btn" type="submit" form="like_form">
-          삭제하기
-        </button>
-      </div>
-      <table class="cart__table">
-        <thbody>
-          {% for cart_item in cart_items %}
-            <tr>
-              <td class="cart__checkbox"><input type="checkbox" name="choice" onclick='getCheckedCnt()'></td>
-              <td class="cart__img">
-                <a href="{% url "products:products_detail" cart_item.product.id %}"><img style="height: 100px;" src="{{ cart_item.product.product_image.all.first.image.url }}" alt=""></a>
-              </td>
-              <td class="cart__name">
-                <p class="mb-3">
-                  {{ cart_item.product.name }}</p>
-                <p>{{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}
+      <form action="" id="cart_from">
+        <table class="cart__table">
+          <thbody>
+            {% for cart_item in cart_items %}
+              <tr>
+                <td class="cart__checkbox"><input type="checkbox" name="choice" onclick='getCheckedCnt()'></td>
+                <td class="cart__img">
+                  <a href="{% url "products:products_detail" cart_item.product.id %}"><img style="height: 100px;" src="{{ cart_item.product.product_image.all.first.image.url }}" alt=""></a>
+                </td>
+                <td class="cart__name">
+                  <p class="mb-3">
+                    {{ cart_item.product.name }}</p>
+                  <p>{{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}
+                    원
+                  </p>
+                </td>
+                <td class="cart__quantity">
+                  <div class=" buy-mount-btn">
+                    <span class='minus-btn'>-</span>
+                    <span class='buy-mount'>1</span>
+                    <span class='plus-btn'>+</span>
+                  </div>
+                </td>
+                <td class="cart__total">
+                  {{ cart_item.sub_total|discount:cart_item.product.sale|intcomma }}
                   원
-                </p>
-              </td>
-              <td class="cart__quantity">
-                <div class=" buy-mount-btn">
-                  <span class='minus-btn'>-</span>
-                  <span class='buy-mount'>1</span>
-                  <span class='plus-btn'>+</span>
-                </div>
-              </td>
-              <td class="cart__total">
-                {{ cart_item.sub_total|discount:cart_item.product.sale|intcomma }}
-                원
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+                </td>
+                <td>
+                  <button class="delete__btn" type="submit" form="cart_form">
+                    <a href="{% url "cart:cart_remove" cart_item.product.id %}">삭제하기</a>
+                  </button>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </form>
 
       <p class="cart__choice">총
         <span id="count__result" class="total__count">0</span>

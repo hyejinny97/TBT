@@ -38,18 +38,17 @@ def cart_detail(
     totalcount=0,
     pay_total=0,
     sale=0,
+    product=None,
 ):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart_id=cart.pk)
         totalcount = len(cart_items)
         for cart_item in cart_items:
-            print(cart_item.product.pk)
             total = cart_item.product.pay * cart_item.quantity
             counter += cart_item.quantity
             product = Product.objects.get(pk=cart_item.product.pk)
             sale = product.sale
-            print(total * (100 - sale) * 0.01)
             pay_total += total * (100 - sale) * 0.01
 
     except ObjectDoesNotExist:
@@ -65,6 +64,7 @@ def cart_detail(
             total_count=totalcount,
             pay_total=pay_total,
             sale=sale,
+            product=product,
         ),
     )
 
@@ -73,17 +73,13 @@ def cart_remove(request, product_pk):
     cart = Cart.objects.get(cart_id=_cart_id(request))
     product = get_object_or_404(Product, pk=product_pk)
     cart_item = CartItem.objects.get(product=product, cart=cart)
-    if cart_item.quantity > 1:
-        cart_item.quantity -= 1
-        cart_item.save()
-    else:
-        cart_item.delete()
-    return redirect("cart:cart_detail")
-
-
-def cart_delete(request, product_pk):
-    cart = Cart.objects.get(cart_id=_cart_id(request))
-    product = get_object_or_404(Product, pk=product_pk)
-    cart_item = CartItem.objects.get(product=product, cart=cart)
     cart_item.delete()
     return redirect("cart:cart_detail")
+
+
+# def cart_delete(request, product_pk):
+#     cart = Cart.objects.get(cart_id=_cart_id(request))
+#     product = get_object_or_404(Product, pk=product_pk)
+#     cart_item = CartItem.objects.get(product=product, cart=cart)
+#     cart_item.delete()
+#     return redirect("cart:cart_detail")
