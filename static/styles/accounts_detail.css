@@ -143,6 +143,23 @@ a:hover {
 }
 
 /* 최근 주문 내역 */
+.main__title {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+}
+
+.sub__title {
+  font-size: 1.4rem;
+}
+
+.plus__title {
+  cursor: pointer;
+  margin-top: 2.4rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
 .sub__title {
   margin-top: 2.5rem;
   margin-bottom: 2rem;
