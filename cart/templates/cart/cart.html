@@ -49,9 +49,8 @@
                   <span class='plus-btn'>+</span>
                 </div>
               </td>
-              <td class="cart__total">
-                {{ cart_item.sub_total|discount:cart_item.product.sale|intcomma }}
-                원
+              <td class='total-purchase-price-wrap cart__total'>
+                <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}'>0원</span>
               </td>
             </tr>
           {% endfor %}
@@ -75,17 +74,60 @@
     {% endif %}
   </section>
   <script>
+    // 체크박스 선택 개수
     function getCheckedCnt() {
       const query = 'input[name="choice"]:checked';
       const selectedElements = document.querySelectorAll(query);
 
       const selectedElementsCnt = selectedElements.length;
 
-      // 출력
       document
         .getElementById('count__result')
         .textContent = selectedElementsCnt;
     }
+
+    // 수량 버튼
+    const minusBtn = document.querySelectorAll('.minus-btn')
+    const plusBtn = document.querySelectorAll('.plus-btn')
+    const buyMount = document.querySelector('.buy-mount')
+
+    const calTotPurchasePrice = function (totalPurchasePrice, pdtPrice, sale, mount) {
+      if (mount !== 0) {
+        totalPurchasePrice.innerText = `${ (pdtPrice * (100 - sale) * 0.01 * mount).toLocaleString('ko-KR')}원`
+      } else {
+        totalPurchasePrice.innerText = '0원'
+      }
+    }
+
+    plusBtn.forEach(plus => {
+      plus.addEventListener("click", event => {
+        let buyMount = plus.previousElementSibling
+        buyMount.innerText = parseInt(buyMount.innerText) + 1
+
+        const mount = parseInt(buyMount.innerText)
+        const totalPurchasePrice = plus.parentElement.parentElement.nextElementSibling.firstElementChild
+        const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
+        const sale = parseInt(totalPurchasePrice.dataset.sale)
+
+        calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+      });
+    });
+
+    minusBtn.forEach(minus => {
+      minus.addEventListener("click", event => {
+        let buyMount = minus.nextElementSibling
+        if (parseInt(buyMount.innerText) - 1 >= 0) {
+          buyMount.innerText = parseInt(buyMount.innerText) - 1
+        }
+
+        const mount = parseInt(buyMount.innerText)
+        const totalPurchasePrice = minus.parentElement.parentElement.nextElementSibling.firstElementChild
+        const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
+        const sale = parseInt(totalPurchasePrice.dataset.sale)
+
+        calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+      });
+    });
   </script>
 
 {% endblock body %}
