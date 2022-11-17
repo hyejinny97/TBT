@@ -4,7 +4,7 @@
 
 {% block body %}
 
-  <section class="wishlist__container">
+  <section class="wishlist__containers">
     <p class="title text-center fw-semibold">
       <span class="title__user">{{ users.nickname }}</span>
       님의 Wish List
@@ -13,14 +13,14 @@
     {% if user.like_products.all %}
       <!-- 버튼 -->
       <div class="wishlist__btn">
-        <button class="cart__btn">장바구니 담기</button>
+        <button class="goto__cart--btn">장바구니 담기</button>
         <button class="delete__btn" type="submit" form="like_form">
           삭제하기
         </button>
       </div>
       <!-- 찜 목록 -->
       <form action="" method="POST" name='delete_form' id="like_form">
-        <div class="wishlist__content wishlist__container">
+        <div class="wishlist__content wishlist__div">
           {% if user.like_products.all %}
             {% for product in user.like_products.all %}
               {% csrf_token %}
