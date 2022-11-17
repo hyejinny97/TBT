@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Question, Answer
 from .forms import QuestionForm, AnswerForm
 from products.models import Product
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -42,18 +43,24 @@ def update(
     question_pk,
 ):
     question = Question.objects.get(pk=question_pk)
+    questionForm = list(Question.objects.values())
+    product_pk = question.name
     if request.user.pk == question.account.pk:
         if request.method == "POST":
             form = QuestionForm()(request.POST, instance=question)
             if form.is_valid():
                 form.save()
-                return redirect("products:index")
+                return redirect("products:products_detail", product_pk)
         else:
             form = QuestionForm(instance=question)
-        context = {"form": form}
+            questionForm = list(form.values())
+            return JsonResponse(questionForm, safe=False)
+        # context = {"form": form}
     else:
-        return redirect("products:index")
-    return render(request, "bulletin/update.html", context)
+        # return redirect("products:index")
+        return JsonResponse(questionForm, safe=False)
+    return JsonResponse(questionForm, safe=False)
+    # return render(request, "bulletin/update.html", context)
 
 
 # Answer 쪽 crud

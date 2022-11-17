@@ -61,7 +61,7 @@ def products_detail(request, products_pk):
     products = Product.objects.all()
     reviews = product.review_set.all()
     questions = product.question_set.filter(name=products_pk).order_by("-pk")
-    answers = Answer.objects.all().order_by("-question_id")
+    # answers = Answer.objects.all().order_by("-question_id")
     total = product.review_set.aggregate(review_avg=Round(Avg("grade")))
 
     recommend_products = []
@@ -83,7 +83,7 @@ def products_detail(request, products_pk):
         "product": product,
         "reviews": reviews,
         "questions": questions,
-        "answers": answers,
+        # "answers": answers,
         "total": total,
         "recommend_products": recommend_products,
         "grades_1": grades_1,

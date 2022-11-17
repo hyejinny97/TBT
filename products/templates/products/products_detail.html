@@ -354,7 +354,8 @@
                 </p>
                 {% if request.user.is_authenticated and request.user.pk == question.account.pk %}
                 <div class="qna-btn">
-                  <a href="" class="btn-modal-update-qna">수정</a>
+                  <a href="{% url 'bulletin:update' question.pk %}" class="btn-modal-update-qna"
+                    data-cnt="{{ forloop.counter}}">수정</a>
                   <a href="{% url 'bulletin:deleteQ' question.pk %}" class="btn-modal-delete-qna">삭제</a>
                 </div>
                 {% endif %}
@@ -539,27 +540,27 @@
                 <tbody>
                   <tr>
                     <td class="tab_oper tab-active">
-                      <input type="radio" name="category" id="qna-1" value="상품">
-                      <label for="qna-1">상품</label>
+                      <input type="radio" name="category" id="update-qna-1" value="상품">
+                      <label for="update-qna-1">상품</label>
                     </td>
                     <td class="tab_oper">
-                      <input type="radio" name="category" id="qna-2" value="배송">
-                      <label for="qna-2">배송</label>
+                      <input type="radio" name="category" id="update-qna-2" value="배송">
+                      <label for="update-qna-2">배송</label>
                     </td>
                     <td class="tab_oper">
-                      <input type="radio" name="category" id="qna-3" value="반품">
-                      <label for="qna-3">반품</label>
+                      <input type="radio" name="category" id="update-qna-3" value="반품">
+                      <label for="update-qna-3">반품</label>
                     </td>
                   </tr>
                   <tr>
-                    <td class="tab_oper"><input type="radio" name="category" id="qna-4" value="교환">
-                      <label for="qna-4">교환</label>
+                    <td class="tab_oper"><input type="radio" name="category" id="update-qna-4" value="교환">
+                      <label for="update-qna-4">교환</label>
                     </td>
-                    <td class="tab_oper"><input type="radio" name="category" id="qna-5" value="환불">
-                      <label for="qna-5">환불</label>
+                    <td class="tab_oper"><input type="radio" name="category" id="update-qna-5" value="환불">
+                      <label for="update-qna-5">환불</label>
                     </td>
-                    <td class="tab_oper"><input type="radio" name="category" id="qna-6" value="기타">
-                      <label for="qna-6">기타</label>
+                    <td class="tab_oper"><input type="radio" name="category" id="update-qna-6" value="기타">
+                      <label for="update-qna-6">기타</label>
                     </td>
                   </tr>
                 </tbody>
@@ -638,6 +639,69 @@
           </form>
         </div>
       </div>
+      <!--문의 수정 모달-->
+      <div id="qna_update" class="modalC hidden">
+        <div class="tit-area">
+          <h1 class="tit">상품 문의하기</h1>
+          <button class="btn-close btn-close-qna-update">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+        <h3 class="sub-tit">상품</h3>
+        <div class="item-area sect">
+          <div class="img-area">
+            <img src="{{product.product_image.all.0.image.url }}" alt="{{product.product_image}}">
+          </div>
+          <div class="info">
+            <p>{{ product.category }}</p>
+            <h3 class="sub-tit">{{ product.name }}</h3>
+          </div>
+        </div>
+        <div class="form-area ">
+          <form action="" class="qna-form" method="POST" id="qna-form-update">
+            {% csrf_token %}
+            <div class="qna-cate">
+              <h3 class="sub-tit">문의유형</h3>
+              <table class="cate-area sect">
+                <tbody>
+                  <tr>
+                    <td class="tab_oper tab-active">
+                      <input type="radio" name="category" id="qna-1" value="상품">
+                      <label for="qna-1">상품</label>
+                    </td>
+                    <td class="tab_oper">
+                      <input type="radio" name="category" id="qna-2" value="배송">
+                      <label for="qna-2">배송</label>
+                    </td>
+                    <td class="tab_oper">
+                      <input type="radio" name="category" id="qna-3" value="반품">
+                      <label for="qna-3">반품</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tab_oper"><input type="radio" name="category" id="qna-4" value="교환">
+                      <label for="qna-4">교환</label>
+                    </td>
+                    <td class="tab_oper"><input type="radio" name="category" id="qna-5" value="환불">
+                      <label for="qna-5">환불</label>
+                    </td>
+                    <td class="tab_oper"><input type="radio" name="category" id="qna-6" value="기타">
+                      <label for="qna-6">기타</label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="qna-txt sect">
+              <h4 class="sub-tit">문의내용</h4>
+              <textarea name="content" id="review-content" cols="120" rows="10" placeholder="문의내용을 입력하세요."></textarea>
+            </div>
+            <button class="btnC" type="submit">완료</button>
+          </form>
+        </div>
+      </div>
+
+
       <!-- 리뷰삭제 안내 모달 -->
       <div class="modalC modal-alert rev-alert hidden">
         <p>리뷰를 정말 삭제하시겠습니까?</p>
