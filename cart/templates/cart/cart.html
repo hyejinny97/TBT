@@ -27,7 +27,8 @@
           <thbody>
             {% for cart_item in cart_items %}
               <tr>
-                <td class="cart__checkbox"><input type="checkbox" name="choice" onclick='getCheckedCnt()'></td>
+                <td class="cart__checkbox">
+                  <input type="checkbox" name="choice" onclick='getCheckedCnt()'></td>
                 <td class="cart__img">
                   <a href="{% url "products:products_detail" cart_item.product.id %}"><img style="height: 100px;" src="{{ cart_item.product.product_image.all.first.image.url }}" alt=""></a>
                 </td>
@@ -41,12 +42,12 @@
                 <td class="cart__quantity">
                   <div class=" buy-mount-btn">
                     <span class='minus-btn'>-</span>
-                    <span class='buy-mount'>0</span>
+                    <span class='buy-mount'>1</span>
                     <span class='plus-btn'>+</span>
                   </div>
                 </td>
                 <td class='total-purchase-price-wrap cart__total'>
-                  <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}'>0원</span>
+                  <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}'>{{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}원</span>
                 </td>
                 <td>
                   <button class="delete__btn" type="submit" form="cart_form">
@@ -111,6 +112,7 @@
           const sale = parseInt(totalPurchasePrice.dataset.sale)
 
           calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+
         });
       });
 
