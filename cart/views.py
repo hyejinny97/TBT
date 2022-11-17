@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from products.models import Product, ProductImage
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
@@ -45,12 +45,12 @@ def cart_detail(
         totalcount = len(cart_items)
         for cart_item in cart_items:
             print(cart_item.product.pk)
-            total += cart_item.product.pay * cart_item.quantity
+            total = cart_item.product.pay * cart_item.quantity
             counter += cart_item.quantity
             product = Product.objects.get(pk=cart_item.product.pk)
             sale = product.sale
-
-        pay_total += total
+            print(total * (100 - sale) * 0.01)
+            pay_total += total * (100 - sale) * 0.01
 
     except ObjectDoesNotExist:
         pass
@@ -67,3 +67,23 @@ def cart_detail(
             sale=sale,
         ),
     )
+
+
+def cart_remove(request, product_pk):
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    product = get_object_or_404(Product, pk=product_pk)
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+    else:
+        cart_item.delete()
+    return redirect("cart:cart_detail")
+
+
+def cart_delete(request, product_pk):
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    product = get_object_or_404(Product, pk=product_pk)
+    cart_item = CartItem.objects.get(product=product, cart=cart)
+    cart_item.delete()
+    return redirect("cart:cart_detail")
