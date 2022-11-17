@@ -186,25 +186,29 @@
 }
 #review,
 #qna,
-#review_update {
+#review_update,
+#qna_update {
 	padding: 2rem;
 }
 #review .tit-area,
 #qna .tit-area,
-#review_update .tit-area {
+#review_update .tit-area,
+#qna_update .tit-area {
 	position: relative;
 	margin-bottom: 3rem;
 }
 #review .tit-area .tit,
 #qna .tit-area .tit,
-#review_update .tit-area .tit {
+#review_update .tit-area .tit,
+#qna_update .tit-area .tit {
 	font-size: 2rem;
 	font-weight: 700;
 	text-align: center;
 }
 #review .tit-area .btn-close,
 #qna .tit-area .btn-close,
-#review_update .tit-area .btn-close {
+#review_update .tit-area .btn-close,
+#qna_update .tit-area .btn-close {
 	font-size: 1.5rem;
 	position: absolute;
 	right: -1rem;
@@ -213,35 +217,41 @@
 }
 #review .sect,
 #qna .sect,
-#review_update .sect {
+#review_update .sect,
+#qna_update .sect {
 	margin-bottom: 3rem;
 }
 #review .item-area,
 #qna .item-area,
-#review_update .item-area {
+#review_update .item-area,
+#qna_update .item-area {
 	display: flex;
 	align-items: flex-end;
 }
 #review .item-area .img-area,
 #qna .item-area .img-area,
-#review_update .item-area .img-area {
+#review_update .item-area .img-area,
+#qna_update .item-area .img-area {
 	margin-right: 1.5rem;
 }
 #review .item-area .img-area img,
 #qna .item-area .img-area img,
-#review_update .item-area .img-area img {
+#review_update .item-area .img-area img,
+#qna_update .item-area .img-area img {
 	max-width: 200px;
 }
 #review .item-area .info p,
 #qna .item-area .info p,
-#review_update .item-area .info p {
+#review_update .item-area .info p,
+#qna_update .item-area .info p {
 	color: var(--main);
 	font-weight: 700;
 	margin-bottom: 1rem;
 }
 #review .sub-tit,
 #qna .sub-tit,
-#review_update .sub-tit {
+#review_update .sub-tit,
+#qna_update .sub-tit {
 	font-size: 1.5rem;
 	font-weight: 700;
 	margin-bottom: 1rem;
@@ -253,7 +263,8 @@
 
 #review .review-form .btnC,
 #qna .qna-form .btnC,
-#review_update .review-form .btnC {
+#review_update .review-form .btnC,
+#qna_update .qna-form .btnC {
 	width: 100%;
 }
 
@@ -298,7 +309,8 @@
 #review .review-form .review-txt textarea,
 #qna .qna-form .qna-txt textarea,
 #review_update .review-form .review-txt input,
-#review_update .review-form .review-txt textarea {
+#review_update .review-form .review-txt textarea,
+#qna_update .qna-form .qna-txt textarea {
 	border: 1px solid var(--main);
 	border-radius: 0.2rem;
 	padding: 0.3rem 0.5rem;
@@ -340,27 +352,35 @@
 #review_update .review-form .review-txt textarea:focus,
 #review_update .review-form .review-txt textarea:active,
 #qna .qna-form .qna-txt textarea:focus,
-#qna .qna-form .qna-txt textarea:active {
+#qna .qna-form .qna-txt textarea:active,
+#qna_update .qna-form .qna-txt textarea:focus,
+#qna_update .qna-form .qna-txt textarea:active {
 	border: 2px solid var(--main);
 }
-#qna .qna-cate .cate-area {
+#qna .qna-cate .cate-area,
+#qna_update .qna-cate .cate-area {
 	width: 100%;
 	text-align: center;
 }
-#qna .qna-cate .cate-area .tab_oper {
+#qna .qna-cate .cate-area .tab_oper,
+#qna_update .qna-cate .cate-area .tab_oper {
 	border: 2px solid var(--main);
 	transition: 0.2s;
 	padding: 0;
 }
-#qna .qna-cate .cate-area .tab_oper input {
+#qna .qna-cate .cate-area .tab_oper input,
+#qna_update .qna-cate .cate-area .tab_oper input {
 	display: none;
 }
-#qna .qna-cate .cate-area .tab_oper label {
+#qna .qna-cate .cate-area .tab_oper label,
+#qna_update .qna-cate .cate-area .tab_oper label {
 	padding: 1rem;
 	cursor: pointer;
 }
 #qna .qna-cate .cate-area td:hover,
-#qna .qna-cate .cate-area td.tab-active {
+#qna .qna-cate .cate-area td.tab-active,
+#qna_update .qna-cate .cate-area td:hover,
+#qna_update .qna-cate .cate-area td.tab-active {
 	background: var(--main);
 	color: var(--bg);
 }

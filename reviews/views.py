@@ -94,11 +94,6 @@ def update(
     # return render(request, "reviews/update.html", context)
 
 
-def json(request):
-    data = list(Review.objects.values())
-    return JsonResponse(data, safe=False)
-
-
 # @login_required
 # def likes(request, review_pk):
 #     review = Review.objects.get(pk=review_pk)
