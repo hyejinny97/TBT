@@ -31,9 +31,10 @@ def detail(request, product_pk):
 
 def delete(request, question_pk):
     question = Question.objects.get(pk=question_pk)
+    product_pk = question.name_id
     if request.user.pk == question.account.pk:
         question.delete()
-    return redirect("products:index")
+    return redirect("products:products_detail", product_pk)
 
 
 def update(

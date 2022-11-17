@@ -286,7 +286,8 @@
                   </p>
                   {% if request.user.is_authenticated and request.user.pk == review.account.pk %}
                   <div class="rev-btn">
-                    <a href="{% url 'reviews:update' review.pk %}" class="btn-modal-update">수정</a>
+                    <a href="{% url 'reviews:update' review.pk %}" class="btn-modal-update"
+                      data-cnt="{{ forloop.counter}}">수정</a>
                     <a href="{% url 'reviews:delete' review.pk %}" class="btn-modal-delete">삭제</a>
                   </div>
                   {% endif %}
@@ -340,7 +341,7 @@
               <div class="qna-header">
                 <p class="qna-info">
                   <span>구매 |</span>
-                  <span>배송 |</span>
+                  <span>{{question.category}} |</span>
                   {% if question.check %}
                   <span class="qna-status">답변</span>
                   {% else %}
@@ -353,8 +354,8 @@
                 </p>
                 {% if request.user.is_authenticated and request.user.pk == question.account.pk %}
                 <div class="qna-btn">
-                  <a href="" class="btn-modal-update">수정</a>
-                  <a href="" class="btn-modal-delete">삭제</a>
+                  <a href="" class="btn-modal-update-qna">수정</a>
+                  <a href="{% url 'bulletin:deleteQ' question.pk %}" class="btn-modal-delete-qna">삭제</a>
                 </div>
                 {% endif %}
               </div>
@@ -363,15 +364,21 @@
                   <span>Q.</span>
                   <p>{{question.content}}</p>
                 </div>
-                <div class="qna-cont qna-a">
-                  <span>A.</span>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam, at. Ipsa voluptatibus ipsum alias,
-                    vitae rem assumenda magni pariatur facere quam illo eveniet iusto facilis nam, provident quisquam
-                    dicta consectetur?</p>
-                </div>
               </div>
             </div>
             {% endfor %}
+            <!-- {% if answers %}
+            {% for answer in answers %}
+            <div class="qna-cont qna-a">
+              <span>A.</span>
+              <p>{{answer.content}}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="qna-cont">
+              <p>답변 대기중</p>
+            </div>
+            {% endif %} -->
             {% else %}
             <div class="qna-sec">
               <p>작성된 문의가 없습니다.</p>
@@ -513,27 +520,10 @@
             <i class="bi bi-x-lg"></i>
           </button>
         </div>
-        <div class="qna-cate">
-          <h3 class="sub-tit">문의유형</h3>
-          <table class="cate-area sect">
-            <tbody>
-              <tr>
-                <td class="tab_oper tab-active">상품</td>
-                <td class="tab_oper">배송</td>
-                <td class="tab_oper">반품</td>
-              </tr>
-              <tr>
-                <td class="tab_oper">교환</td>
-                <td class="tab_oper">환불</td>
-                <td class="tab_oper">기타</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
         <h3 class="sub-tit">상품</h3>
         <div class="item-area sect">
           <div class="img-area">
-            <img src="{{product.product_image.all.0.image.url }}" alt="">
+            <img src="{{product.product_image.all.0.image.url }}" alt="{{product.product_image}}">
           </div>
           <div class="info">
             <p>{{ product.category }}</p>
@@ -541,11 +531,43 @@
           </div>
         </div>
         <div class="form-area ">
-          <form action="" class="qna-form">
+          <form action="{% url 'bulletin:createQ' product.pk %}" class="qna-form" method="POST">
+            {% csrf_token %}
+            <div class="qna-cate">
+              <h3 class="sub-tit">문의유형</h3>
+              <table class="cate-area sect">
+                <tbody>
+                  <tr>
+                    <td class="tab_oper tab-active">
+                      <input type="radio" name="category" id="qna-1" value="상품">
+                      <label for="qna-1">상품</label>
+                    </td>
+                    <td class="tab_oper">
+                      <input type="radio" name="category" id="qna-2" value="배송">
+                      <label for="qna-2">배송</label>
+                    </td>
+                    <td class="tab_oper">
+                      <input type="radio" name="category" id="qna-3" value="반품">
+                      <label for="qna-3">반품</label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tab_oper"><input type="radio" name="category" id="qna-4" value="교환">
+                      <label for="qna-4">교환</label>
+                    </td>
+                    <td class="tab_oper"><input type="radio" name="category" id="qna-5" value="환불">
+                      <label for="qna-5">환불</label>
+                    </td>
+                    <td class="tab_oper"><input type="radio" name="category" id="qna-6" value="기타">
+                      <label for="qna-6">기타</label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="qna-txt sect">
               <h4 class="sub-tit">문의내용</h4>
-              <textarea name="review-content" id="review-content" cols="120" rows="10"
-                placeholder="문의내용을 입력하세요."></textarea>
+              <textarea name="content" id="review-content" cols="120" rows="10" placeholder="문의내용을 입력하세요."></textarea>
             </div>
             <button class="btnC" type="submit">완료</button>
           </form>
@@ -574,29 +596,29 @@
             <div class="rate-area sect">
               <h4 class="sub-tit">별점<span>*</span></h4>
               <div class="rate-stars">
-                <input type="radio" name="grade" id="rate-5" value="5">
-                <label for="rate-5">
+                <input type="radio" name="grade" id="update-rate-5" value="5">
+                <label for="update-rate-5">
                   <i class="bi bi-star-fill"></i>
                 </label>
-                <input type="radio" name="grade" id="rate-4" value="4">
-                <label for="rate-4">
+                <input type="radio" name="grade" id="update-rate-4" value="4">
+                <label for="update-rate-4">
                   <i class="bi bi-star-fill"></i>
                 </label>
-                <input type="radio" name="grade" id="rate-3" value="3">
-                <label for="rate-3">
+                <input type="radio" name="grade" id="update-rate-3" value="3">
+                <label for="update-rate-3">
                   <i class="bi bi-star-fill"></i>
                 </label>
-                <input type="radio" name="grade" id="rate-2" value="2">
-                <label for="rate-2">
+                <input type="radio" name="grade" id="update-rate-2" value="2">
+                <label for="update-rate-2">
                   <i class="bi bi-star-fill"></i>
                 </label>
-                <input type="radio" name="grade" id="rate-1" value="1">
-                <label for="rate-1">
+                <input type="radio" name="grade" id="update-rate-1" value="1">
+                <label for="update-rate-1">
                   <i class="bi bi-star-fill"></i>
                 </label>
               </div>
             </div>
-            <div class="review-img sect">
+            <!-- <div class="review-img sect">
               <h4 class="sub-tit">사진 첨부</h4>
               <span>사진을 첨부해주세요 (최대 1장)</span>
               <label for="file" class="upload-btn">
@@ -605,24 +627,34 @@
                   사진첨부하기</span>
               </label>
               <input type="file" accept="image/jpeg" name="review_image" id="file" />
-            </div>
+            </div> -->
             <div class="review-txt sect">
               <h4 class="sub-tit">리뷰 작성<span>*</span></h4>
-              <input type="text" name="title" placeholder="리뷰 제목을 작성해주세요">
-              <textarea name="content" id="review-content" cols="120" rows="10"
+              <input type="text" name="title" placeholder="리뷰 제목을 작성해주세요" id="update-title">
+              <textarea name="content" id="update-content" cols="120" rows="10"
                 placeholder="자세하고 솔직한 리뷰는 다른 고객에게 큰 도움이 됩니다. (최소 20자 이상)"></textarea>
             </div>
             <button class="btnC" type="submit">완료</button>
           </form>
         </div>
       </div>
-      <div class="modalC modal-alert hidden">
+      <!-- 리뷰삭제 안내 모달 -->
+      <div class="modalC modal-alert rev-alert hidden">
         <p>리뷰를 정말 삭제하시겠습니까?</p>
         <div class="btn-area">
           <a class="btnA btn-cancel">취소</a>
           <a href="" class="btnA btn-delete">삭제</a>
         </div>
       </div>
+      <!-- 문의삭제 안내 모달 -->
+      <div class="modalC modal-alert qna-alert hidden">
+        <p>문의를 정말 삭제하시겠습니까?</p>
+        <div class="btn-area">
+          <a class="btnA btn-cancel">취소</a>
+          <a href="" class="btnA btn-delete btn-delete-qna">삭제</a>
+        </div>
+      </div>
+      <!-- 오버레이 끝 -->
     </div>
   </section>
 </main>
