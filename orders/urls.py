@@ -5,4 +5,5 @@ app_name = 'orders'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('complete', views.complete, name='complete'),
 ]

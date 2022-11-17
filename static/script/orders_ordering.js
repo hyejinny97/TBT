@@ -1,3 +1,4 @@
+// 이 부분 다시 수정!!!!!!!! - "개수"까지 곱해서 상품 금액을 구해야함
 // 구매하려는 모든 상품의 할인가격을 합해서 '총 상품 금액' 구하기
 const discountedPrices = document.querySelectorAll('.pdt-pay')
 const totPrice = document.querySelector('#tot-price')
@@ -24,6 +25,7 @@ totDelivery.innerText = `${sumDeliveries.toLocaleString()}원`
 
 
 
+// 이 부분 다시 수정!!!!!!!! - "개수"까지 고려해서 최종 결제 금액을 구해야함
 // '총 상품 금액'과 '총 배송비'를 합해서 '최종 결제 금액' 구하기
 const finalPayments = document.querySelectorAll('.final-payment > span')
 
