@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from .form import ProductsForm, ProductImageForm
 from .models import Product, ProductImage
+from bulletin.models import Answer
 from django.db.models import Avg, Count
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -59,7 +60,8 @@ def products_detail(request, products_pk):
     product = get_object_or_404(Product, pk=products_pk)
     products = Product.objects.all()
     reviews = product.review_set.all()
-    questions = product.question_set.all()
+    questions = product.question_set.filter(name=products_pk).order_by("-pk")
+    answers = Answer.objects.all().order_by("-question_id")
     total = product.review_set.aggregate(review_avg=Round(Avg("grade")))
 
     recommend_products = []
@@ -81,6 +83,7 @@ def products_detail(request, products_pk):
         "product": product,
         "reviews": reviews,
         "questions": questions,
+        "answers": answers,
         "total": total,
         "recommend_products": recommend_products,
         "grades_1": grades_1,

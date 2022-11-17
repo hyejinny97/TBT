@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
 import json
 from django.views.decorators.http import require_POST
+from django.core import serializers
 
 # Create your views here.
 def index(request, product_pk):
@@ -60,30 +61,41 @@ def update(
     review_pk,
 ):
     review = Review.objects.get(pk=review_pk)
+    reviewForm = list(Review.objects.values())
+    is_update = False
     product_pk = review.product.pk
     if request.user.pk == review.account.pk:
         if request.method == "POST":
             review_form = ReviewForm(request.POST, request.FILES, instance=review)
+            # data = list(review_form.values())
             is_update = True
             if review_form.is_valid():
                 review_form.save()
                 return redirect("products:products_detail", product_pk)
         else:
             review_form = ReviewForm(instance=review)
-            json.dumps(review_form)
             is_update = False
+            reviewForm = review_form.values()
             return JsonResponse(
-                {
-                    "reviewForm": review_form,
-                }
+                reviewForm,
+                safe=False,
             )
     else:
-        return redirect("products:index")
-    context = {
-        "reviewForm": review_form,
-    }
-    return JsonResponse(context)
+        return JsonResponse(
+            reviewForm,
+            safe=False,
+        )
+    return JsonResponse(
+        reviewForm,
+        safe=False,
+    )
+
     # return render(request, "reviews/update.html", context)
+
+
+def json(request):
+    data = list(Review.objects.values())
+    return JsonResponse(data, safe=False)
 
 
 # @login_required
