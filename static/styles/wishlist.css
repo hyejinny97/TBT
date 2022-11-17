@@ -1,6 +1,6 @@
 @import url(./main.css);
 
-.wishlist__container {
+.wishlist__containers {
   min-height: 50vh;
   padding: 0 10%;
 }
@@ -19,7 +19,7 @@
   float: right;
 }
 
-.cart__btn {
+.goto__cart--btn {
   margin-right: 0.5rem;
   padding: 0.6rem 0.8rem;
   background-color: transparent;
@@ -29,7 +29,7 @@
   border-radius: 5px;
 }
 
-.cart__btn:hover {
+.goto__cart--btn:hover {
   background-color: var(--main);
   color: var(--bg);
   transition: all 300ms ease-in;
@@ -51,6 +51,13 @@
 }
 
 /* 찜 사진 */
+.wishlist__div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 7rem;
+  padding-bottom: 6rem;
+}
 
 .wishlist__list {
   margin-top: 6.5rem;
