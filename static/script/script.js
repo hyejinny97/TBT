@@ -156,6 +156,11 @@ try {
 
         let urls = e.target.href;
         revUpdateForm.setAttribute('action', `${urls}`)
+        // console.log(urls);
+        let cnt = e.target.dataset.cnt
+        cnt = Number(cnt)
+        cnt++;
+        console.log(`cnt : ${cnt}`);
 
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
@@ -168,8 +173,11 @@ try {
             }
         })
             .then(response => {
-                // console.log(response.data[0]);
-                const formData = response.data[0];
+                console.log(response.data.length);
+                const dataLength = response.data.length;
+                const dataNum = cnt - dataLength;
+                console.log(dataNum);
+                const formData = response.data[dataNum];
                 const formTitle = formData.title;
                 const formCont = formData.content;
                 const formGrade = formData.grade;
