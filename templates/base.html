@@ -62,9 +62,15 @@
               <a href="{% url 'accounts:login' %}">로그인</a>
             </li>
             {% endif %}
+            {% if item_count > 0%}
+            <li>
+              <a href="{% url 'cart:cart_detail' %}">장바구니 ({{item_count}})</a>
+            </li>
+            {% else %}
             <li>
               <a href="{% url 'cart:cart_detail' %}">장바구니</a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </nav>

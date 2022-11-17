@@ -36,7 +36,6 @@
               </td>
               <td>
                 {{ cart_item.product.name }}
-                {{ cart_item.product.id }}
                 금액 :
                 {{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}
                 수량 :
@@ -45,7 +44,7 @@
               </td>
               <td>
                 합계 :
-                {{ cart_item.sub_total|intcomma }}
+                {{ cart_item.sub_total|discount:cart_item.product.sale|intcomma }}
               </td>
               {% if cart_item.quantity < cart_item.product.stock %}
                 <td>
