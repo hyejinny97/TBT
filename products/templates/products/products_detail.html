@@ -9,51 +9,7 @@
 {% endblock css %}
 
 {% block body %}
-<<<<<<< HEAD
-{% comment %} breadcrumb {% endcomment %}
-<nav class='pdt-breadcrumb'
-  style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-  aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item">
-      <a href="/">홈</a>
-    </li>
-    <li class="breadcrumb-item">
-      {% if product.category == '노트/메모지' %}
-      <a href="{% url 'products:note' %}">
-        {{ product.category }}
-      </a>
-      {% elif product.category == '다이어리' %}
-      <a href="{% url 'products:diary' %}">
-        {{ product.category }}
-      </a>
-      {% elif product.category == '필기류/필통' %}
-      <a href="{% url 'products:pencil' %}">
-        {{ product.category }}
-      </a>
-      {% elif product.category == '파일/바인더' %}
-      <a href="{% url 'products:file' %}">
-        {{ product.category }}
-      </a>
-      {% endif %}
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
-  </ol>
-</nav>
-<main id="product-detail">
-  {% comment %} 상품 정보 {% endcomment %}
-  <section class='row row-cols-2'>
-    {% comment %} 상품 이미지 {% endcomment %}
-    <div class='col'>
-      <div class='row g-1'>
-        <div class='col-2'>
-          {% for productimage in product.product_image.all %}
-          <img class='pdt-img' src="{{ productimage.image.url }}" alt="">
-          {% endfor %}
-        </div>
-        <div class='col-10'>
-          <img class='pdt-first-img' src="{{product.product_image.all.0.image.url }}" alt="">
-=======
+
   {% comment %} breadcrumb {% endcomment %}
   <nav class='pdt-breadcrumb' style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -96,7 +52,6 @@
           <div class='col-10 img-magnifier-container'>
             <img id="myimage" class='pdt-first-img' src="{{product.product_image.all.0.image.url }}" alt="">
           </div>
->>>>>>> c6608a19e11d12c742b26a74677c4c406429a034
         </div>
       </div>
     </div>
@@ -242,7 +197,6 @@
                 {% endif %}
               </div>
             </div>
-<<<<<<< HEAD
             <div class='grade-bar-container d-none d-lg-block'>
               <div class='grade-bar-item'>
                 <span>5점</span>
@@ -299,8 +253,6 @@
                 </div>
                 <span class='pdt-review-grade-count'>2</span>
               </div>
-=======
-          {% endif %}
         </div>
         <p class='pdt-name'>{{ product.name }}</p>
         <hr>
@@ -328,7 +280,6 @@
               <i class="bi bi-star-fill"></i>
               <i class="bi bi-star-fill"></i>
               <i class="bi bi-star-fill"></i>
->>>>>>> c6608a19e11d12c742b26a74677c4c406429a034
             </div>
           </div>
           <div id="review-area">
@@ -368,7 +319,7 @@
               </div>
             </div>
           </div>
-<<<<<<< HEAD
+
         </article>
         {% comment %} 문의 {% endcomment %}
         <article id='pdt-qna'>
@@ -477,7 +428,6 @@
         <div class="item-area sect">
           <div class="img-area">
             <img src="{{product.product_image.all.0.image.url }}" alt="">
-=======
         </div>
         <table class='purchase-table'>
           <tr>
@@ -753,7 +703,6 @@
           <div class='basket-buy-btn-wrap small'>
             <a class='basket-btn' href="{% url "cart:add_cart" product.pk %}">장바구니</a>
             <a class='buy-btn' href="">바로구매</a>
->>>>>>> c6608a19e11d12c742b26a74677c4c406429a034
           </div>
           <div class="info">
             <p>{{ product.category }}</p>
@@ -852,14 +801,12 @@
           </form>
         </div>
       </div>
-<<<<<<< HEAD
+
     </div>
   </section>
 </main>
 
 
-
-=======
     </section>
       
       
@@ -1067,18 +1014,10 @@
   
   <!-- 찜하기 script -->
   <script>
-    const forms = document.querySelectorAll('.like-forms')
-    const csrftoken = document
-      .querySelector('[name=csrfmiddlewaretoken]')
-      .value;
->>>>>>> c6608a19e11d12c742b26a74677c4c406429a034
-
-<!-- 찜하기 script -->
-<script>
+    
   const forms = document.querySelectorAll('.like-forms')
   const csrftoken = document
-    .querySelector('[name=csrfmiddlewaretoken]')
-    .value;
+    .querySelector('[name=csrfmiddlewaretoken]').value;
 
   forms.forEach((form) => {
     form.addEventListener('submit', function (event) {
@@ -1118,10 +1057,11 @@
           }
         })
     })
-<<<<<<< HEAD
+
   })
 </script>
-=======
+<script>
+
 
     function magnify(imgID, zoom) {
       let img, glass, w, h, bw;
@@ -1193,7 +1133,7 @@
     magnify('myimage', 3);
     
   </script>
->>>>>>> c6608a19e11d12c742b26a74677c4c406429a034
+
 {% endblock body %}
 
 {% block js %}
