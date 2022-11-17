@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
+{% load index_tag %}
 
 <!-- 장바구니 body-->
 {% block body %}
@@ -37,7 +38,7 @@
                 {{ cart_item.product.name }}
                 {{ cart_item.product.id }}
                 금액 :
-                {{cart_item.product.pay|intcomma }}
+                {{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}
                 수량 :
                 {{cart_item.quantity }}
 
