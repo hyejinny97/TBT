@@ -8,7 +8,7 @@
 }
 
 /* 시즌 상품 더보기*/
-#home .season-more {   
+#home .season-more {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -36,18 +36,15 @@
 	text-align: center;
 }
 .slide-area .slider {
-	/* max-width: 100rem; */
 	position: relative;
 	height: 600px;
-	/* IN THE END */
 	overflow: hidden;
 }
 .slide-area .slider .slide {
 	position: absolute;
 	top: 0;
 	width: 100%;
-
-	/* THIS creates the animation! */
+	object-fit: contain;
 	transition: transform 1s;
 }
 .slide-area .slider .slider-btn {
@@ -58,7 +55,7 @@
 	color: rgba(255, 255, 255, 0.7);
 	height: 5.5rem;
 	width: 5.5rem;
-	font-size: 3.25rem;
+	font-size: 3rem;
 	cursor: pointer;
 }
 .slide-area .slider .slider-btn-left {
@@ -71,7 +68,7 @@
 }
 .slide-area .slider .dots {
 	position: absolute;
-	bottom: 10%;
+	bottom: 4%;
 	left: 50%;
 	transform: translateX(-50%);
 	display: flex;

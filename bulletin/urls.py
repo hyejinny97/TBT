@@ -9,6 +9,6 @@ urlpatterns = [
     path("detail/<int:product_pk>/", views.detail, name="detailQ"),
     path("createA/<int:question_pk>/", views.createA, name="createA"),
     path("deleteA/<int:answer_pk>", views.deleteA, name="deleteA"),
-    path("update/<int:question_pk>/", views.update, name="update"),
+    # path("update/<int:question_pk>/", views.update, name="update"),
     path("updateA/<int:answer_pk>/", views.updateA, name="updateA"),
 ]
