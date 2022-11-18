@@ -143,7 +143,31 @@
         <form action="{% url 'cart:add_cart' product.pk %}" method='POST' class='basket-btn-form'>
           {% csrf_token %}
           <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
-          <input class='basket-btn' type="submit" value='장바구니'>
+          {% comment %} 수량=0일 때, 모달창 뜨게 {% endcomment %}
+          <!-- Button trigger modal -->
+          <button type='button' class="basket-btn basket-btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            장바구니
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">⛔ 수량을 선택하세요.</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  장바구니로 이동할 상품이 없습니다.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+                  {% comment %} <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} 수량!=0일 때, submot 가능하게 {% endcomment %}
+          <input class='basket-btn basket-btn-submit active' type="submit" value='장바구니'>
         </form>
         <a class='buy-btn' href="">바로구매</a>
       </div>
@@ -440,7 +464,30 @@
           <form action="{% url 'cart:add_cart' product.pk %}" method='POST' class='basket-btn-form'>
             {% csrf_token %}
             <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
-            <input class='basket-btn' type="submit" value='장바구니'>
+            {% comment %} 수량=0일 때, 모달창 뜨게 {% endcomment %}
+            <!-- Button trigger modal -->
+            <button type='button' class="basket-btn basket-btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              장바구니
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">⛔ 수량을 선택하세요.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    장바구니로 이동할 상품이 없습니다.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% comment %} 수량!=0일 때, submot 가능하게 {% endcomment %}
+            <input class='basket-btn basket-btn-submit active' type="submit" value='장바구니'>
           </form>
           <a class='buy-btn' href="">바로구매</a>
         </div>

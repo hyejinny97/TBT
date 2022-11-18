@@ -158,6 +158,19 @@
   color: white;
   background-color: var(--sub);
 }
+.basket-btn-modal {
+  display: none;
+}
+.basket-btn-modal.active {
+  display: block;
+}
+.basket-btn-submit {
+  display: none;
+}
+.basket-btn-submit.active {
+  display: block;
+}
+
 .buy-btn {
   display: inline-block;
   padding: 1rem 0;
