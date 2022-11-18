@@ -31,34 +31,34 @@
       </div>
       <div>
         <h4 class="purchase-pdt-header">주문상품</h4>
-        {% for product in products %}
+        {% for item in order_items %}
           <div class="purchase-pdt-item row">
             <div class='col-3'>
               <a class="purchase-pdt-img-wrap" href="{% url 'products:products_detail' product.pk %}">
-                <img class="purchase-pdt-img" src="{{ product.product_image.all.0.image.url }}" alt="">
+                <img class="purchase-pdt-img" src="{{ item.product.product_image.all.0.image.url }}" alt="">
               </a>
             </div>
             <div class='col-7 pdt-info'>
               <a href="{% url 'products:products_detail' product.pk %}">
-                <p class="pdt-name text-break">{{ product.name }}</p>
+                <p class="pdt-name text-break">{{ item.product.name }}</p>
               </a>
               <div class='pdt-price'>
-                {% if product.sale != 0 %}
-                  <span class='pdt-sale'>{{ product.sale }}%</span>
+                {% if item.product.sale != 0 %}
+                  <span class='pdt-sale'>{{ item.product.sale }}%</span>
                 {% endif %}
-                <span class='pdt-pay' data-discounted-price='{{ product.pay|discount:product.sale }}'>{{ product.pay|discount:product.sale|intcomma }}원</span>
-                {% if product.sale != 0 %}
-                  <del class='before-sale'>{{ product.pay|intcomma }}원</del>
+                <span class='pdt-pay' data-discounted-price='{{ item.product.pay|discount:item.product.sale }}'>{{ item.product.pay|discount:item.product.sale|intcomma }}원</span>
+                {% if item.product.sale != 0 %}
+                  <del class='before-sale'>{{ item.product.pay|intcomma }}원</del>
                 {% endif %}
               </div>
             </div>
             <div class='col-2 pdt-mount-info'>
               <p class="pdt-buy-mount" data-mount="1">
-                <span>1</span>개</p>
-              <p class="pdt-delivery" data-delivery='{{ product.delivery }}'>
+                <span>{{ item.quantity }}</span>개</p>
+              <p class="pdt-delivery" data-delivery='{{ item.product.delivery }}'>
                 <i class="bi bi-truck"></i>
-                {% if product.delivery != '0' %}
-                  {{ product.delivery|intcomma }}원
+                {% if item.product.delivery != '0' %}
+                  {{ item.product.delivery|intcomma }}원
                 {% else %}
                   무료배송
                 {% endif %}
