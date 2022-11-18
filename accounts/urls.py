@@ -16,6 +16,7 @@ urlpatterns = [
     path("delete/", views.delete, name="delete"),
     path("changeps/", views.changeps, name="changeps"),
     path("<int:user_pk>/follow/", views.follow, name="follow"),
+    path("<int:user_pk>/order_list/", views.order_list, name="order_list"),
     path("<int:user_pk>/wishlist/", views.wishlist, name="wishlist"),
     path("<int:user_pk>/review_list/", views.review_list, name="review_list"),
     # path("<int:user_pk>/like_delete/", views.like_delete, name="like_delete"),

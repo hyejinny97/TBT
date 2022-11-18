@@ -150,7 +150,6 @@ a:hover {
 }
 
 .sub__title {
-  font-size: 1.4rem;
 }
 
 .plus__title {
@@ -166,7 +165,7 @@ a:hover {
   margin-left: 0.5rem;
   color: var(--main);
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .order__td--number {
