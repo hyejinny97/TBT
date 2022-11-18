@@ -458,6 +458,17 @@
             {% endfor %}
           </div>
         </article>
+        {% comment %} superuser인 경우만, 상품 수정/삭제 가능 {% endcomment %}
+        <article id='superuser-power'>
+          <h3>SuperUser이신가요?</h3>
+          {% if request.user.is_superuser %}
+          <a class="btn btn-primary" href="{% url 'products:products_update' product.pk %}">상품 정보 수정</a>
+          <form class="btn btn-danger" action="{% url 'products:products_delete' product.pk  %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="상품 삭제">
+          </form>
+          {% endif %}
+        </article>
       </div>
       <div class='col-4'>
         <div class='basket-buy-btn-wrap small'>
@@ -494,24 +505,6 @@
       </div>
     </div>
   </section>
-
-
-
-
-
-  <p>
-    <a href="{% url 'reviews:index' product.pk %}">리뷰확인|{{ reviews.count }}|{{ total.review_avg|floatformat }}</a>
-  </p>
-  <p>
-    <a href="{% url 'products:products_update' product.pk %}">수정하기</a>
-  </p>
-  <form action="{% url 'products:products_delete' product.pk  %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="상품 삭제">
-  </form>
-  <p><a href="{% url 'bulletin:createQ' product.pk %}">문의하기</a></p>
-  <p><a href="{% url 'bulletin:detailQ' product.pk %}">문의확인</a></p>
-  </div>
 
   {% comment %} 리뷰/문의 모달 {% endcomment %}
   <section>
