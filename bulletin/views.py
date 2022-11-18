@@ -45,6 +45,7 @@ def update(
     question = Question.objects.get(pk=question_pk)
     questionForm = list(Question.objects.values())
     product_pk = question.name
+    is_pass = False
     if request.user.pk == question.account.pk:
         if request.method == "POST":
             form = QuestionForm()(request.POST, instance=question)
@@ -53,13 +54,13 @@ def update(
                 return redirect("products:products_detail", product_pk)
         else:
             form = QuestionForm(instance=question)
-            questionForm = list(form.values())
-            return JsonResponse(questionForm, safe=False)
+            questionForm = form.values()
+            return JsonResponse(context={"isPass": is_pass})
         # context = {"form": form}
     else:
         # return redirect("products:index")
-        return JsonResponse(questionForm, safe=False)
-    return JsonResponse(questionForm, safe=False)
+        return JsonResponse(context={"isPass": is_pass})
+    return JsonResponse(context={"isPass": is_pass})
     # return render(request, "bulletin/update.html", context)
 
 
