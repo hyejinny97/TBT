@@ -121,7 +121,7 @@
           <th>수량</th>
           <td class='buy-mount-btn'>
             <span class='minus-btn'>-</span>
-            <span class='buy-mount'>0</span>
+            <span class='buy-mount'>1</span>
             <span class='plus-btn'>+</span>
           </td>
         </tr>
@@ -129,10 +129,15 @@
       <div class='total-purchase-price-wrap'>
         <span>주문 금액</span>
         <span class='total-purchase-price' data-delivery='{{ product.delivery }}' data-price='{{ product.pay }}'
-          data-sale='{{ product.sale }}'>0원</span>
+          data-sale='{{ product.sale }}'>원</span>
       </div>
       <div class='basket-buy-btn-wrap'>
-        <a class='basket-btn' href="{% url 'cart:add_cart' product.pk %}">장바구니</a>
+        {% comment %} <a class='basket-btn' href="{% url 'cart:add_cart' product.pk %}">장바구니</a> {% endcomment %}
+        <form action="{% url 'cart:add_cart' product.pk %}" method='POST' class='basket-btn-form'>
+          {% csrf_token %}
+          <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
+          <input class='basket-btn' type="submit" value='장바구니'>
+        </form>
         <a class='buy-btn' href="">바로구매</a>
       </div>
     </div>
@@ -419,7 +424,11 @@
       </div>
       <div class='col-4'>
         <div class='basket-buy-btn-wrap small'>
-          <a class='basket-btn' href="{% url 'cart:add_cart' product.pk %}">장바구니</a>
+          <form action="{% url 'cart:add_cart' product.pk %}" method='POST' class='basket-btn-form'>
+            {% csrf_token %}
+            <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
+            <input class='basket-btn' type="submit" value='장바구니'>
+          </form>
           <a class='buy-btn' href="">바로구매</a>
         </div>
       </div>

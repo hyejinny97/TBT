@@ -138,10 +138,13 @@
   justify-content: space-between;
   font-size: 1rem;
 }
+.basket-btn-form {
+  width: 49%;
+}
 .basket-btn {
   display: inline-block;
   padding: 1rem 0;
-  width: 49%;
+  width: 100%;
   background-color: var(--sub-b);
   border-radius: 0.5rem;
   color: white;

@@ -8,15 +8,21 @@ for (let starsColor of starsColorAll) {
 
 
 
-// 수량 버튼을 눌렀을 때 수량 증감 및 주문 금액 계산 
-const minusBtn = document.querySelector('.minus-btn')
-const plusBtn = document.querySelector('.plus-btn')
-const buyMount = document.querySelector('.buy-mount')
-
+// 주문 금액 기본값 넣기 (수량 default=1일 때 주문 금액)
 const totalPurchasePrice = document.querySelector('.total-purchase-price')
 const deliveryPrice = parseInt(totalPurchasePrice.dataset.delivery)
 const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
 const sale = parseInt(totalPurchasePrice.dataset.sale)
+
+totalPurchasePrice.innerText = `${(pdtPrice * (100 - sale) * 0.01 * 1 + deliveryPrice).toLocaleString('ko-KR')}원`
+
+
+
+// 수량 버튼을 눌렀을 때 수량 증감 및 주문 금액 계산, 장바구니 버튼에 수량 전달
+const minusBtn = document.querySelector('.minus-btn')
+const plusBtn = document.querySelector('.plus-btn')
+const buyMount = document.querySelector('.buy-mount')
+const basketBtnInputMounts = document.querySelectorAll('.basket-btn-mount')
 
 const calTotPurchasePrice = function (mount) {   // 주문 금액 구하기
   if (mount !== 0) {
@@ -30,6 +36,9 @@ plusBtn.addEventListener('click', function () {
   buyMount.innerText = parseInt(buyMount.innerText) + 1
   let mount = parseInt(buyMount.innerText)
   calTotPurchasePrice(mount)
+  for (let basketBtnInputMount of basketBtnInputMounts) {
+    basketBtnInputMount.value = mount
+  }
 })
 
 minusBtn.addEventListener('click', function () {
@@ -38,6 +47,9 @@ minusBtn.addEventListener('click', function () {
   }
   let mount = parseInt(buyMount.innerText)
   calTotPurchasePrice(mount)
+  for (let basketBtnInputMount of basketBtnInputMounts) {
+    basketBtnInputMount.value = mount
+  }
 })
 
 
