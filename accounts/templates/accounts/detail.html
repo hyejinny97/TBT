@@ -125,7 +125,12 @@
 
   <!-- 최근 주문 내역 -->
   {% if request.user == user %}
-  <p class="sub__title">최근 주문 내역</p>
+  <div class="main__title">
+    <p class="sub__title">최근 주문 내역</p>
+    <a class="plus__title" href="{% url 'accounts:order_list' user.pk %}"
+      >더보기 ></a
+    >
+  </div>
   <section class="order__history">
     <table class="order__table">
       <thead>

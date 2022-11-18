@@ -114,6 +114,14 @@ def follow(request, user_pk):
     return JsonResponse(context)
 
 
+def order_list(request, user_pk):
+    users = get_user_model().objects.get(pk=user_pk)
+    context = {
+        "users": users,
+    }
+    return render(request, "accounts/order_list.html", context)
+
+
 def wishlist(request, user_pk):
     users = get_user_model().objects.get(pk=user_pk)
     like_product = users.like_products.all()
