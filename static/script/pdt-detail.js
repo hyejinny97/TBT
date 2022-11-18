@@ -40,14 +40,21 @@ totalPurchasePrice.innerText = `${(pdtPrice * (100 - sale) * 0.01 * 1 + delivery
 
 
 
-// 수량 버튼을 눌렀을 때 수량 증감 및 주문 금액 계산, 장바구니 버튼에 수량 전달
+// 수량 버튼을 눌렀을 때 수량 증감 및 주문 금액 계산
+// 장바구니/바로구매 버튼에 수량 정보 넘기기
 // 수량=0일때, 장바구니/바로구매 버튼 누르면 모달창 뜨게
 const minusBtn = document.querySelector('.minus-btn')
 const plusBtn = document.querySelector('.plus-btn')
 const buyMount = document.querySelector('.buy-mount')
+
 const basketBtnInputMounts = document.querySelectorAll('.basket-btn-mount')
+const mountPerPdtInputs = document.querySelectorAll('.mount_per_pdt')
+
 const basketBtnModals = document.querySelectorAll('.basket-btn-modal')
 const basketBtnSubmits = document.querySelectorAll('.basket-btn-submit')
+const buyBtnModals = document.querySelectorAll('.buy-btn-modal')
+const buyBtnSubmits = document.querySelectorAll('.buy-btn-submit')
+
 
 const calTotPurchasePrice = function (mount) {   // 주문 금액 구하기
   if (mount !== 0) {
@@ -65,12 +72,24 @@ const mount0ActiveModal = function (mount) {   // 수량=0이면 모달창 띄�
     for (let basketBtnModal of basketBtnModals) {
       basketBtnModal.classList.add('active')
     }
+    for (let buyBtnSubmit of buyBtnSubmits) {
+      buyBtnSubmit.classList.remove('active')
+    }
+    for (let basketBtnModal of buyBtnModals) {
+      basketBtnModal.classList.add('active')
+    }
   } else {
     for (let basketBtnModal of basketBtnModals) {
       basketBtnModal.classList.remove('active')
     }
     for (let basketBtnSubmit of basketBtnSubmits) {
       basketBtnSubmit.classList.add('active')
+    }
+    for (let buyBtnModal of buyBtnModals) {
+      buyBtnModal.classList.remove('active')
+    }
+    for (let buyBtnSubmit of buyBtnSubmits) {
+      buyBtnSubmit.classList.add('active')
     }
   }
 }
@@ -81,6 +100,9 @@ plusBtn.addEventListener('click', function () {
   calTotPurchasePrice(mount)
   for (let basketBtnInputMount of basketBtnInputMounts) {
     basketBtnInputMount.value = mount
+  }
+  for (let mountPerPdtInput of mountPerPdtInputs) {
+    mountPerPdtInput.value = mount
   }
   mount0ActiveModal(mount)
 })
@@ -94,8 +116,12 @@ minusBtn.addEventListener('click', function () {
   for (let basketBtnInputMount of basketBtnInputMounts) {
     basketBtnInputMount.value = mount
   }
+  for (let mountPerPdtInput of mountPerPdtInputs) {
+    mountPerPdtInput.value = mount
+  }
   mount0ActiveModal(mount)
 })
+
 
 
 

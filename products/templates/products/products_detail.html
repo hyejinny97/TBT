@@ -151,7 +151,7 @@
           data-sale='{{ product.sale }}'>원</span>
       </div>
       <div class='basket-buy-btn-wrap'>
-        {% comment %} <a class='basket-btn' href="{% url 'cart:add_cart' product.pk %}">장바구니</a> {% endcomment %}
+        {% comment %} 장바구니 버튼 {% endcomment %}
         <form action="{% url 'cart:add_cart' product.pk %}" method='POST' class='basket-btn-form'>
           {% csrf_token %}
           <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
@@ -175,7 +175,6 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
-                  {% comment %} <button type="button" class="btn btn-primary">Save changes</button> {% endcomment %}
                 </div>
               </div>
             </div>
@@ -183,7 +182,38 @@
           {% comment %} 수량!=0일 때, submot 가능하게 {% endcomment %}
           <input class='basket-btn basket-btn-submit active' type="submit" value='장바구니'>
         </form>
-        <a class='buy-btn' href="">바로구매</a>
+        {% comment %} 바로구매 버튼 {% endcomment %}
+        <form action="{% url 'orders:index' %}" method='POST' class='buy-btn-form'>
+          {% csrf_token %}
+          <input type="hidden" class="pdt_to_buy" name="pdt_to_buy" value='{{ product.pk }}'>
+          <input type="hidden" class="mount_per_pdt" name="mount_per_pdt" value='1'>
+          {% comment %} 수량=0일 때, 모달창 뜨게 {% endcomment %}
+          <!-- Button trigger modal -->
+          <button type='button' class="buy-btn buy-btn-modal" data-bs-toggle="modal"
+            data-bs-target="#buyModal">
+            바로구매
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="buyModalLabel">⛔ 수량을 선택하세요.</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  결제 페이지로 이동할 상품이 없습니다.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% comment %} 수량!=0일 때, submot 가능하게 {% endcomment %}
+          <input class="buy-btn buy-btn-submit active" type="submit" value='바로구매'>
+        </form>
       </div>
     </div>
   </section>
@@ -486,6 +516,7 @@
       </div>
       <div class='col-4'>
         <div class='basket-buy-btn-wrap small'>
+          {% comment %} 장바구니 버튼 {% endcomment %}
           <form action="{% url 'cart:add_cart' product.pk %}" method='POST' class='basket-btn-form'>
             {% csrf_token %}
             <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
@@ -516,7 +547,38 @@
             {% comment %} 수량!=0일 때, submot 가능하게 {% endcomment %}
             <input class='basket-btn basket-btn-submit active' type="submit" value='장바구니'>
           </form>
-          <a class='buy-btn' href="">바로구매</a>
+          {% comment %} 바로구매 버튼 {% endcomment %}
+          <form action="{% url 'orders:index' %}" method='POST' class='buy-btn-form'>
+            {% csrf_token %}
+            <input type="hidden" class="pdt_to_buy" name="pdt_to_buy" value='{{ product.pk }}'>
+            <input type="hidden" class="mount_per_pdt" name="mount_per_pdt" value='1'>
+            {% comment %} 수량=0일 때, 모달창 뜨게 {% endcomment %}
+            <!-- Button trigger modal -->
+            <button type='button' class="buy-btn buy-btn-modal" data-bs-toggle="modal"
+              data-bs-target="#buyModal">
+              바로구매
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="buyModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="buyModalLabel">⛔ 수량을 선택하세요.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    결제 페이지로 이동할 상품이 없습니다.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">확인</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% comment %} 수량!=0일 때, submot 가능하게 {% endcomment %}
+            <input class="buy-btn buy-btn-submit active" type="submit" value='바로구매'>
+          </form>
         </div>
       </div>
     </div>

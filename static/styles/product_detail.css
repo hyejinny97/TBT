@@ -149,7 +149,7 @@
   justify-content: space-between;
   font-size: 1rem;
 }
-.basket-btn-form {
+.basket-btn-form, .buy-btn-form {
   width: 49%;
 }
 .basket-btn {
@@ -177,11 +177,10 @@
 .basket-btn-submit.active {
   display: block;
 }
-
 .buy-btn {
   display: inline-block;
   padding: 1rem 0;
-  width: 49%;
+  width: 100%;
   background-color: var(--main-sub);
   border-radius: 0.5rem;
   color: white;
@@ -190,6 +189,18 @@
 .buy-btn:hover {
   color: white;
   background-color: var(--main);
+}
+.buy-btn-modal {
+  display: none;
+}
+.buy-btn-modal.active {
+  display: block;
+}
+.buy-btn-submit {
+  display: none;
+}
+.buy-btn-submit.active {
+  display: block;
 }
 
 @media screen and (width >= 1200px) {
