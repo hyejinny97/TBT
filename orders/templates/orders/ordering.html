@@ -32,10 +32,16 @@
       <div>
         <h4 class="purchase-pdt-header">주문상품</h4>
         {% for product in products %}
-          <div class="purchase-pdt-item">
-            <img class="purchase-pdt-img" src="{{ product.product_image.all.0.image.url }}" alt="">
-            <div>
-              <p class="pdt-name">{{ product.name }}</p>
+          <div class="purchase-pdt-item row">
+            <div class='col-3'>
+              <a class="purchase-pdt-img-wrap" href="{% url 'products:products_detail' product.pk %}">
+                <img class="purchase-pdt-img" src="{{ product.product_image.all.0.image.url }}" alt="">
+              </a>
+            </div>
+            <div class='col-7 pdt-info'>
+              <a href="{% url 'products:products_detail' product.pk %}">
+                <p class="pdt-name text-break">{{ product.name }}</p>
+              </a>
               <div class='pdt-price'>
                 {% if product.sale != 0 %}
                   <span class='pdt-sale'>{{ product.sale }}%</span>
@@ -46,8 +52,8 @@
                 {% endif %}
               </div>
             </div>
-            <div>
-              <p class="buy-mount">
+            <div class='col-2 pdt-mount-info'>
+              <p class="pdt-buy-mount" data-mount="1">
                 <span>1</span>개</p>
               <p class="pdt-delivery" data-delivery='{{ product.delivery }}'>
                 <i class="bi bi-truck"></i>

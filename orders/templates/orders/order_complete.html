@@ -21,7 +21,7 @@
         {% for product in products %}
           <tr>
             <td>{{ product.name }}</td>
-            <td>1개</td>
+            <td class="pdt-buy-mount" data-mount="1">1개</td>
             <td class='pdt-pay' data-discounted-price='{{ product.pay|discount:product.sale }}'>
               {{ product.pay|discount:product.sale|intcomma }}원
             </td>
@@ -39,7 +39,7 @@
       <div class="final-payment-container">
         <p>총 결제 금액</p>
         <p class="final-payment">
-          <span>2,000,000,000</span>원</p>
+          <span></span>원</p>
       </div>
       <div class='how-to-pay-wrap'>
         <div class='how-to-pay'>
@@ -49,6 +49,10 @@
         <div class='how-to-pay'>
           <p>할부</p>
           <p>일시불</p>
+        </div>
+        <div class='how-to-pay'>
+          <p>결제일</p>
+          <p>2022.11.18 10:30</p>
         </div>
       </div>
       <div class='barcode'>
