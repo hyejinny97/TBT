@@ -6,6 +6,7 @@ from accounts.models import User
 class Cart(models.Model):
     cart_id = models.CharField(max_length=250, blank=True)
     date_added = models.DateField(auto_now_add=True)
+    quantity = models.IntegerField(default=1)
 
     class Meta:
         db_table = "Cart"

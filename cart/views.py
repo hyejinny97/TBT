@@ -13,21 +13,26 @@ def _cart_id(request):
 
 
 def add_cart(request, product_pk):
-    product = Product.objects.get(pk=product_pk)
-    try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-    except Cart.DoesNotExist:
-        cart = Cart.objects.create(cart_id=_cart_id(request))
-        cart.save()
+    if request.method == "POST":
+        item_quantity = request.POST.get("buy-mount")
+        product = Product.objects.get(pk=product_pk)
+        try:
+            cart = Cart.objects.get(cart_id=_cart_id(request))
+            cart.quantity = int(item_quantity)
+            print(cart.quantity)
+            cart.save()
+        except Cart.DoesNotExist:
+            cart = Cart.objects.create(cart_id=_cart_id(request))
+            cart.save()
 
-    try:
-        cart_item = CartItem.objects.get(product=product, cart=cart)
-        cart_item.quantity += 1
-        cart_item.save()
-    except CartItem.DoesNotExist:
-        cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
-        cart_item.save()
-    return redirect("cart:cart_detail")
+        try:
+            cart_item = CartItem.objects.get(product=product, cart=cart)
+            cart_item.quantity += int(item_quantity)
+            cart_item.save()
+        except CartItem.DoesNotExist:
+            cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+            cart_item.save()
+        return redirect("cart:cart_detail")
 
 
 def cart_detail(
@@ -46,7 +51,8 @@ def cart_detail(
         totalcount = len(cart_items)
         for cart_item in cart_items:
             total = cart_item.product.pay * cart_item.quantity
-            counter += cart_item.quantity
+            counter += cart.quantity
+            print(cart.quantity)
             product = Product.objects.get(pk=cart_item.product.pk)
             sale = product.sale
             pay_total += total * (100 - sale) * 0.01
