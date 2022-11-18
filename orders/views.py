@@ -2,6 +2,7 @@ from django.shortcuts import render
 from products.models import Product
 from .models import Order, OrderItem
 from django.contrib.auth.decorators import login_required
+import re
 # Create your views here.
 
 @login_required
@@ -25,9 +26,18 @@ def index(request):
     return render(request, 'orders/ordering.html', context)
 
 def complete(request):
-    products = [Product.objects.get(pk=10), Product.objects.get(pk=20), Product.objects.get(pk=30)]
- 
+    pattern = re.compile('[0-9]+')
+    order_items = pattern.findall(request.POST.get('order_items'))
+    print('여기!!!!!!!!!!!!!!!!!')
+    print(order_items)
+    completed_orders = []
+    for order in order_items:
+        print(order)
+        completed_order = Order.objects.create(order_item=OrderItem.objects.get(pk=int(order)))
+        completed_orders.append(completed_order)
+    
     context = {
-        'products': products,
+        'completed_orders': completed_orders ,
     }
+
     return render(request, 'orders/order_complete.html', context)
