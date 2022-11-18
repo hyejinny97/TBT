@@ -9,10 +9,8 @@ class OrderItem(models.Model):
     quantity = models.IntegerField()
 
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-    date = models.DateField(auto_now=True)
+    order_item = models.ForeignKey(OrderItem, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
 
 
 

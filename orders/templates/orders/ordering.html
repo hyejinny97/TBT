@@ -111,6 +111,11 @@
 
   <input type="hidden" id='username' value='{{ request.user.username }}'>
   <input type="hidden" id='email' value='{{ request.user.email }}'>
+  <form action="{% url 'orders:complete' %}" id='translate-form' method='POST'>
+    {% csrf_token %}
+    <input type="hidden" name="order_items" value='{{ order_items }}'>
+    <input type="submit" class='d-none'>
+  </form>
 
 {% endblock body %}
 

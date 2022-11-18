@@ -4,6 +4,7 @@ from .forms import CustomAuthenticationForm
 from products.models import Product, ProductImage
 from .models import User
 from reviews.models import Review
+from orders.models import Order, OrderItem
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login as auth_login
@@ -58,11 +59,20 @@ def logout(request):
 def detail(request, user_pk):
     user = get_user_model().objects.get(pk=user_pk)
     reviews = get_user_model().objects.get(pk=user_pk).review_set.all()
-    print(reviews)
+
+    orders = []
+    order_items = get_user_model().objects.get(pk=user_pk).orderitem_set.all()
+    for item in order_items:
+        if item.order_set.all():
+            orders.append(item.order_set.all())
+    orders.reverse()
+    print(orders)
+
     context = {
         "user": user,
         "my": request.user,
         "reviews": reviews,
+        'orders': orders,
     }
     return render(request, "accounts/detail.html", context)
 
@@ -119,8 +129,18 @@ def follow(request, user_pk):
 
 def order_list(request, user_pk):
     users = get_user_model().objects.get(pk=user_pk)
+
+    order_list = []
+    order_items = get_user_model().objects.get(pk=user_pk).orderitem_set.all()
+    for item in order_items:
+        if item.order_set.all():
+            order_list.append(item.order_set.all())
+    order_list.reverse()
+    print(order_list)
+
     context = {
         "users": users,
+        'order_list': order_list,
     }
     return render(request, "accounts/order_list.html", context)
 

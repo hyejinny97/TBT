@@ -24,6 +24,7 @@
 }
 .receipt-pdt-info {
   margin-top: 2rem;
+  width: 100%;
   border-bottom: 1px solid #95959544;
 }
 .receipt-pdt-info th, .receipt-pdt-info td {
