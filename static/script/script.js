@@ -32,6 +32,10 @@ const alertOpenBtnsQna = document.querySelectorAll('.btn-modal-delete-qna');
 const alertDeleteBtnQna = document.querySelector('.btn-delete-qna');
 const alertModalQna = document.querySelector('.qna-alert');
 
+// // const thumbsOverlay = document.querySelectorAll('.overlayC2');
+// // const thumbsImgPop = document.querySelectorAll('.rev-body .rev-img-popup');
+const thumbsImg = document.querySelectorAll('.rev-body .rev-img');
+const thumbsCloseBtn = document.querySelectorAll('.rev-body .btn-close-img');
 
 // 경고 모달창
 try {
@@ -90,6 +94,32 @@ try {
         alertClose.addEventListener('click', closeAlertQna);
     })
 
+
+} catch {
+
+}
+//  리뷰 썸네일 이미지 팝업
+try {
+    const imgPopup = function (e) {
+        const overlay = e.target.nextElementSibling;
+        // console.log(overlay.children[1]);
+        overlay.classList.remove('hidden');
+        overlay.children[1].classList.remove('hidden');
+        body.classList.add('scroll-block');
+
+    }
+    const imgClose = function (e) {
+        const overlay = e.target.parentElement.parentElement;
+        overlay.classList.add('hidden');
+        body.classList.remove('scroll-block');
+    }
+
+    thumbsImg.forEach(img => {
+        img.addEventListener('click', imgPopup);
+    })
+    thumbsCloseBtn.forEach(close => {
+        close.addEventListener('click', imgClose);
+    })
 
 } catch {
 
@@ -166,9 +196,10 @@ try {
         let cnt = e.target.dataset.cnt
         cnt = Number(cnt)
         cnt++;
-        console.log(`cnt : ${cnt}`);
+        console.log(urls);
 
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+        console.log(csrftoken);
 
         axios({
             method: 'POST',
@@ -179,10 +210,8 @@ try {
             }
         })
             .then(response => {
-                console.log(response.data.length);
                 const dataLength = response.data.length;
                 const dataNum = cnt - dataLength;
-                console.log(dataNum);
                 const formData = response.data[dataNum];
                 const formTitle = formData.title;
                 const formCont = formData.content;
@@ -231,8 +260,6 @@ try {
         let cnt = e.target.dataset.cnt
         cnt = Number(cnt)
         cnt++;
-        console.log(`cnt : ${cnt}`);
-
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
         axios({

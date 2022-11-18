@@ -303,7 +303,13 @@
                     {{review.content}}
                   </p>
                   {% if review.review_image %}
-                  <img src="{{ review.review_image.url }}" alt="" class="rev-img" onclick="window.open(this.src)">
+                  <img src="{{ review.thumbnail.url }}" alt="{{review.review_image}}" class="rev-img">
+                  <div class="overlayC2 hidden">
+                    <button class="btn-close btn-close-img">
+                      <i class="bi bi-x-lg"></i>
+                    </button>
+                    <img src="{{ review.review_image.url }}" alt="{{review.review_image}}" class="rev-img-popup">
+                  </div>
                   {% endif %}
                 </div>
                 <div class="rev-footer">
@@ -666,7 +672,7 @@
             <h3 class="sub-tit">{{ product.name }}</h3>
           </div>
         </div>
-        <div class="form-area ">
+        <div class="form-area">
           <form action="" class="qna-form" method="POST" id="qna-form-update">
             {% csrf_token %}
             <div class="qna-cate">

@@ -1,6 +1,6 @@
 from django.db import models
-from imagekit.models import ProcessedImageField
-from imagekit.processors import ResizeToFill
+from imagekit.models import ProcessedImageField, ImageSpecField
+from imagekit.processors import ResizeToFill, Thumbnail
 from products.models import Product
 from django.conf import settings
 
@@ -23,7 +23,13 @@ class Review(models.Model):
     review_image = ProcessedImageField(
         upload_to="review_images/",
         blank=True,
-        processors=[ResizeToFill(200, 200)],
+        processors=[ResizeToFill(500, 500)],
+        format="JPEG",
+        options={"quality": 80},
+    )
+    thumbnail = ImageSpecField(
+        source="review_image",
+        processors=[Thumbnail(200, 200)],
         format="JPEG",
         options={"quality": 60},
     )
