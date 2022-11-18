@@ -7,7 +7,7 @@ from reviews.models import Review
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import logout as auth_logout, authenticate
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -27,8 +27,11 @@ def signup(request):
         form = CustomCreationUserForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
+            username = form.cleaned_data.get("username")
+            raw_password = form.cleaned_data.get("password1")
+            user = authenticate(username=username, password=raw_password)
             auth_login(request, user)
-            return redirect("accounts:login")
+            return redirect("index")
     else:
         form = CustomCreationUserForm()
     context = {"form": form}
