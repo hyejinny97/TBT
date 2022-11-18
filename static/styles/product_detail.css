@@ -104,6 +104,10 @@
 .purchase-table td {
   padding-left: 1rem;
 }
+.bi-truck {
+  color: var(--main);
+  font-size: 1em;
+}
 .buy-mount-btn {
   display: flex;
 }
