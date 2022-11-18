@@ -34,12 +34,12 @@
         {% for item in order_items %}
           <div class="purchase-pdt-item row">
             <div class='col-3'>
-              <a class="purchase-pdt-img-wrap" href="{% url 'products:products_detail' product.pk %}">
+              <a class="purchase-pdt-img-wrap" href="{% url 'products:products_detail' item.pk %}">
                 <img class="purchase-pdt-img" src="{{ item.product.product_image.all.0.image.url }}" alt="">
               </a>
             </div>
             <div class='col-7 pdt-info'>
-              <a href="{% url 'products:products_detail' product.pk %}">
+              <a href="{% url 'products:products_detail' item.pk %}">
                 <p class="pdt-name text-break">{{ item.product.name }}</p>
               </a>
               <div class='pdt-price'>
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class='col-2 pdt-mount-info'>
-              <p class="pdt-buy-mount" data-mount="1">
+              <p class="pdt-buy-mount" data-mount="{{ item.quantity }}">
                 <span>{{ item.quantity }}</span>개</p>
               <p class="pdt-delivery" data-delivery='{{ item.product.delivery }}'>
                 <i class="bi bi-truck"></i>

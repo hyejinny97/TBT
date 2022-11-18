@@ -84,7 +84,8 @@ function requestPay() {
         // 가맹점 서버 결제 API 성공시 로직
       })
       alert('결제 완료!')
-      var link = 'http://www.naver.com';
+      var link = windows.location.protocol + windows.location.host + '/complete/';
+      console.log(link)
       window.location.href = link;
       window.location.replace(link);
       window.open(link);
