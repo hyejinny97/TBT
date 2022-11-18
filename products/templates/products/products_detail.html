@@ -115,12 +115,12 @@
       <table class='purchase-table'>
         <tr>
           <th>배송비</th>
-          <td>            
+          <td>
             <i class="bi bi-truck"></i>
             {% if product.delivery != '0' %}
-              {{ product.delivery|intcomma }}원
+            {{ product.delivery|intcomma }}원
             {% else %}
-              템템무료배송
+            템템무료배송
             {% endif %}
           </td>
         </tr>
@@ -145,11 +145,13 @@
           <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
           {% comment %} 수량=0일 때, 모달창 뜨게 {% endcomment %}
           <!-- Button trigger modal -->
-          <button type='button' class="basket-btn basket-btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type='button' class="basket-btn basket-btn-modal" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
             장바구니
           </button>
           <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -396,8 +398,8 @@
                 </p>
                 {% if request.user.is_authenticated and request.user.pk == question.account.pk %}
                 <div class="qna-btn">
-                  <a href="{% url 'bulletin:update' question.pk %}" class="btn-modal-update-qna"
-                    data-cnt="{{ forloop.counter}}">수정</a>
+                  <!-- <a href="{% url 'bulletin:update' question.pk %}" class="btn-modal-update-qna"
+                    data-cnt="{{ forloop.counter}}">수정</a> -->
                   <a href="{% url 'bulletin:deleteQ' question.pk %}" class="btn-modal-delete-qna">삭제</a>
                 </div>
                 {% endif %}
@@ -466,11 +468,13 @@
             <input type="hidden" name="buy-mount" value='1' class='basket-btn-mount'>
             {% comment %} 수량=0일 때, 모달창 뜨게 {% endcomment %}
             <!-- Button trigger modal -->
-            <button type='button' class="basket-btn basket-btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type='button' class="basket-btn basket-btn-modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
               장바구니
             </button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">

@@ -37,6 +37,23 @@ const alertModalQna = document.querySelector('.qna-alert');
 const thumbsImg = document.querySelectorAll('.rev-body .rev-img');
 const thumbsCloseBtn = document.querySelectorAll('.rev-body .btn-close-img');
 
+const topBtn = document.querySelector('#top');
+window.addEventListener('scroll', function () {
+    // console.log(this.scrollY);
+    if (this.scrollY > 200) {
+        topBtn.classList.add('on');
+        topBtn.classList.remove('off');
+    }
+    else {
+        topBtn.classList.remove('on');
+        topBtn.classList.add('off');
+    }
+});
+topBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+})
+
 // 경고 모달창
 try {
     const openAlert = function (e) {
