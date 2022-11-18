@@ -28,7 +28,7 @@
             {% for cart_item in cart_items %}
               <tr>
                 <td class="cart__checkbox">
-                  <input type="checkbox" name="choice" onclick='getCheckedCnt()'></td>
+                  <input type="checkbox" id="my_checkbox" name="choice" onclick='getCheckedCnt(event)'></td>
                 <td class="cart__img">
                   <a href="{% url "products:products_detail" cart_item.product.id %}"><img style="height: 100px;" src="{{ cart_item.product.product_image.all.first.image.url }}" alt=""></a>
                 </td>
@@ -47,7 +47,7 @@
                   </div>
                 </td>
                 <td class='total-purchase-price-wrap cart__total'>
-                  <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}'>{{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}원</span>
+                  <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}' data-delivery='{{ cart_item.product.delivery }}'>{{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}원</span>
                 </td>
                 <td>
                   <button class="delete__btn" type="submit" form="cart_form">
@@ -64,9 +64,13 @@
           개의 상품을 선택하셨습니다.
         </p>
         <div class="cart__result">
+          <p class="cart__pay--choice">선택 상품 금액
+            <span id="choice__total">0원</span>
+            + 배송비
+            <span id="tot-delivery">0원</span></p>
           <p class="cart__pay--total">
             전체 주문 금액 :
-            {{ pay_total|intcomma}}원
+            <span id="total">0원</span>
           </p>
           <button class="cart__btn" type="submit" form="like_form">
             주문 하기
@@ -76,16 +80,50 @@
       {% endif %}
     </section>
     <script>
-      // 체크박스 선택 개수
-      function getCheckedCnt() {
+      const choiceTotal = document.querySelector('#choice__total')
+      const total = document.querySelector('#total')
+      const totDelivery = document.querySelector('#tot-delivery')
+      let choiceSum = 0
+      let deliverySum = 0
+
+      function getCheckedCnt(event) {
         const query = 'input[name="choice"]:checked';
         const selectedElements = document.querySelectorAll(query);
-
+        const checkbox = event.target
+        const is_checked = checkbox.checked;
         const selectedElementsCnt = selectedElements.length;
 
+        // 체크박스 선택 개수
         document
           .getElementById('count__result')
           .textContent = selectedElementsCnt;
+
+        //선택 금액
+        const selectPriceElement = event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild
+        let selectPrice = selectPriceElement
+          .innerText
+          .slice(0, -1)
+          .replace(",", "")
+        selectPrice = Number(selectPrice)
+        const delivery = Number(selectPriceElement.dataset.delivery)
+
+        // 선택 상품 가격 더하고 뺴기
+        if (is_checked) {
+          choiceSum += selectPrice
+          deliverySum += delivery
+        } else {
+          choiceSum -= selectPrice
+          deliverySum -= delivery
+        }
+
+        // 선택 합산 금액
+        choiceTotal.innerText = `${ (choiceSum).toLocaleString('ko-KR')}원`
+
+        // 배송비
+        totDelivery.innerText = `${deliverySum.toLocaleString()}원`
+
+        // 전체 합산 금액
+        total.innerText = `${ (choiceSum + deliverySum).toLocaleString('ko-KR')}원`
       }
 
       // 수량 버튼
