@@ -16,11 +16,10 @@ def add_cart(request, product_pk):
     if request.method == "POST":
         item_quantity = request.POST.get("buy-mount")
         product = Product.objects.get(pk=product_pk)
+
         try:
             cart = Cart.objects.get(cart_id=_cart_id(request))
-            cart.quantity = int(item_quantity)
-            print(cart.quantity)
-            cart.save()
+
         except Cart.DoesNotExist:
             cart = Cart.objects.create(cart_id=_cart_id(request))
             cart.save()
@@ -32,6 +31,11 @@ def add_cart(request, product_pk):
         except CartItem.DoesNotExist:
             cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
             cart_item.save()
+
+        item_count = CartItem.objects.get(cart=cart.pk, product=product)
+        item_count.quantity = item_quantity
+        item_count.save()
+
         return redirect("cart:cart_detail")
 
 
@@ -49,10 +53,11 @@ def cart_detail(
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart_id=cart.pk)
         totalcount = len(cart_items)
+
         for cart_item in cart_items:
+            print(cart_item.quantity)
             total = cart_item.product.pay * cart_item.quantity
-            counter += cart.quantity
-            print(cart.quantity)
+            counter = cart_item.quantity
             product = Product.objects.get(pk=cart_item.product.pk)
             sale = product.sale
             pay_total += total * (100 - sale) * 0.01
