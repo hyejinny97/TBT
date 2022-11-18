@@ -98,6 +98,9 @@
 	padding: 1rem;
 	position: relative;
 }
+#review-area .rev-sec .rev-empt {
+	margin: 1rem auto;
+}
 #review-area .rev-sec .rev-prof-img {
 	border-radius: 50%;
 	height: 100%;
@@ -144,7 +147,8 @@
 	top: 13%;
 	right: 25%;
 	color: var(--bg);
-	background: var(--highlight);
+	background: var(--txt);
+	font-size: 2rem;
 	z-index: 1001;
 }
 #review-area .rev-sec .rev-main .rev-body .rev-img-popup {
