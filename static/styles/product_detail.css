@@ -15,6 +15,13 @@
   display: block;
   margin: 3px auto;
   width: 70%;
+  cursor: pointer;
+}
+.pdt-img:hover {
+  box-shadow: 5px 5px 5px #9595954f;
+}
+.pdt-img.active {
+  border: 5px solid var(--main);
 }
 
 /* 상품 기본 정보 */

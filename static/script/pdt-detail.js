@@ -1,3 +1,23 @@
+// 일단 첫 화면은 가장 첫번째 상품 이미지가 active
+// 왼쪽 작은 상품 이미지 클릭했을 때, 오른쪽 큰 이미지로 보이게
+const pdtImages = document.querySelectorAll('.pdt-img')
+const pdtFirstImage = document.querySelector('.pdt-first-img')
+
+pdtImages[0].classList.add('active')
+
+for (let pdtImage of pdtImages) {
+  pdtImage.addEventListener('click', function (event) {
+    for (let img of pdtImages) {
+      img.classList.remove('active')
+    }
+    event.target.classList.add('active')
+    clickedImgSrc = event.target.getAttribute('src')
+    pdtFirstImage.setAttribute('src', clickedImgSrc)
+  })
+}
+
+
+
 // 별점 소수점으로 채우기
 const starsColorAll = document.querySelectorAll('.stars-color')
 

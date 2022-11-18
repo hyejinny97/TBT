@@ -34,6 +34,18 @@
       <a href="{% url 'products:file' %}">
         {{ product.category }}
       </a>
+      {% elif product.category == '크리스마스 카드' %}
+      <a href="{% url 'products:card' %}">
+        {{ product.category }}
+      </a>
+      {% elif product.category == '크리스마스 리스' %}
+      <a href="{% url 'products:wreath' %}">
+        {{ product.category }}
+      </a>
+      {% elif product.category == '크리스마스 트리 장식' %}
+      <a href="{% url 'products:decoration' %}">
+        {{ product.category }}
+      </a>
       {% endif %}
     </li>
     <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
@@ -187,7 +199,7 @@
       </li>
       <li class='tab'>
         <a href="#pdt-qna">문의
-          <span class='small-count'></span>
+          <span class='small-count'>{{ questions.count }}</span>
         </a>
       </li>
       <li class='tab'>
@@ -373,7 +385,7 @@
         {% comment %} 문의 {% endcomment %}
         <article id='pdt-qna'>
           <div class="pdt-qna-titarea">
-            <h3>문의 <span class='small-count'></span></h3>
+            <h3>문의 <span class='small-count'>{{ questions.count }}</span></h3>
             <p class="qna-modal-btn">문의하기</p>
           </div>
           <div id="qna-area">
