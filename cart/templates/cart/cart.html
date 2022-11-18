@@ -2,6 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% load index_tag %}
+{% load mathfilters %}
 
 <!-- 장바구니 body-->
 {% block body %}
@@ -47,7 +48,7 @@
                   </div>
                 </td>
                 <td class='total-purchase-price-wrap cart__total'>
-                  <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}' data-delivery='{{ cart_item.product.delivery }}'>{{cart_item.product.pay|discount:cart_item.product.sale|intcomma }}원</span>
+                  <span class='total-purchase-price' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}' data-delivery='{{ cart_item.product.delivery }}'>{{cart_item.product.pay|discount:cart_item.product.sale|mul:cart_item.quantity|intcomma }}원</span>
                 </td>
                 <td>
                   <button class="delete__btn" type="submit" form="cart_form">
