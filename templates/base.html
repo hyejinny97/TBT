@@ -65,11 +65,18 @@
             {% endif %}
             {% if item_count > 0%}
             <li>
-              <a href="{% url 'cart:cart_detail' %}">장바구니 ({{item_count}})</a>
+              <a href="{% url 'cart:cart_detail' %}" class="gnb-basket">장바구니 
+                <i class="bi bi-cart-fill"></i>
+                <span class="basket-num">
+                  {{item_count}}
+                </span>
+              </a>
             </li>
             {% else %}
             <li>
-              <a href="{% url 'cart:cart_detail' %}">장바구니</a>
+              <a href="{% url 'cart:cart_detail' %}">장바구니
+                <i class="bi bi-basket3-fill"></i>
+              </a>
             </li>
             {% endif %}
           </ul>

@@ -20,7 +20,8 @@ def create(request, product_pk):
     else:
         form = QuestionForm()
     context = {"form": form}
-    return render(request, "bulletin/create.html", context)
+    return redirect("products:products_detail", product_pk)
+    # return render(request, "bulletin/create.html", context)
 
 
 def detail(request, product_pk):
@@ -38,30 +39,30 @@ def delete(request, question_pk):
     return redirect("products:products_detail", product_pk)
 
 
-def update(
-    request,
-    question_pk,
-):
-    question = Question.objects.get(pk=question_pk)
-    questionForm = list(Question.objects.values())
-    product_pk = question.name
-    is_pass = False
-    if request.user.pk == question.account.pk:
-        if request.method == "POST":
-            form = QuestionForm()(request.POST, instance=question)
-            if form.is_valid():
-                form.save()
-                return redirect("products:products_detail", product_pk)
-        else:
-            form = QuestionForm(instance=question)
-            questionForm = form.values()
-            return JsonResponse(context={"isPass": is_pass})
-        # context = {"form": form}
-    else:
-        # return redirect("products:index")
-        return JsonResponse(context={"isPass": is_pass})
-    return JsonResponse(context={"isPass": is_pass})
-    # return render(request, "bulletin/update.html", context)
+# def update(
+#     request,
+#     question_pk,
+# ):
+#     question = Question.objects.get(pk=question_pk)
+#     questionForm = list(Question.objects.values())
+#     product_pk = question.name
+#     is_pass = False
+#     if request.user.pk == question.account.pk:
+#         if request.method == "POST":
+#             form = QuestionForm()(request.POST, instance=question)
+#             if form.is_valid():
+#                 form.save()
+#                 return redirect("products:products_detail", product_pk)
+#         else:
+#             form = QuestionForm(instance=question)
+#             questionForm = form.values()
+#             return JsonResponse(context={"isPass": is_pass})
+#         # context = {"form": form}
+#     else:
+#         # return redirect("products:index")
+#         return JsonResponse(context={"isPass": is_pass})
+#     return JsonResponse(context={"isPass": is_pass})
+# return render(request, "bulletin/update.html", context)
 
 
 # Answer 쪽 crud

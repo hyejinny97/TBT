@@ -263,62 +263,62 @@ try {
 }
 
 // 문의 수정 모달창
-try {
-    const openUpdateModal = function (e) {
-        e.preventDefault();
-        // console.log(e.target.href);
-        qnaUpdateModal.classList.remove('hidden');
-        overlay.classList.remove('hidden');
-        body.classList.add('scroll-block');
+// try {
+//     const openUpdateModal = function (e) {
+//         e.preventDefault();
+//         // console.log(e.target.href);
+//         qnaUpdateModal.classList.remove('hidden');
+//         overlay.classList.remove('hidden');
+//         body.classList.add('scroll-block');
 
-        let urls = e.target.href;
-        qnaUpdateForm.setAttribute('action', `${urls}`)
-        // console.log(urls);
-        let cnt = e.target.dataset.cnt
-        cnt = Number(cnt)
-        cnt++;
-        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+//         let urls = e.target.href;
+//         qnaUpdateForm.setAttribute('action', `${urls}`)
+//         // console.log(urls);
+//         let cnt = e.target.dataset.cnt
+//         cnt = Number(cnt)
+//         cnt++;
+//         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
 
-        axios({
-            method: 'POST',
-            url: `${urls}`,
-            headers: {
-                'X-CSRFToken': csrftoken,
-            }
-        })
-            .then(response => {
-                console.log(response);
-                // const dataLength = response.data.length;
-                // const dataNum = cnt - dataLength;
-                // console.log(dataNum);
-                // const formData = response.data[dataNum];
-                // console.log(formData);
-                // const formCata = formData.category;
-                // const formCont = formData.content;
+//         axios({
+//             method: 'POST',
+//             url: `${urls}`,
+//             headers: {
+//                 'X-CSRFToken': csrftoken,
+//             }
+//         })
+//             .then(response => {
+//                 console.log(response);
+//                 // const dataLength = response.data.length;
+//                 // const dataNum = cnt - dataLength;
+//                 // console.log(dataNum);
+//                 // const formData = response.data[dataNum];
+//                 // console.log(formData);
+//                 // const formCata = formData.category;
+//                 // const formCont = formData.content;
 
-                // const inputTitle = document.querySelector('#update-title');
-                // const inputCont = document.querySelector('#update-content');
+//                 // const inputTitle = document.querySelector('#update-title');
+//                 // const inputCont = document.querySelector('#update-content');
 
 
-                //     inputTitle.setAttribute('value', `${formTitle}`);
-                //     inputCont.innerText = formCont;
-                //     inputGrade.checked = true;
-            });
-    }
-    const closeUpdateModal = function () {
-        qnaUpdateModal.classList.add('hidden');
-        overlay.classList.add('hidden');
-        body.classList.remove('scroll-block');
-    }
+//                 //     inputTitle.setAttribute('value', `${formTitle}`);
+//                 //     inputCont.innerText = formCont;
+//                 //     inputGrade.checked = true;
+//             });
+//     }
+//     const closeUpdateModal = function () {
+//         qnaUpdateModal.classList.add('hidden');
+//         overlay.classList.add('hidden');
+//         body.classList.remove('scroll-block');
+//     }
 
-    qnaOpenUpdateBtns.forEach(updateBtn => {
-        updateBtn.addEventListener('click', openUpdateModal)
-    });
+//     qnaOpenUpdateBtns.forEach(updateBtn => {
+//         updateBtn.addEventListener('click', openUpdateModal)
+//     });
 
-    qnaCloseUpdateBtn.addEventListener('click', closeUpdateModal);
-} catch {
+//     qnaCloseUpdateBtn.addEventListener('click', closeUpdateModal);
+// } catch {
 
-}
+// }
 
 // 메인 인덱스 슬라이드
 try {
