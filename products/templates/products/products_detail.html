@@ -474,8 +474,8 @@
         </article>
         {% comment %} superuser인 경우만, 상품 수정/삭제 가능 {% endcomment %}
         <article id='superuser-power'>
-          <h3>SuperUser이신가요?</h3>
           {% if request.user.is_superuser %}
+          <h3>SuperUser이신가요?</h3>
           <a class="btn btn-primary" href="{% url 'products:products_update' product.pk %}">상품 정보 수정</a>
           <form class="btn btn-danger" action="{% url 'products:products_delete' product.pk  %}" method="POST">
             {% csrf_token %}
