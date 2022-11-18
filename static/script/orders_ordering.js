@@ -1,11 +1,11 @@
-// 이 부분 다시 수정!!!!!!!! - "개수"까지 곱해서 상품 금액을 구해야함
 // 구매하려는 모든 상품의 할인가격을 합해서 '총 상품 금액' 구하기
 const discountedPrices = document.querySelectorAll('.pdt-pay')
+const buyMounts = document.querySelectorAll('.pdt-buy-mount')
 const totPrice = document.querySelector('#tot-price')
 
 let sumPrice = 0
-for (let price of discountedPrices) {
-  sumPrice += parseInt(price.dataset.discountedPrice)
+for (i = 0; i < discountedPrices.length; i++) {
+  sumPrice += parseInt(discountedPrices[i].dataset.discountedPrice) * parseInt(buyMounts[i].dataset.mount)
 }
 
 totPrice.innerText = `${sumPrice.toLocaleString()}원`
@@ -25,7 +25,6 @@ totDelivery.innerText = `${sumDeliveries.toLocaleString()}원`
 
 
 
-// 이 부분 다시 수정!!!!!!!! - "개수"까지 고려해서 최종 결제 금액을 구해야함
 // '총 상품 금액'과 '총 배송비'를 합해서 '최종 결제 금액' 구하기
 const finalPayments = document.querySelectorAll('.final-payment > span')
 
