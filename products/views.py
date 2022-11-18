@@ -35,7 +35,7 @@ def products_create(request):
             product = create_form.save()
             for img in product_images:
                 ProductImage.objects.create(product=product, image=img)
-            return redirect("products:index")
+            return redirect("/")
     else:
         create_form = ProductsForm()
         product_image_form = ProductImageForm()
@@ -116,7 +116,7 @@ def products_delete(request, products_pk):
 
     products = get_object_or_404(Product, pk=products_pk)
     products.delete()
-    return redirect("products:index")
+    return redirect("/")
 
 
 @login_required
