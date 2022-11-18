@@ -4,6 +4,8 @@ const starsColorAll = document.querySelectorAll('.stars-color')
 for (let starsColor of starsColorAll) {
   avgOfGrade = starsColor.dataset.avgGrade ? starsColor.dataset.avgGrade : 0
   starsColor.style.width = `${avgOfGrade / 5 * 118}px`
+  console.log(starsColor)
+  console.log(starsColor.style.width)
 }
 
 

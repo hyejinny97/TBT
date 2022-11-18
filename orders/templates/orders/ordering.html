@@ -58,7 +58,7 @@
               <p class="pdt-delivery" data-delivery='{{ product.delivery }}'>
                 <i class="bi bi-truck"></i>
                 {% if product.delivery != '0' %}
-                  {{ product.delivery }}원
+                  {{ product.delivery|intcomma }}원
                 {% else %}
                   무료배송
                 {% endif %}

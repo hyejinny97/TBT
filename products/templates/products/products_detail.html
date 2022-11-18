@@ -100,7 +100,7 @@
             <i class="bi bi-star-fill"></i>
             <i class="bi bi-star-fill"></i>
           </div>
-          <div class='stars-color' data-avg-grade='{{ total.review_avg }}'>
+          <div class='stars-color' data-avg-grade='{{ total.review_avg|floatformat }}'>
             <i class="bi bi-star-fill"></i>
             <i class="bi bi-star-fill"></i>
             <i class="bi bi-star-fill"></i>
@@ -115,7 +115,14 @@
       <table class='purchase-table'>
         <tr>
           <th>배송비</th>
-          <td>{{ product.delivery|intcomma }}원</td>
+          <td>            
+            <i class="bi bi-truck"></i>
+            {% if product.delivery != '0' %}
+              {{ product.delivery|intcomma }}원
+            {% else %}
+              템템무료배송
+            {% endif %}
+          </td>
         </tr>
         <tr>
           <th>수량</th>
