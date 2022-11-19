@@ -14,13 +14,15 @@
 .domain {
   margin-bottom: 3rem;
 }
-.buyer-header, .purchase-pdt-header {
+.buyer-header,
+.purchase-pdt-header {
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--line);
   font-weight: 700;
 }
-.buyer-info th, .buyer-info td {
+.buyer-info th,
+.buyer-info td {
   padding: 0.8rem;
   font-size: 0.9rem;
 }
@@ -48,6 +50,11 @@
   word-break: break-all;
   font-weight: 800;
   font-size: 1.2rem;
+}
+.pdt-checkbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .pdt-price {
   margin: 0.5rem 0;
@@ -87,6 +94,16 @@
   color: var(--main);
   font-size: 1em;
 }
+.pdt-count-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pdt-trash {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 /* 주문 결제 창 */
 .payment-btn-wrap {
@@ -97,7 +114,8 @@
   margin-bottom: 1rem;
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 5px 5px 10px #9595951f, -5px -5px 10px #9595951f, -5px 5px 10px #9595951f, 5px -5px 10px #9595951f;
+  box-shadow: 5px 5px 10px #9595951f, -5px -5px 10px #9595951f,
+    -5px 5px 10px #9595951f, 5px -5px 10px #9595951f;
 }
 .payment-header {
   margin-bottom: 1rem;
@@ -107,7 +125,8 @@
   width: 100%;
   margin-bottom: 1rem;
 }
-.payment-list th, .payment-list td {
+.payment-list th,
+.payment-list td {
   padding: 0.3rem;
   font-size: 1rem;
 }
