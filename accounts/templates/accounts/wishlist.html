@@ -10,14 +10,17 @@
       님의 Wish List
     </p>
 
-    {% if user.like_products.all %}
+    {% if users.like_products.all %}
       <!-- 버튼 -->
+      <!-- 로그인 사용자와 프로필 사용자가 같을경우 버튼 표시 -->
+      {% if request.user.pk == users.pk %}
       <div class="wishlist__btn">
         {% comment %} <button class="goto__cart--btn">장바구니 담기</button> {% endcomment %}
         <button class="delete__btn" type="submit" form="like_form">
           삭제하기
         </button>
       </div>
+      {% endif %}
       <!-- 찜 목록 -->
       <form action="" method="POST" name='delete_form' id="like_form">
         <div class="wishlist__content wishlist__div">
