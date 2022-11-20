@@ -148,21 +148,28 @@
       total.innerText = `${ (choiceSum + deliverySum).toLocaleString('ko-KR')}원`
       
       // 주문하기 버튼 눌렀을 때, 구매해야할 상품 정보랑 각 수량 정보 넘기기
-      const pdtsToBuyInput = document.querySelector('#pdt_to_buy')
-      const mountPerPdtsInput = document.querySelector('#mount_per_pdt')
-
-      let pdtsToBuyInfo = []
-      let mountPerPdtsInfo = []
+      const cartBtn = document.querySelector('.cart__btn')
+      cartBtn.addEventListener('click', function(){
+        const pdtsToBuyInput = document.querySelector('#pdt_to_buy')
+        const mountPerPdtsInput = document.querySelector('#mount_per_pdt')
+  
+        const query = 'input[name="choice"]:checked';
+        const selectedElements = document.querySelectorAll(query);
+  
+        let pdtsToBuyInfo = []
+        let mountPerPdtsInfo = []
+      
+        for (let selectedElement of selectedElements) {
+          selectedPdtPk = selectedElement.dataset.pdt;
+          pdtsToBuyInfo.push(selectedElement.dataset.pdt)
+  
+          selectedPdtMountTag = document.querySelector(`.mount-${selectedPdtPk}`)
+          mountPerPdtsInfo.push(selectedPdtMountTag.innerText)
+        }
+        pdtsToBuyInput.value = pdtsToBuyInfo
+        mountPerPdtsInput.value = mountPerPdtsInfo
+      })
     
-      for (let selectedElement of selectedElements) {
-        selectedPdtPk = selectedElement.dataset.pdt;
-        pdtsToBuyInfo.push(selectedElement.dataset.pdt)
-
-        selectedPdtMountTag = document.querySelector(`.mount-${selectedPdtPk}`)
-        mountPerPdtsInfo.push(selectedPdtMountTag.innerText)
-      }
-      pdtsToBuyInput.value = pdtsToBuyInfo
-      mountPerPdtsInput.value = mountPerPdtsInfo
 
       //체크박스 선택 이벤트
       function getCheckedCnt(event) {
