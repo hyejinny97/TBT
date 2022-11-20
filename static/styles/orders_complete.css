@@ -3,6 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap');
 @import url(./main.css);
 
+/* 페이지 제목 */
+.main-header {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 27px;
+  font-weight: 900;
+}
+
 /* receipt-head */
 .receipt {
   margin: 4rem auto;
