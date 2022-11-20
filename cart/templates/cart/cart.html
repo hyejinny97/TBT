@@ -30,7 +30,7 @@
       {% for cart_item in cart_items %}
         <div class="purchase-pdt-item row">
           <div class="col-1 cart__checkbox pdt-checkbox">
-            <input type="checkbox" checked="true" id="my_checkbox" name="choice" onclick='getCheckedCnt(event)' data-pdt='{{ cart_item.product.pk }}'></div>
+            <input type="checkbox" checked="true" id="my_checkbox" name="choice" onclick='getCheck(event)' data-pdt='{{ cart_item.product.pk }}'></div>
           <div class='col-1'>
             <a class="purchase-pdt-img-wrap">
               <img class="purchase-pdt-img" src="{{ cart_item.product.product_image.all.first.image.url }}" alt="">
@@ -52,9 +52,9 @@
           </div>
           <div class="col-3 cart__quantity pdt-count-info">
             <div class=" buy-mount-btn">
-              <span class='minus-btn'>-</span>
+              <span class='minus-btn' onclick='minus(event)'>-</span>
               <span class='buy-mount mount-{{ cart_item.product.pk }}'>{{ cart_item.quantity }}</span>
-              <span class='plus-btn'>+</span>
+              <span class='plus-btn' onclick="plus(event)">+</span>
             </div>
           </div>
           <div class='col-2 pdt-mount-info'>
@@ -119,34 +119,115 @@
       {% endif %}
     </section>
     <script>
+      //선택
+      const totalPurchasePrices = document.querySelectorAll('.total-purchase-price')
+
+      //innerText
       const choiceTotal = document.querySelector('#choice__total')
+      const deliveryTotal = document.querySelector('#tot-delivery')
       const total = document.querySelector('#total')
-      const totDelivery = document.querySelector('#tot-delivery')
-      let choiceSum = 0
-      let deliverySum = 0
+      const selectTotalCnt = document.querySelector('#count__result')
 
-      //기본 전체 체크박스 개수
-      const query = 'input[name="choice"]:checked';
-      const selectedElements = document.querySelectorAll(query);
-      const selectedElementsCnt = Number(selectedElements.length);
-
-      document
-        .getElementById('count__result')
-        .textContent = selectedElementsCnt;
-
-      // 선택 상품 총 합산 & 배송비
-      const choiceTotalSum = document.querySelectorAll('.total-purchase-price');
-      for (let i = 0; i < choiceTotalSum.length; i++) {
-        choiceSum += parseInt(choiceTotalSum[i].dataset.total)
-        deliverySum += parseInt(choiceTotalSum[i].dataset.delivery)
+      // 선택 금액 합산
+      const getChoicePurchase = () => {
+        let totalChoicePrice = 0
+        for(let i=0; i<totalPurchasePrices.length; i++){
+          totalChoicePrice += parseInt(totalPurchasePrices[i].innerText.slice(0, -1).replace(",", ""))
+        }
+        choiceTotal.innerText = `${(totalChoicePrice).toLocaleString('ko-KR')}원`
       }
 
-      choiceTotal.innerText = `${choiceSum.toLocaleString()}원`
-      totDelivery.innerText = `${deliverySum.toLocaleString()}원`
+      // 배송비 합산
+      let totalDeliveryPrice = 0
+      for(let i=0; i<totalPurchasePrices.length; i++){
+        totalDeliveryPrice += parseInt(totalPurchasePrices[i].dataset.delivery)
+      }
+      deliveryTotal.innerText = `${(totalDeliveryPrice).toLocaleString('ko-KR')}원`
 
-      // 전체 상품 총 합산
-      total.innerText = `${ (choiceSum + deliverySum).toLocaleString('ko-KR')}원`
-      
+      // 총 합산 (선택 + 배송비)
+      const getTotal = () => {
+        let totalChoiceTotal = parseInt(choiceTotal.innerText.slice(0, -1).replace(",", ""))
+        let totalDeliveryPrice = parseInt(deliveryTotal.innerText.slice(0, -1).replace(",", ""))
+        total.innerText = `${(totalChoiceTotal + totalDeliveryPrice).toLocaleString('ko-KR')}원`
+      }
+
+      // 해당 상품 세일 적용된 가격 구하는 함수
+      const calTotPurchasePrice =  (totalPurchasePrice, pdtPrice, sale, mount) => {
+        if (mount !== 0) {
+          totalPurchasePrice.innerText = `${ (pdtPrice * (100 - sale) * 0.01 * mount).toLocaleString('ko-KR')}원`
+        } else {
+          totalPurchasePrice.innerText = '0원'
+        }
+      }
+
+      // 선택 상품 가져오는 함수
+      const checkboxCnt = () => {
+        const query = 'input[name="choice"]:checked';
+        const selectedElements = document.querySelectorAll(query);
+        const selectedElementsCnt = Number(selectedElements.length);
+    
+        selectTotalCnt.innerText = selectedElementsCnt;
+      }
+
+      // 체크 박스 버튼 이벤트
+      const getCheck = (event) => {
+        checkboxCnt()
+
+        const checkbox = event.target
+        const is_checked = checkbox.checked;
+
+        const selectPriceElement = event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild
+        let selectPrice = parseInt(selectPriceElement.innerText.slice(0, -1).replace(",", ""))
+        let choicePrice = parseInt(choiceTotal.innerText.slice(0, -1).replace(",", ""))
+        const delivery = Number(selectPriceElement.dataset.delivery)
+
+        if(is_checked){
+          choicePrice += selectPrice
+          totalDeliveryPrice += delivery
+          
+        } else {
+          choicePrice -= selectPrice
+          totalDeliveryPrice -= delivery
+         }
+        
+        choiceTotal.innerText = `${ (choicePrice).toLocaleString('ko-KR')}원`
+        deliveryTotal.innerText = `${(totalDeliveryPrice).toLocaleString('ko-KR')}원`
+        total.innerText = `${ (choicePrice + totalDeliveryPrice).toLocaleString('ko-KR')}원`
+      }
+
+      // 플러스 버튼 이벤트
+      const plus = (event) => {
+        const buyMount = event.target.previousElementSibling
+        buyMount.innerText = parseInt(buyMount.innerText) + 1
+
+        const mount = parseInt(buyMount.innerText)
+        const totalPurchasePrice = event.target.parentElement.parentElement.nextElementSibling.firstElementChild
+        const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
+        const sale = parseInt(totalPurchasePrice.dataset.sale)
+
+        calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+        getChoicePurchase()
+        getTotal()
+      }
+
+      // 마이너스 버튼 이벤트
+      const minus = (event) => {
+        const buyMount = event.target.nextElementSibling
+        if (parseInt(buyMount.innerText) - 1 >= 1) {
+          buyMount.innerText = parseInt(buyMount.innerText) - 1
+        }
+
+        const mount = parseInt(buyMount.innerText)
+        const totalPurchasePrice = event.target.parentElement.parentElement.nextElementSibling.firstElementChild
+        const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
+        const sale = parseInt(totalPurchasePrice.dataset.sale)
+        let delivery = parseInt(totalPurchasePrice.dataset.delivery)
+  
+        calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
+        getChoicePurchase()
+        getTotal()
+      }
+
       // 주문하기 버튼 눌렀을 때, 구매해야할 상품 정보랑 각 수량 정보 넘기기
       const cartBtn = document.querySelector('.cart__btn')
       cartBtn.addEventListener('click', function(){
@@ -169,94 +250,12 @@
         pdtsToBuyInput.value = pdtsToBuyInfo
         mountPerPdtsInput.value = mountPerPdtsInfo
       })
-    
 
-      //체크박스 선택 이벤트
-      function getCheckedCnt(event) {
-        // 체크박스 선택 개수
-        const query = 'input[name="choice"]:checked';
-        const selectedElements = document.querySelectorAll(query);
-        const selectedElementsCnt = Number(selectedElements.length);
+      // 함수 실행
+      checkboxCnt()
+      getChoicePurchase()
+      getTotal()
 
-        document
-          .getElementById('count__result')
-          .textContent = selectedElementsCnt;
-
-        //test
-        const checkbox = event.target
-        const is_checked = checkbox.checked;
-
-        //선택 금액
-        const selectPriceElement = event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild
-        let selectPrice = selectPriceElement
-          .innerText
-          .slice(0, -1)
-          .replace(",", "")
-        selectPrice = Number(selectPrice)
-        const delivery = Number(selectPriceElement.dataset.delivery)
-
-        // 선택 상품 가격 더하고 뺴기
-        if (is_checked) {
-          choiceSum += selectPrice
-          deliverySum += delivery
-        } else {
-          choiceSum -= selectPrice
-          deliverySum -= delivery
-        }
-
-        // 선택 합산 금액
-        choiceTotal.innerText = `${ (choiceSum).toLocaleString('ko-KR')}원`
-
-        // 배송비
-        totDelivery.innerText = `${deliverySum.toLocaleString()}원`
-
-        // 전체 합산 금액
-        total.innerText = `${ (choiceSum + deliverySum).toLocaleString('ko-KR')}원`
-      }
-
-      // 수량 버튼
-      const minusBtn = document.querySelectorAll('.minus-btn')
-      const plusBtn = document.querySelectorAll('.plus-btn')
-      const buyMount = document.querySelector('.buy-mount')
-
-      const calTotPurchasePrice = function (totalPurchasePrice, pdtPrice, sale, mount) {
-        if (mount !== 0) {
-          totalPurchasePrice.innerText = `${ (pdtPrice * (100 - sale) * 0.01 * mount).toLocaleString('ko-KR')}원`
-        } else {
-          totalPurchasePrice.innerText = '0원'
-        }
-      }
-
-      plusBtn.forEach(plus => {
-        plus.addEventListener("click", event => {
-          let buyMount = plus.previousElementSibling
-          buyMount.innerText = parseInt(buyMount.innerText) + 1
-
-          const mount = parseInt(buyMount.innerText)
-          const totalPurchasePrice = plus.parentElement.parentElement.nextElementSibling.firstElementChild
-          const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
-          const sale = parseInt(totalPurchasePrice.dataset.sale)
-
-          calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
-
-        });
-      });
-
-      minusBtn.forEach(minus => {
-        minus.addEventListener("click", event => {
-          let buyMount = minus.nextElementSibling
-          if (parseInt(buyMount.innerText) - 1 >= 0) {
-            buyMount.innerText = parseInt(buyMount.innerText) - 1
-          }
-
-          const mount = parseInt(buyMount.innerText)
-          const totalPurchasePrice = minus.parentElement.parentElement.nextElementSibling.firstElementChild
-          const pdtPrice = parseInt(totalPurchasePrice.dataset.price)
-          const sale = parseInt(totalPurchasePrice.dataset.sale)
-
-          calTotPurchasePrice(totalPurchasePrice, pdtPrice, sale, mount)
-        });
-      });
     </script>
 
   {% endblock body %}
