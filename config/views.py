@@ -12,7 +12,7 @@ def index(request):
 
     season_products = [
         get_object_or_404(Product, pk=263),
-        get_object_or_404(Product, pk=165),
+        get_object_or_404(Product, pk=166),
         get_object_or_404(Product, pk=201),
     ]
 
