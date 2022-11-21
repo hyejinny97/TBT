@@ -146,7 +146,7 @@
               <th>리뷰 제목</th>
             </tr>
           </thead>
-          {% for review in reviews %}
+          {% for review in reviews|slice:":3" %}
             <tbody>
               <tr>
                 <td class="review__td--img">
