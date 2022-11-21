@@ -93,14 +93,19 @@ def products_detail(request, products_pk):
 
     return render(request, "products/products_detail.html", context)
 
-
+# https://stackoverflow.com/questions/34006994/how-to-upload-multiple-images-to-a-blog-post-in-django
+# https://django.fun/en/qa/251566/
 def products_update(request, products_pk):
     products = get_object_or_404(Product, pk=products_pk)
+    product_images_all = products.product_image.all()
+
     if request.method == "POST":
         form = ProductsForm(request.POST, request.FILES, instance=products)
         product_images = request.FILES.getlist("image")
         if form.is_valid():
             product = form.save()
+            for product_image in product_images_all:
+                product_image.delete()
             for img in product_images:
                 ProductImage.objects.create(product=product, image=img)
             return redirect("products:products_detail", products_pk)

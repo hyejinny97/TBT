@@ -509,7 +509,31 @@
           <a class="btn btn-primary" href="{% url 'products:products_update' product.pk %}">상품 정보 수정</a>
           <form class="btn btn-danger" action="{% url 'products:products_delete' product.pk  %}" method="POST">
             {% csrf_token %}
-            <input type="submit" value="상품 삭제">
+            <!-- 상품 삭제 Button trigger modal -->
+            <button type="button" class="m-0 p-0" data-bs-toggle="modal" data-bs-target="#pdtDelete">
+              상품 삭제
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="pdtDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">
+                      상품을 정말 삭제하시겠습니까?
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p class='text-dark'>상품을 삭제하면 관련 리뷰, 문의 모두 사라집니다.</p>
+                    <p class='text-dark'>정말로 삭제하시겠습니까?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="submit" class="btn btn-danger">삭제</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </form>
           {% endif %}
         </article>
