@@ -440,8 +440,8 @@
                 </p>
                 {% if request.user.is_authenticated and request.user.pk == question.account.pk %}
                 <div class="qna-btn">
-                  <!-- <a href="{% url 'bulletin:update' question.pk %}" class="btn-modal-update-qna"
-                    data-cnt="{{ forloop.counter}}">수정</a> -->
+                  <a href="{% url 'bulletin:updateA' question.pk %}" class="btn-modal-update-qna"
+                    data-cnt="{{ forloop.counter}}">수정</a>
                   <a href="{% url 'bulletin:deleteQ' question.pk %}" class="btn-modal-delete-qna">삭제</a>
                 </div>
                 {% endif %}
