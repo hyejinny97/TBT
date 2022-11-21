@@ -282,6 +282,14 @@
   font-size: 1.3rem;
 }
 
+/* 상품정보 탭 */
+.pdt-description-text {
+  margin-top: 3rem;
+  text-align: center;
+  white-space:pre;
+  line-height: 2rem;
+}
+
 /* 리뷰 탭 */
 .review-grade-wrap {
   display: flex;

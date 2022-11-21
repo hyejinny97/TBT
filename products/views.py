@@ -98,15 +98,20 @@ def products_update(request, products_pk):
     products = get_object_or_404(Product, pk=products_pk)
     if request.method == "POST":
         form = ProductsForm(request.POST, request.FILES, instance=products)
+        product_images = request.FILES.getlist("image")
         if form.is_valid():
-            form.save()
+            product = form.save()
+            for img in product_images:
+                ProductImage.objects.create(product=product, image=img)
             return redirect("products:products_detail", products_pk)
 
     else:
         form = ProductsForm(instance=products)
+        product_image_form = ProductImageForm()
 
     context = {
         "form": form,
+        "product_image_form": product_image_form,
     }
 
     return render(request, "products/products_update.html", context)
