@@ -98,7 +98,6 @@
               <th>주문 상태</th>
             </tr>
           </thead>
-          <!-- 여기에 주문 상품 for문 넣으시면 됩니다. -->
           <tbody>
             {% for order in orders.0 %}
               <tr>
@@ -119,6 +118,20 @@
                 <td class="order__name">{{ order.order_item.product.name }}</td>
                 <td class="order__td--status">배송 완료</td>
               </tr>
+            {% endfor %}
+            {% for order in orders.2 %}
+            <tr class="hide__order hidden">
+              <td class="order__td--number">{{ order.pk }}</td>
+              <td class="order__td--img">
+                <img
+                  class="profile__review--img"
+                  src="{{ order.order_item.product.product_image.all.0.image.url }}"
+                  alt="order-img"
+                />
+              </td>
+              <td class="order__name">{{ order.order_item.product.name }}</td>
+              <td class="order__td--status">배송 완료</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
