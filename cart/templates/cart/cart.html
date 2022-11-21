@@ -30,7 +30,7 @@
       {% for cart_item in cart_items %}
         <div class="purchase-pdt-item row">
           <div class="col-1 cart__checkbox pdt-checkbox">
-            <input type="checkbox" checked="true" id="my_checkbox" name="choice" onclick='getCheck(event)' data-pdt='{{ cart_item.product.pk }}'></div>
+            <input class='checkbox-{{ cart_item.product.pk }}' type="checkbox" checked="true" id="my_checkbox" name="choice" onclick='getCheck(event)' data-pdt='{{ cart_item.product.pk }}'></div>
           <div class='col-1'>
             <a class="purchase-pdt-img-wrap">
               <img class="purchase-pdt-img" src="{{ cart_item.product.product_image.all.first.image.url }}" alt="">
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class='col-2 pdt-mount-info'>
-            <span class='total-purchase-price mb-2' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}' data-delivery='{{ cart_item.product.delivery }}' data-total='{{cart_item.product.pay|discount:cart_item.product.sale|mul:cart_item.quantity }}'>{{cart_item.product.pay|discount:cart_item.product.sale|mul:cart_item.quantity|intcomma }}원</span>
+            <span class='total-purchase-price mb-2' data-price='{{ cart_item.product.pay }}' data-sale='{{ cart_item.product.sale }}' data-delivery='{{ cart_item.product.delivery }}' data-total='{{cart_item.product.pay|discount:cart_item.product.sale|mul:cart_item.quantity }}' data-pdt-pk='{{ cart_item.product.pk }}'>{{cart_item.product.pay|discount:cart_item.product.sale|mul:cart_item.quantity|intcomma }}원</span>
             <p class="pdt-delivery" data-delivery='{{ cart_item.product.delivery }}'>
               <i class="bi bi-truck"></i>
                {% if cart_item.product.delivery != '0' %}
@@ -132,7 +132,13 @@
       const getChoicePurchase = () => {
         let totalChoicePrice = 0
         for(let i=0; i<totalPurchasePrices.length; i++){
-          totalChoicePrice += parseInt(totalPurchasePrices[i].innerText.slice(0, -1).replace(",", ""))
+          const checkboxPdtPk = totalPurchasePrices[i].dataset.pdtPk
+          const checkbox = document.querySelector(`.checkbox-${checkboxPdtPk}`)
+          const isChecked = checkbox.checked
+          
+          if (isChecked) {
+            totalChoicePrice += parseInt(totalPurchasePrices[i].innerText.slice(0, -1).replace(",", ""))
+          }
         }
         choiceTotal.innerText = `${(totalChoicePrice).toLocaleString('ko-KR')}원`
       }
@@ -175,7 +181,7 @@
 
         const checkbox = event.target
         const is_checked = checkbox.checked;
-
+        
         const selectPriceElement = event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild
         let selectPrice = parseInt(selectPriceElement.innerText.slice(0, -1).replace(",", ""))
         let choicePrice = parseInt(choiceTotal.innerText.slice(0, -1).replace(",", ""))
