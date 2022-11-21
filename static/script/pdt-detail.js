@@ -2,6 +2,11 @@
 // 왼쪽 작은 상품 이미지 클릭했을 때, 오른쪽 큰 이미지로 보이게
 const pdtImages = document.querySelectorAll('.pdt-img');
 const pdtFirstImage = document.querySelector('.pdt-first-img');
+const glass = document.querySelector('.img-magnifier-glass');
+
+const src = pdtFirstImage.src;
+let defaultSource = src;
+glass.style.backgroundImage = "url('" + defaultSource + "')";
 
 pdtImages[0].classList.add('active');
 
@@ -16,11 +21,6 @@ for (let pdtImage of pdtImages) {
     glass.style.backgroundImage = "url('" + clickedImgSrc + "')";
   });
 }
-
-const glass = document.querySelector('.img-magnifier-glass');
-
-let defaultSource = '/media/imgaes/diary_34_images_0.jpg';
-glass.style.backgroundImage = "url('" + defaultSource + "')";
 
 // 이미지 확대
 function magnify(zoom) {
@@ -112,19 +112,20 @@ totalPurchasePrice.innerText = `${(
 // 수량 버튼을 눌렀을 때 수량 증감 및 주문 금액 계산
 // 장바구니/바로구매 버튼에 수량 정보 넘기기
 // 수량=0일때, 장바구니/바로구매 버튼 누르면 모달창 뜨게
-const minusBtn = document.querySelector('.minus-btn')
-const plusBtn = document.querySelector('.plus-btn')
-const buyMount = document.querySelector('.buy-mount')
+const minusBtn = document.querySelector('.minus-btn');
+const plusBtn = document.querySelector('.plus-btn');
+const buyMount = document.querySelector('.buy-mount');
 
-const basketBtnInputMounts = document.querySelectorAll('.basket-btn-mount')
-const mountPerPdtInputs = document.querySelectorAll('.mount_per_pdt')
+const basketBtnInputMounts = document.querySelectorAll('.basket-btn-mount');
+const mountPerPdtInputs = document.querySelectorAll('.mount_per_pdt');
 
-const basketBtnModals = document.querySelectorAll('.basket-btn-modal')
-const basketBtnSubmits = document.querySelectorAll('.basket-btn-submit')
-const buyBtnModals = document.querySelectorAll('.buy-btn-modal')
-const buyBtnSubmits = document.querySelectorAll('.buy-btn-submit')
+const basketBtnModals = document.querySelectorAll('.basket-btn-modal');
+const basketBtnSubmits = document.querySelectorAll('.basket-btn-submit');
+const buyBtnModals = document.querySelectorAll('.buy-btn-modal');
+const buyBtnSubmits = document.querySelectorAll('.buy-btn-submit');
 
-const calTotPurchasePrice = function (mount) {   // 주문 금액 구하기
+const calTotPurchasePrice = function (mount) {
+  // 주문 금액 구하기
   if (mount !== 0) {
     totalPurchasePrice.innerText = `${(
       pdtPrice * (100 - sale) * 0.01 * mount +
@@ -145,10 +146,10 @@ const mount0ActiveModal = function (mount) {
       basketBtnModal.classList.add('active');
     }
     for (let buyBtnSubmit of buyBtnSubmits) {
-      buyBtnSubmit.classList.remove('active')
+      buyBtnSubmit.classList.remove('active');
     }
     for (let basketBtnModal of buyBtnModals) {
-      basketBtnModal.classList.add('active')
+      basketBtnModal.classList.add('active');
     }
   } else {
     for (let basketBtnModal of basketBtnModals) {
@@ -158,10 +159,10 @@ const mount0ActiveModal = function (mount) {
       basketBtnSubmit.classList.add('active');
     }
     for (let buyBtnModal of buyBtnModals) {
-      buyBtnModal.classList.remove('active')
+      buyBtnModal.classList.remove('active');
     }
     for (let buyBtnSubmit of buyBtnSubmits) {
-      buyBtnSubmit.classList.add('active')
+      buyBtnSubmit.classList.add('active');
     }
   }
 };
@@ -174,10 +175,10 @@ plusBtn.addEventListener('click', function () {
     basketBtnInputMount.value = mount;
   }
   for (let mountPerPdtInput of mountPerPdtInputs) {
-    mountPerPdtInput.value = mount
+    mountPerPdtInput.value = mount;
   }
-  mount0ActiveModal(mount)
-})
+  mount0ActiveModal(mount);
+});
 
 minusBtn.addEventListener('click', function () {
   if (parseInt(buyMount.innerText) - 1 >= 0) {
@@ -189,12 +190,10 @@ minusBtn.addEventListener('click', function () {
     basketBtnInputMount.value = mount;
   }
   for (let mountPerPdtInput of mountPerPdtInputs) {
-    mountPerPdtInput.value = mount
+    mountPerPdtInput.value = mount;
   }
-  mount0ActiveModal(mount)
-})
-
-
+  mount0ActiveModal(mount);
+});
 
 // 상품정보/리뷰/문의/추천 탭 클릭 시, 클래스에 active 추가
 const tabs = document.querySelectorAll('.tab');
