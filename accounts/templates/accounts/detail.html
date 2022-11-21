@@ -37,13 +37,13 @@
             {% if request.user != user %}
               <form id="follow-form" data-user-id="{{ user.pk }}" data-my-id="{{ my.pk }}">
                 {% csrf_token %}
-                {% if request.user in user.followings.all %}
+                {% if request.user in user.followers.all %}
                   <button type="submit" class="follow__btn" id="follow-btn">
-                    follow
+                    unfollow
                   </button>
                 {% else %}
                   <button type="submit" class="unfollow__btn" id="follow-btn">
-                    unfollow
+                    follow
                   </button>
                 {% endif %}
               </form>
