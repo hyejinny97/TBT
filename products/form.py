@@ -18,7 +18,7 @@ class ProductsForm(forms.ModelForm):
 
 class ProductImageForm(forms.ModelForm):
     image = forms.ImageField(
-        label='Image',
+        label='상품이미지',
         widget=forms.ClearableFileInput(attrs={'multiple':True}),
     )
     class Meta:
