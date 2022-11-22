@@ -28,11 +28,23 @@
 
     ## ⚙ DB ERD 설계
 
-- **초기 ERD 구성**
+<details>
+<summary>**초기 ERD 구성**</summary>
+<div markdown="1">
 
 ![image-20221109235717405](assets/image-20221109235717405.png)
 
-- **최종 ERD 구성**
+</div>
+</details>
+
+<details>
+<summary>**최종 ERD 구성**</summary>
+<div markdown="1">
+
+![image-20221122172506053](assets/image-20221122172506053.png)
+
+</div>
+</details>
 
 ## 📱 화면 설계
 
