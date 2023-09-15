@@ -36,43 +36,43 @@
 
 > 메인 페이지
 
-<img src="./assets/TBT_main.jpg" width="400">
+<img src="./assets/TBT_main.jpg" width="500">
 
 > 상품 카테고리별 목록 페이지
 
-<img src="./assets/pdt-list.png" width="400">
+<img src="./assets/pdt-list.png" width="500">
 
 > 상품 디테일 페이지
 
-<img src="./assets/pdt-detail-1.png" width="400">
-<img src="./assets/pdt-detail-2.png" width="400">
-<img src="./assets/pdt-detail-3.png" width="400">
+<img src="./assets/pdt-detail-1.png" width="500">
+<img src="./assets/pdt-detail-2.png" width="500">
+<img src="./assets/pdt-detail-3.png" width="500">
 
 > 장바구니
 
-<img src="./assets/cart.png" width="400">
+<img src="./assets/cart.png" width="500">
 
 > 주문하기(결제페이지)
 
-<img src="./assets/pay.png" width="400">
+<img src="./assets/pay.png" width="500">
 
 > 결제 완료(주문 완료)
 
-<img src="./assets/pay-complete.png" width="400">
+<img src="./assets/pay-complete.png" width="500">
 
 > 회원 상세페이지(마이페이지)
 
-<img src="./assets/mypage-1.png" width="400">
-<img src="./assets/mypage-2.png" width="400">
+<img src="./assets/mypage-1.png" width="500">
+<img src="./assets/mypage-2.png" width="500">
 
 > Wish List(찜목록)
 
-<img src="./assets/wish-list-1.png" width="400">
-<img src="./assets/wish-list-2.png" width="400">
+<img src="./assets/wish-list-1.png" width="500">
+<img src="./assets/wish-list-2.png" width="500">
 
 > 내가쓴 리뷰 모아보기
 
-<img src="./assets/reviews.png" width="400">
+<img src="./assets/reviews.png" width="500">
 
 ## ⚙ DB ERD 설계
 
@@ -513,7 +513,7 @@ Figma를 사용하여 와이어프레임(기초 화면설계)과 추가 세부�
 
 ## ✨ 실제 구현 화면
 
-- AWS 배포 사이트: <http://tbtpjt-env.eba-yvaz6ma4.ap-northeast-2.elasticbeanstalk.com/>
+- AWS 배포 사이트: ~~<http://tbtpjt-env.eba-yvaz6ma4.ap-northeast-2.elasticbeanstalk.com/>~~
 - 발표 PDF 파일: [PDF 파일](assets/TBT-%EC%84%B8%EB%AF%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B802.pdf)
 
 ## 🎠 프로젝트 회고 및 후기
